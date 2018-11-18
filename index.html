@@ -274,6 +274,137 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/18/ARTS-第一周挑战/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="luowen">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Coding in life...">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/18/ARTS-第一周挑战/" itemprop="url">ARTS_第一周挑战</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-18T18:53:39+08:00">
+                2018-11-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <ol>
+<li>Algorithm：每周至少做一个 leetcode 的算法题<br><br><a href="https://leetcode.com/problems/two-sum/" target="_blank" rel="noopener"> TwoSum题目 </a></li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span>[] twoSum(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> target) &#123;</span><br><span class="line">        Map&lt;Integer, Integer&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.length; i++) &#123;</span><br><span class="line">            map.put(nums[i], i);</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">int</span> complement ;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.length; i++) &#123;</span><br><span class="line">            complement = target - nums[i];</span><br><span class="line">            <span class="keyword">if</span> (map.containsKey(complement) &amp;&amp; map.get(complement) != i) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">new</span> <span class="keyword">int</span>[] &#123; i, map.get(complement) &#125;;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li><p>Review：阅读并点评至少一篇英文技术文章<br><br>自己翻译练习的Effective Java （注：翻译水平很有限，欢迎大家指正）<br><a href="https://styleoflw.github.io/2018/11/17/Effective-Java-Introduction/" target="_blank" rel="noopener">Effective Java Introduction</a></p>
+</li>
+<li><p>Tip：学习至少一个技术技巧<br><br><a href="https://styleoflw.github.io/2018/11/17/markdown-record/" target="_blank" rel="noopener"> markdown语法学习</a></p>
+</li>
+<li><p>Share：分享一篇有观点和思考的技术文章<br><br>这篇文章是带我第一次引起我看源码的文章，纪念一下<br><a href="http://www.cnblogs.com/wupeixuan/p/8620173.html" target="_blank" rel="noopener"> hashMap源码</a></p>
+</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/17/Effective-Java-Introduction/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -478,7 +609,7 @@
 <p>&nbsp;&nbsp;&nbsp;&nbsp;当讨论Java编程语言和它的库的功能时，参考指定的版本有时是必要的。为了方便，这本书偏好用绰号给官方的发行版名字，这张表展示了映射关系在官方名字和绰号之间。（表已省略）</p>
 </blockquote>
 <blockquote>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;这个列子被合理的完成，但是偏好易读性超过了完整。他们自由地用来自包java.util 和 java.io的类。为了编译例子，你应该添加一个或多个导入声明，或者别的引用。<br><a href="http://joshbloch.com/effectivejava" target="_blank" rel="noopener"><br>本书的网站<br></a>，包含了每个列子的扩展版本，你可以编译和运行它们。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;这个列子被合理的完成，但是偏好易读性超过了完整。他们自由地用来自包java.util 和 java.io的类。为了编译例子，你应该添加一个或多个导入声明，或者别的引用。<a href="http://joshbloch.com/effectivejava" target="_blank" rel="noopener">本书的网站<br></a>，包含了每个列子的扩展版本，你可以编译和运行它们。</p>
 </blockquote>
 <blockquote>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;对于大部分，这本书使用技术术语作为他们定义在javaSE8【JLS】，一些术语应特别的提到。这门语言支持4种类型：interface接口（包含注解annotation），class（包含枚举enum），数组和原始数据类型。一至三被称为引用数据类型。类实例和数组是对象，原始类型的值并不是。一个类的成员由它的字段，方法，成员类，和成员接口组成。一个方法的签名由它的名字和它的形式参数类型组成；这个签名不包括方法的返回类型。</p>
@@ -880,7 +1011,7 @@ __斜体__
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-count">4</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -893,7 +1024,7 @@ __斜体__
             
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">3</span>
                 <span class="site-state-item-name">tags</span>
               
             </div>
