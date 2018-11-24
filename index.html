@@ -306,6 +306,473 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/24/架构01-架构到底指什么/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="luowen">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Coding in life...">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/24/架构01-架构到底指什么/" itemprop="url">架构01_架构到底指什么</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-24T07:28:35+08:00">
+                2018-11-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/从零开始学架构/" itemprop="url" rel="index">
+                    <span itemprop="name">从零开始学架构</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="架构到底指什么？能弄清这些概念吗？"><a href="#架构到底指什么？能弄清这些概念吗？" class="headerlink" title="架构到底指什么？能弄清这些概念吗？"></a>架构到底指什么？能弄清这些概念吗？</h3><ol>
+<li>架构和框架是什么关系？有什么区别？</li>
+<li>Linux有架构，MySQL有架构，JVM也有架构，使用JAVA开发、MySQL存储，跑在Linux上的业务也有架构，应该关注哪个架构呢？</li>
+<li>微信有架构，微信的登录系统也有架构，微信的支付系统也有架构，当我们谈微信架构时，到底是在谈什么架构呢？</li>
+</ol>
+<blockquote>
+<p>要想准确的回答这几个问题，关键在于梳理几个有关系而又相似的概念，包括系统与子系统，模块与组件，框架与架构。</p>
+</blockquote>
+<hr>
+<h4 id="系统与子系统"><a href="#系统与子系统" class="headerlink" title="系统与子系统"></a><center>系统与子系统</center></h4><p>维基百科定义：</p>
+<blockquote>
+<p>系统泛指由一群有关联的个体组成，根据某种规则运作，能完成个别元件不能单独完成的工作的群体。它的意思是“总体”“整体”或“联盟”</p>
+</blockquote>
+<p>关键内容整理</p>
+<blockquote>
+<ol>
+<li>关联：系统是由一群有关联的个体组成的，没有关联的个体堆在一起不能称为一个系统</li>
+<li>规则：系统内的个体需要按照指定的规则运作，而不是单个个体各自为政。规则规定了系统内个体分工和协作的方式。</li>
+<li>能力：系统能力与个体能力有本质的差别，系统能力不是个体能力之和，而是产生了新的能力。</li>
+</ol>
+</blockquote>
+<blockquote>
+<p>子系统定义：子系统也是由一群有关联的个体所组成的系统，多半会是更大系统中的一部分。</p>
+</blockquote>
+<p>总结：其实子系统的定义和系统定义是一样的，只是观察的角度有差异，一个系统可能是另外一个更大系统的子系统。</p>
+<p>根据以上的基本概念，以微信为例来做一个分析。</p>
+<blockquote>
+<ol>
+<li>微信本身是一个系统，包含聊天，登录，支付，朋友圈等子系统。</li>
+<li>朋友圈这个系统又包含动态、评论、点赞等子系统。</li>
+<li>评论这个系统可能又包含防刷子系统，审核子系统，发布子系统，存储子系统。</li>
+<li>评论审核系统不再包含业务意义上的子系统，而是包括各个模块或者组件，这些模块或者组件本身也是另外一个维度上的系统。列如，MySQL，Redis是存储系统，但不是业务子系统。</li>
+</ol>
+</blockquote>
+<hr>
+<h4 id="模块与组件"><a href="#模块与组件" class="headerlink" title="模块与组件"></a><center>模块与组件</center></h4><p>模块和组件两个概念在实际工作中很容易混淆，我们经常能够听到类似这样的说法：</p>
+<pre><code>- MySQL 模块主要负责存储数据，而ElasticSearch模块主要负责数据搜索。
+- 我们有安全加密组件，有审核组件
+- App的下载模块使用了第三方的组件。
+</code></pre><p>造成这种现象的主要原因是，模块与组件的定义不好理解，也不能很好地进行区分。来看看两者在维基百科上的定义。</p>
+<blockquote>
+<p>软件模块（Module）是一套一致而互相有紧密关连的软件组织。它分别包含了程序和数据结构两部分。现代软件开发往往利用模块作为合成的单位。模块的接口表达了由该模块体统的功能和调用它时所需的元素。模块是可能分开被编写的单位。这使它们可再用和允许人员同时协作，编写及研究不同的模块。</p>
+<p>软件组件定义为自包含的，可编程的，可重用的，与语言无关的软件单位，软件组件可以很容易被用于组装应用程序中。</p>
+</blockquote>
+<p>可能看完这两个定义后一头雾水，还是不知道这两者有什么区别。造成这种现象的根本原因是，模块和组件都是系统的组成部分，只是从不同的角度拆分系统而已。</p>
+<ul>
+<li><p>从逻辑的角度拆分系统后：得到的单元就是“模块”；从物理的角度来拆分系统后，得到的单元就是“组件”.划分模块的主要目的是职责分离；划分模块的主要目的是单元复用。其实，“组件”的英文component也可翻译成零件一词，“零件”是一个物理的概念，并且具备“独立且可替换”的特点。</p>
+</li>
+<li><p>例子:一个最简单的网站系统来为例。假设我们要做一个学生信息管理系统。这个系统从逻辑角度来拆分，可以分为“登录注册模块”“个人信息模块”“个人成绩模块”；从物理的角度来拆分，可以拆分为Nginx，Web服务器，MySQL</p>
+</li>
+</ul>
+<h4 id="框架与架构"><a href="#框架与架构" class="headerlink" title="框架与架构"></a><center>框架与架构</center></h4><p>框架是和架构比较相似的概念，且两者有较强的关联关系，所以在实际工作中，这两个概念有时我们容易分不清楚。参考维基百科上框架与架构的定义，我来解释两者的区别。</p>
+<blockquote>
+<p>软件框架（Software framework）通常指的是为了实现某个业界标准或完成特定基本任务的软件组件规范，也指为了实现某个软件组件规范时，提供规范所要求之基础功能的软件产品</p>
+</blockquote>
+<p>其中关键部分：</p>
+<ol>
+<li>框架是组件规范：列如，MVC就是一种最常见的开发规范，类似的还有MVP，MVVM，J2EE等框架。</li>
+<li>框架提供基础功能的产品：例如，Spring MVC是MVC的开发框架，除了满足MVC的规范，Spring提供了很多基础功能来帮助我们实现功能，包括注解（@Controller等），还有许多基础功能。</li>
+</ol>
+<blockquote>
+<p>软件架构指软件系统的“基础结构”，创造这些基础结构的准则，以及对这些结构的描述</p>
+</blockquote>
+<pre><code>单纯从定义的角度来看，框架和架构的区别还是比较明显的，框架关注的是“规范”，架构关注的是“结构”。框架的英文是Framework，架构的英文是Architecture。Spring MVC的英文文档标题是“Web MVC framework”。
+
+虽然是这样，但工作中经常能遇到似是而非的说法。例如“我们的系统是MVC架构”“我们需要将android app重构为MVP架构”，“我们的系统基于SSH框架开发”，“我们是SSH的架构”，“XX系统是基于springMVC框架开发，标准的MVC架构”。。。
+
+究竟什么说法是对的，什么说法是错的呢?
+
+其实这些说法都是对的，造成这种现象的根本原因隐藏于架构的定义中，关键就是“基础架构”这个概念没有明确说是从什么角度来分解的。采用不同的角度或者唯独，可以将系统划分为不同的结构，其实我在“模块与组件”中的“学生管理系统”实例已经包含了这一点。
+</code></pre><ol>
+<li>从业务逻辑的角度分解，“学生管理系统”的架构是：<ul>
+<li>登录注册模块</li>
+<li>个人信息模块</li>
+<li>个人成绩模块</li>
+</ul>
+</li>
+<li>从物理部署的角度分解，“学生管理系统”的架构是：<ul>
+<li>nignx</li>
+<li>web服务器</li>
+<li>mysql</li>
+</ul>
+</li>
+<li>从开发规范的角度分解，“学生管理系统”可以采用标准的MVC框架来开发，因此架构又变成MVC架构：<ul>
+<li>Controller</li>
+<li>View</li>
+<li>Model</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p>这个地方重新定义了架构.</p>
+</blockquote>
+<p>参考：软件架构指软件系统的顶层结构。</p>
+<ol>
+<li>“系统是一群关联的个体组成”，这些“个体”可以是“子系统”“模块”“组件”等；架构需要明确系统包含哪些“个体”</li>
+<li>系统中的个体需要“根据某种规则”运作，架构需要明确个运作和协作的规则。</li>
+<li>维基百科定义的架构用到了“基础结构”这个说法，这里改为“顶层结构”，可以更好地区分系统和子系统，避免将系统架构和子系统架构混淆在一起导致架构层次混乱。    </li>
+</ol>
+<h4 id="一些感觉很不错的评论"><a href="#一些感觉很不错的评论" class="headerlink" title="一些感觉很不错的评论"></a><center>一些感觉很不错的评论</center></h4><ol>
+<li>架构是顶层设计，框架是面向编程或配置的半成品；组件是从技术维度上的复用；模块是从业务维度上职责的划分；系统是相互协同可运行的实体。 </li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/21/句子的形成-可做主语的词类/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="luowen">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Coding in life...">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/21/句子的形成-可做主语的词类/" itemprop="url">句子的形成_名词作主语</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-21T23:09:51+08:00">
+                2018-11-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/英语语法/" itemprop="url" rel="index">
+                    <span itemprop="name">英语语法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="句子的形成"><a href="#句子的形成" class="headerlink" title="句子的形成"></a>句子的形成</h2><p>概说：</p>
+<blockquote>
+<ol>
+<li>任何一个句子一定由主语（subject，简写成S）及动词（verb，简写成V）形成。<ul>
+<li>John works hard。</li>
+</ul>
+</li>
+<li>有时主语可以省略，而形成祈使句。这种祈使句句首位原形动词，之前省略了You should（你应当）<ul>
+<li>Work hard = (You should) work hard.</li>
+<li>注意：其实句变成否定形式时，要在原形动词前加Don’t<ul>
+<li>Don’t fool around 别游手好闲</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+</blockquote>
+<h3 id="new-knowledge"><a href="#new-knowledge" class="headerlink" title="new knowledge"></a><center>new knowledge<center></center></center></h3><ol>
+<li>opt vi 选择</li>
+</ol>
+<h3 id="第一节-可作主语的词类"><a href="#第一节-可作主语的词类" class="headerlink" title="第一节 可作主语的词类"></a>第一节 可作主语的词类</h3><blockquote>
+<p>一般所见到的结构中，通常是以名词作主语，但除了名词之外，还可用代词，不定式或不定式短语、名词性从句、名词短语、表距离的地点副词短语等作主语</p>
+<ol>
+<li><p>名词作主语</p>
+<ul>
+<li>The child is apt to tell lies</li>
+</ul>
+</li>
+<li><p>代词作主语</p>
+<ul>
+<li>He always keep his promise</li>
+</ul>
+</li>
+<li><p>动名词或不定式作主语</p>
+<ul>
+<li>动词绝对不可以直接当主语。一定要变成动名词或不定式短语，如此才可以视为名词的对等语，作主语用。</li>
+<li>Seeing him makes me angry.</li>
+<li>To see him is my purpose of here</li>
+</ul>
+<ol>
+<li>动名词作主语，通常用以表示已知的事实或曾经做过的事情</li>
+<li>不定式作主语，通常表示一种意愿、目的或未完成的事。</li>
+</ol>
+<ul>
+<li>注意：不定式或动名词短语作主语时，往往会形成主语太长的现象，古通常用代词it作形式主语，置于句首前，而将真正主语（也就是动名词或不定式短语）移至句尾。动名词移至句尾时，通常改为不定式短语。</li>
+</ul>
+</li>
+<li><p>名词性从句作主语：</p>
+<ul>
+<li>He doesn’t study makes me angry (x)</li>
+<li>注意：所谓句子，就是一开头就是主语的结构。句子绝对不能当主语，一定要变成名词性从句方可作主语</li>
+<li>名词性从句的种类<ul>
+<li>名词性从句包括宾语从句、主语从句、表语从句、同位语从句。</li>
+<li>名词性从句一共有三种：<ol>
+<li>that 从句</li>
+<li>whether 从句</li>
+<li>疑问词所引导的从句</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+</blockquote>
+<pre><code>1. that从句
+任何一个主语起首的句子面前冠以that，即成that从句。
+2. whether从句
+本从句系由可用yes/no回答的问句变化而成，这种可用yes/no回答的问句称为一般疑问句。
+    a.问句由be动词时：
+    主语与be动词还原，前面冠以whether
+    Is he happy？
+    whether he is happy？
+    b.问句由一般助动词（can、will、may、should、ought to must、have）时：
+    主语与助动词还原、前面冠以whether
+    Can he do it?
+    whether he can do it?
+    c.问句有do、does、did等助动词时：
+    主语与助动词还原，再将do、does、did去掉，后面的动词一人称和时态进行变化。
+    Did he come？
+    whether he came
+3.疑问句从句：
+本从句系由疑问句（what,when,how,where,why）等引导的问句变化而成，这种由疑问词引导的问句称为特殊疑问句。
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/20/Effective-Java-Item01/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -325,7 +792,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/11/20/Effective-Java-Item01/" itemprop="url">Effective_Java_Item01</a></h1>
+                <a class="post-title-link" href="/2018/11/20/Effective-Java-Item01/" itemprop="url">Effective_Java_Item01_考虑静态工厂方法替代构造器</a></h1>
         
 
         <div class="post-meta">
@@ -407,8 +874,35 @@
 <li>timely adj 即使的，合适的 adv 及时地</li>
 <li>cleanup n 清除</li>
 <li>precede v 领先 ，在…之前</li>
+<li>probably adv 大概，或许</li>
+<li>prime 主要的，可能的 v 作准备</li>
+<li>get around 避开，到处走走，有办法应付</li>
+<li>end up 结束，死亡</li>
+<li>close 紧密的，关的</li>
+<li>dispense 分配 分发 免除</li>
+<li>be said to be 据说</li>
+<li>also 也，而且，同样</li>
+<li>compact n.合同，契约 v 使简洁，使紧凑 adj 简洁的</li>
+<li>lend vt 贷款 提供</li>
 </ol>
-<h3 id="Item-1-考虑静态工厂方法替代构造器"><a href="#Item-1-考虑静态工厂方法替代构造器" class="headerlink" title="Item 1:考虑静态工厂方法替代构造器"></a>Item 1:考虑静态工厂方法替代构造器</h3>
+<h3 id="Item-1-考虑静态工厂方法替代构造器"><a href="#Item-1-考虑静态工厂方法替代构造器" class="headerlink" title="Item 1:考虑静态工厂方法替代构造器"></a>Item 1:考虑静态工厂方法替代构造器</h3><blockquote>
+<p>对于一个类传统的方式允许一个客户获取一个实例是提供一个公开的构造。有一种别的技术，这种技术应该成为每个开发者工具包的一部分。一个类可以提供一个公开的静态工厂方法，这个方法是简单的一个静态的方法，该方法返回一个类的实例。这是一个简单的列子来自Boolean（包装原始数据的类对于boolean基本数据类型）。这个方法翻译一个boolean原始数据类型的值进入一个Boolean包装类对象的引用。</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Boolean <span class="title">valueOf</span><span class="params">( <span class="keyword">boolean</span> b )</span></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> b? Boolean.TRUE : Boolean.FALSE;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注意这个静态工厂方法是不相同的对于工厂方法模式来自《设计模式》。这个静态工厂方法在这个项中描述并没有直接等价与《设计模式》。</p>
+<p>一个类可以提供它的使用者用静态工厂方法替代，或者另外，公开的构造器有优势并且也有劣势。</p>
+<p>静态工厂方法的一个优点在于，不像构造方法，他们有属于自己的名字。如果参数对于一个构造函数做不了什么，描述的对象将被返回，一个静态工厂有一个精心准备的名字会更容易使用，并且致使使用者的代码更容易被阅读。例如：构造函数BigInteger（int，int，Random），这将返回一个<br>BigInteger，这个是可能主要的，这有更好的表达作为一个静态工厂方法的名字 BigInteger。probablyPrime（这个方法被添加进Java4平台）</p>
+</blockquote>
+<blockquote>
+<p>一个类可以仅有一个单独的给定签名的构造函数，程序员已经知道避开这种通过提供两种构造函数，这种函数的参数集合不同仅在于它们的参数类型的顺序不同的限制。这是一种很坏的想法。这样一个api的使用者将从来不会记得构造函数是这样，并且结束调用这样一个错误通过这个失误。人们阅读代码，用这些构造函数将不会知道这个代码，要是没有参考类的文档。</p>
+<p>因为他们有同样的名字，静态工厂方法将不会共享在前一个段落限制讨论，在这种情况下一个类视乎必须多个相同签名的构造函数，用静态工厂方法替代这些构造方法并且小心地紧密的名字来强调它们的不同。</p>
+<p>静态工厂方法的第二个优势是，不像构造函数，它们没有必要创建一个对象在每次它们被调用的时候。这个允许不变的类来提前构造使用一个预先构造好的实例，或者为了缓存一个实例作为它们构建的，并且可以分配它们来避免重复的创建不必要的重复的对象。这个Boolean。valueOf（boolean）方法阐述了这个技术：它从来不创建对象。这个技巧很相似于Flyweight pattern（轻量级模式）【Gramma95】。它可以极大的提高性能如果同等的对象被频繁的请求，尤其是它们是那种创建很昂贵的对象。</p>
+<p>静态工厂方法能够返回同样的对象来自重复的调用的这个能力，允许类能够维持严格的控制实例在任何时刻都存在。这样实现的类据说是instance-controlled（实例控制）。有几个原因来写实例控制类。实例控制允许一个类保证它是一个单列或者一个不能实例化。而且，它允许一个不可变的值类来保证没有两个相同的实例存在：a.equals(b)仅仅可能是a==b，也就是同一个对象。这个是轻量级模式的基础【Gramma95】。枚举类型提供了这种保证。</p>
+<p>静态工厂方法的第三个优点是，不像构造函数，它们可以返回一个任意它们的返回类型的子类型的一个对象。这个给你极大的灵活在选择返回对象的类。</p>
+<p>灵活的应用是一个api可以返回对象，而没有让它们的类公开。隐藏实现类用这种流行导致一个非常简洁的API。这个技术提供它自身对于interface-based framework（Item 20）（接口基础框架），在这里接口提供自然的返回类型对于用静态工厂方法。</p>
+</blockquote>
+
           
         
       
@@ -557,8 +1051,7 @@
 <li>递归调用总是尝试解决一个规模更小的子问题，这样递归才能收敛到最简单的情况。<br><br><br></li>
 <li>递归调用的父问题和尝试解决的子问题之间不应该有交集</li>
 </ol>
-<h4 id="二分查找。（用好重载是真的牛）"><a href="#二分查找。（用好重载是真的牛）" class="headerlink" title="二分查找。（用好重载是真的牛）"></a>二分查找。（用好重载是真的牛）</h4><pre><code class="java">
-<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">binarySearch</span><span class="params">(<span class="keyword">int</span>[] orderArray, <span class="keyword">int</span> targetValue)</span> </span>{
+<h4 id="二分查找。（用好重载是真的牛）"><a href="#二分查找。（用好重载是真的牛）" class="headerlink" title="二分查找。（用好重载是真的牛）"></a>二分查找。（用好重载是真的牛）</h4><pre><code class="java"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">binarySearch</span><span class="params">(<span class="keyword">int</span>[] orderArray, <span class="keyword">int</span> targetValue)</span> </span>{
     <span class="keyword">return</span> binarySearch(orderArray, targetValue, <span class="number">0</span>, orderArray.length - <span class="number">1</span>);
 }
 
@@ -572,7 +1065,6 @@
 
     <span class="keyword">return</span> index;
 }
-
 </code></pre>
 
           
@@ -1447,7 +1939,7 @@ __斜体__
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">8</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -1458,7 +1950,7 @@ __斜体__
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">categories</span>
               </a>
             </div>
