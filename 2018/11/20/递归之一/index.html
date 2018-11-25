@@ -94,18 +94,18 @@
 
 
 
-<meta name="description" content="编写递归最重要的三点之一 递归总有一个最简单的情况。 方法的第一条语句总是包含return的条件语句   递归调用总是尝试解决一个规模更小的子问题，这样递归才能收敛到最简单的情况。 递归调用的父问题和尝试解决的子问题之间不应该有交集  二分查找。（用好重载是真的牛）public static int binarySearch(int[] orderArray, int targetValue) {">
+<meta name="description" content="编写递归最重要的三点之一 递归总有一个最简单的情况。 方法的第一条语句总是包含return的条件语句   递归调用总是尝试解决一个规模更小的子问题，这样递归才能收敛到最简单的情况。 递归调用的父问题和尝试解决的子问题之间不应该有交集  二分查找。（用好重载是真的牛）12345678910111213141516//这个肯定是对外提供的api，下面重载的方法才是具体实现，真牛public stati">
 <meta name="keywords" content="Java JavaScript Network Algorithms compute 踩坑专业户">
 <meta property="og:type" content="article">
 <meta property="og:title" content="递归之一">
 <meta property="og:url" content="http://yoursite.com/2018/11/20/递归之一/index.html">
 <meta property="og:site_name" content="Coding in life...">
-<meta property="og:description" content="编写递归最重要的三点之一 递归总有一个最简单的情况。 方法的第一条语句总是包含return的条件语句   递归调用总是尝试解决一个规模更小的子问题，这样递归才能收敛到最简单的情况。 递归调用的父问题和尝试解决的子问题之间不应该有交集  二分查找。（用好重载是真的牛）public static int binarySearch(int[] orderArray, int targetValue) {">
+<meta property="og:description" content="编写递归最重要的三点之一 递归总有一个最简单的情况。 方法的第一条语句总是包含return的条件语句   递归调用总是尝试解决一个规模更小的子问题，这样递归才能收敛到最简单的情况。 递归调用的父问题和尝试解决的子问题之间不应该有交集  二分查找。（用好重载是真的牛）12345678910111213141516//这个肯定是对外提供的api，下面重载的方法才是具体实现，真牛public stati">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-11-21T05:02:12.449Z">
+<meta property="og:updated_time" content="2018-11-24T08:32:32.173Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="递归之一">
-<meta name="twitter:description" content="编写递归最重要的三点之一 递归总有一个最简单的情况。 方法的第一条语句总是包含return的条件语句   递归调用总是尝试解决一个规模更小的子问题，这样递归才能收敛到最简单的情况。 递归调用的父问题和尝试解决的子问题之间不应该有交集  二分查找。（用好重载是真的牛）public static int binarySearch(int[] orderArray, int targetValue) {">
+<meta name="twitter:description" content="编写递归最重要的三点之一 递归总有一个最简单的情况。 方法的第一条语句总是包含return的条件语句   递归调用总是尝试解决一个规模更小的子问题，这样递归才能收敛到最简单的情况。 递归调用的父问题和尝试解决的子问题之间不应该有交集  二分查找。（用好重载是真的牛）12345678910111213141516//这个肯定是对外提供的api，下面重载的方法才是具体实现，真牛public stati">
 
 
 
@@ -407,21 +407,7 @@
 <li>递归调用总是尝试解决一个规模更小的子问题，这样递归才能收敛到最简单的情况。<br><br><br></li>
 <li>递归调用的父问题和尝试解决的子问题之间不应该有交集</li>
 </ol>
-<h4 id="二分查找。（用好重载是真的牛）"><a href="#二分查找。（用好重载是真的牛）" class="headerlink" title="二分查找。（用好重载是真的牛）"></a>二分查找。（用好重载是真的牛）</h4><pre><code class="java"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">binarySearch</span><span class="params">(<span class="keyword">int</span>[] orderArray, <span class="keyword">int</span> targetValue)</span> </span>{
-    <span class="keyword">return</span> binarySearch(orderArray, targetValue, <span class="number">0</span>, orderArray.length - <span class="number">1</span>);
-}
-
-<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">binarySearch</span><span class="params">(<span class="keyword">int</span>[] orderArray, <span class="keyword">int</span> targetValue, <span class="keyword">int</span> minIndex, <span class="keyword">int</span> maxIndex)</span> </span>{
-    <span class="keyword">if</span>(orderArray==<span class="keyword">null</span> || orderArray.length == <span class="number">0</span>) <span class="keyword">return</span> Integer.MIN_VALUE;
-
-    <span class="keyword">int</span> index = (minIndex + maxIndex)/<span class="number">2</span>;
-
-    <span class="keyword">if</span>( targetValue &gt; orderArray[index] ) <span class="keyword">return</span> binarySearch(orderArray, targetValue, index, maxIndex);
-    <span class="keyword">if</span>( targetValue &lt; orderArray[index] ) <span class="keyword">return</span> binarySearch(orderArray, targetValue, minIndex, index);
-
-    <span class="keyword">return</span> index;
-}
-</code></pre>
+<h4 id="二分查找。（用好重载是真的牛）"><a href="#二分查找。（用好重载是真的牛）" class="headerlink" title="二分查找。（用好重载是真的牛）"></a>二分查找。（用好重载是真的牛）</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">//这个肯定是对外提供的api，下面重载的方法才是具体实现，真牛</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">binarySearch</span><span class="params">(<span class="keyword">int</span>[] orderArray, <span class="keyword">int</span> targetValue)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">return</span> binarySearch(orderArray, targetValue, <span class="number">0</span>, orderArray.length - <span class="number">1</span>);</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">binarySearch</span><span class="params">(<span class="keyword">int</span>[] orderArray, <span class="keyword">int</span> targetValue, <span class="keyword">int</span> minIndex, <span class="keyword">int</span> maxIndex)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">if</span>(orderArray==<span class="keyword">null</span> || orderArray.length == <span class="number">0</span>) <span class="keyword">return</span> Integer.MIN_VALUE;</span><br><span class="line"></span><br><span class="line">       <span class="keyword">int</span> index = (minIndex + maxIndex)/<span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">       <span class="keyword">if</span>( targetValue &gt; orderArray[index] ) <span class="keyword">return</span> binarySearch(orderArray, targetValue, index, maxIndex);</span><br><span class="line">       <span class="keyword">if</span>( targetValue &lt; orderArray[index] ) <span class="keyword">return</span> binarySearch(orderArray, targetValue, minIndex, index);</span><br><span class="line">       </span><br><span class="line">       <span class="keyword">return</span> index;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -533,7 +519,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-count">11</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -544,7 +530,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">9</span>
                 <span class="site-state-item-name">categories</span>
               </a>
             </div>
@@ -554,10 +540,10 @@
             
             
             <div class="site-state-item site-state-tags">
-              
-                <span class="site-state-item-count">2</span>
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">5</span>
                 <span class="site-state-item-name">tags</span>
-              
+              </a>
             </div>
           
 
