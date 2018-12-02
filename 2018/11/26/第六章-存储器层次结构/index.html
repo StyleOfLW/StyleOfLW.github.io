@@ -94,18 +94,18 @@
 
 
 
-<meta name="description" content="Blogging is a little fun">
+<meta name="description" content="概述： 前面学习的都是依赖于一个简单的计算机系统模型，CPU执行指令，而存储器系统为CPU存放指令和数据。在简单模型中，存储器系统是一个线性的字节数组，而CPU能够在一个常数时间内访问每个存储器位置。虽然迄今为止这都是一个有效的模型，但是它没有反映现代系统实际工作的方式。 实际上，存储器系统（memory system）是一个具有不同容量、成本和访问时间的存储设备的层次结构。  L0 CPU寄存器">
 <meta name="keywords" content="CSAPP">
 <meta property="og:type" content="article">
 <meta property="og:title" content="第六章-存储器层次结构">
 <meta property="og:url" content="http://yoursite.com/2018/11/26/第六章-存储器层次结构/index.html">
 <meta property="og:site_name" content="Coding in life...">
-<meta property="og:description" content="Blogging is a little fun">
+<meta property="og:description" content="概述： 前面学习的都是依赖于一个简单的计算机系统模型，CPU执行指令，而存储器系统为CPU存放指令和数据。在简单模型中，存储器系统是一个线性的字节数组，而CPU能够在一个常数时间内访问每个存储器位置。虽然迄今为止这都是一个有效的模型，但是它没有反映现代系统实际工作的方式。 实际上，存储器系统（memory system）是一个具有不同容量、成本和访问时间的存储设备的层次结构。  L0 CPU寄存器">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-11-26T13:31:01.434Z">
+<meta property="og:updated_time" content="2018-12-02T14:53:28.927Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="第六章-存储器层次结构">
-<meta name="twitter:description" content="Blogging is a little fun">
+<meta name="twitter:description" content="概述： 前面学习的都是依赖于一个简单的计算机系统模型，CPU执行指令，而存储器系统为CPU存放指令和数据。在简单模型中，存储器系统是一个线性的字节数组，而CPU能够在一个常数时间内访问每个存储器位置。虽然迄今为止这都是一个有效的模型，但是它没有反映现代系统实际工作的方式。 实际上，存储器系统（memory system）是一个具有不同容量、成本和访问时间的存储设备的层次结构。  L0 CPU寄存器">
 
 
 
@@ -399,7 +399,90 @@
       
 
       
-        
+        <p>概述：</p>
+<pre><code>前面学习的都是依赖于一个简单的计算机系统模型，CPU执行指令，而存储器系统为CPU存放指令和数据。在简单模型中，存储器系统是一个线性的字节数组，而CPU能够在一个常数时间内访问每个存储器位置。虽然迄今为止这都是一个有效的模型，但是它没有反映现代系统实际工作的方式。
+</code></pre><p>实际上，存储器系统（memory system）是一个具有不同容量、成本和访问时间的存储设备的层次结构。</p>
+<ul>
+<li>L0 CPU寄存器保存着最常用的数据。</li>
+<li>L1 靠近CPU的小的、快速的高速缓存存储器（cache memory）作为一部分存储在相对慢速的主存储器（main memory）中数据和指令的缓冲区域。主存缓存存储在容量较大的、慢速磁盘上大数据，而这些磁盘常常又作为存储在通过网络连接的其他机器的磁盘或磁带上的数据的缓冲区域。</li>
+</ul>
+<p>计算机系统中一个基本持久的思想：使数据项存储在层次结构中较高的地方，在哪里CPU能更快地访问到它们。</p>
+<pre><code>这种思想围绕着计算机程序的一个称为局部性（locality）的基本属性。具有良好局部性的程序倾向于一次又一次地访问相同的数据项集合
+</code></pre><h3 id="6-1存储技术"><a href="#6-1存储技术" class="headerlink" title="6.1存储技术"></a><center>6.1存储技术</center></h3><h4 id="6-1-1-随机访问存储器"><a href="#6-1-1-随机访问存储器" class="headerlink" title="6.1.1 随机访问存储器"></a>6.1.1 随机访问存储器</h4><p>  随机访问存储器（Random-Access Memory，RAM）分为两类：静态的和动态的。静态RAM(SARM)比动态的（DRAM）更快，但也贵很多。SRAM用来作为高速存储器，既可以在CPU芯片上，也可以在片下。DRAM用来作为主存以及图形系统的帧缓冲区。典型地，一个笔记本，SRAM不会操过几兆字节。</p>
+<ol>
+<li>静态RAM</li>
+</ol>
+<blockquote>
+<p>SRAM将每个位存储在一个双稳态的（bistable）存储器单元里。每个单元是用一个六晶体管电路来实现的。</p>
+<p>SRAM存储器单元有双稳态特性，只要有电，它就会永远地保持它的值。</p>
+</blockquote>
+<ol start="2">
+<li>动态RAM</li>
+</ol>
+<ol start="3">
+<li><p>传统的DRAM</p>
+</li>
+<li><p>内存模块</p>
+</li>
+</ol>
+<ul>
+<li>DRAM芯片封装在内存模块，通过将多个内存模块链接到内存控制器，能够聚合成主存</li>
+</ul>
+<ol start="5">
+<li><p>增强的DRAM</p>
+</li>
+<li><p>非易失性存储器</p>
+</li>
+</ol>
+<blockquote>
+<p>如果断电，DRAM和SRAM会丢失它们的信息，从这个意义上来书，它们是（volatile, 挥发性的）。<br>非易失性存储器（novolatile memory）即使是在关电后，仍然保存着它们的信息</p>
+</blockquote>
+<blockquote>
+<p>ROM,其中有的类型可以读也可以写，但是它们整体上都被称为（Read-Only Memory, ROM）。ROM是以它们能够被重编程（写）的次数和它们对进行重编所用的机制来区分的</p>
+</blockquote>
+<p>闪存（flash memory）是一类非易失性存储器。</p>
+<ul>
+<li>SSD,一种新型的基于闪存的磁盘驱动技术，称为固态硬盘（Solid State Disk， SSD）</li>
+</ul>
+<p>存储在ROM设备中的程序通常被称为（firmware）固件。当一个计算机系统通电以后，它会运行存储在ROM中的固件。</p>
+<pre><code>- 一些系统在固件中提供了少量的基本的输入和输出函数--例如PC的BIOS（基本输入/输出系统）例程。
+</code></pre><ol start="7">
+<li>访问主存</li>
+</ol>
+<p>数据流通过称为总线（bus）的共享电子电路在处理器和DRAM主存之间来来回回。</p>
+<pre><code>每次CPU和主存之间的数据传送都是通过一系列步骤来完成的，这些步骤称为总线事物（bus transaction）。读事物（read transaction）从主存传送数据到CPU。写事物（write transaction）从CPU传送数据到主存
+</code></pre><p>一个计算机系统的配置（主要部分）</p>
+<ul>
+<li>CPU芯片</li>
+<li>I/O桥接器（I/O bridge）的芯片组（其中包括内存控制器）</li>
+<li>以及组成主存的DRAM内存模块 </li>
+</ul>
+<blockquote>
+<p>这些部件由一对总线连接起来，其中一条总线是系统总线（system bus），它连接CPU和I/O桥接器，另一条总线是内存总线（memory bus），它连接I/O桥接器和主存。I/O桥接器将系统总线的电子信号翻译成内存总线的电子信号。</p>
+</blockquote>
+<h4 id="6-1-2-磁盘存储"><a href="#6-1-2-磁盘存储" class="headerlink" title="6.1.2 磁盘存储"></a>6.1.2 磁盘存储</h4><ol>
+<li><p>磁盘构造<br>磁盘是由盘片（platter）构成的。每个盘片有两面或者称为表面（surface），表面覆盖着磁性记录材料。盘片中央有一个可以旋转的主轴（spindle），它使得盘片以固定的旋转速率（rotational rate）旋转，通常是5400-15000转每分钟（Revolution Per Minute， RPM）。磁盘通常包含一个或多个这样的盘片，并封装在一个密封的容器类</p>
+</li>
+<li><p>磁盘容量</p>
+</li>
+<li><p>磁盘操作</p>
+</li>
+<li>逻辑磁盘块</li>
+<li>连接I/O设备</li>
+</ol>
+<p>例如图形卡、监视器、鼠标、键盘和磁盘这样的输入/输出（I/O）设备，都是通过I/O总线，连接到CPU和主存的。</p>
+<p>虽然I/O总线比系统总线和内存总线慢，但是它可以容纳种类繁多的第三方I/O设备。</p>
+<ul>
+<li>通用串行总线（Universal Serial Bus，USB）控制器是一个连接到USB总显得设备的中转机构，USB总显示一个广泛使用的标准，连接各种外围I/O设备。</li>
+<li>图形卡（或适配器）包含硬件和软件逻辑，它们负载代表CPU在显示器上画像素。</li>
+<li>主机总线适配器将一个或多个磁盘连接到I/O总线，使用的是一个特别的主机总线接口定义的通信协议。</li>
+</ul>
+<ol start="6">
+<li>访问磁盘<br>设备可以自己执行读或者写总线事物而不需要CPU干涉的过程，称为直接内存访问（Direct Memory Access，DMA）。这种数据传送称为DMA传送🤩（DMA transfer）<h4 id="6-1-3-固态硬盘"><a href="#6-1-3-固态硬盘" class="headerlink" title="6.1.3 固态硬盘"></a>6.1.3 固态硬盘</h4></li>
+</ol>
+<h4 id="6-1-4-存储技术趋势"><a href="#6-1-4-存储技术趋势" class="headerlink" title="6.1.4 存储技术趋势"></a>6.1.4 存储技术趋势</h4><h3 id="6-2-局部性"><a href="#6-2-局部性" class="headerlink" title="6.2 局部性"></a><center>6.2 局部性</center></h3><h4 id="6-2-1-对程序数据引用的局部性"><a href="#6-2-1-对程序数据引用的局部性" class="headerlink" title="6.2.1 对程序数据引用的局部性"></a>6.2.1 对程序数据引用的局部性</h4><h4 id="6-2-2-取指令的局部性"><a href="#6-2-2-取指令的局部性" class="headerlink" title="6.2.2 取指令的局部性"></a>6.2.2 取指令的局部性</h4><h4 id="6-2-3-局部性小结"><a href="#6-2-3-局部性小结" class="headerlink" title="6.2.3 局部性小结"></a>6.2.3 局部性小结</h4><h3 id="6-3-存储器层次结构"><a href="#6-3-存储器层次结构" class="headerlink" title="6.3 存储器层次结构"></a><center>6.3 存储器层次结构</center></h3><h4 id="6-3-1-存储器层次结构中的缓存"><a href="#6-3-1-存储器层次结构中的缓存" class="headerlink" title="6.3.1 存储器层次结构中的缓存"></a>6.3.1 存储器层次结构中的缓存</h4><p>一般而言，高速缓存（cache，读作‘cash’）是一个小而快速的存储设备，它作为存储在更大、也更慢的设备中的数据对象的缓冲区域。使用高速缓存的过程称为缓存（caching，读作‘cashing’）</p>
+<h4 id="6-3-2-存储器层次结构概念小结"><a href="#6-3-2-存储器层次结构概念小结" class="headerlink" title="6.3.2 存储器层次结构概念小结"></a>6.3.2 存储器层次结构概念小结</h4><h3 id="6-4-高速缓存存储器"><a href="#6-4-高速缓存存储器" class="headerlink" title="6.4 高速缓存存储器"></a><center>6.4 高速缓存存储器</center></h3><h4 id="6-4-1-通用的高速缓存存储器组织结构"><a href="#6-4-1-通用的高速缓存存储器组织结构" class="headerlink" title="6.4.1 通用的高速缓存存储器组织结构"></a>6.4.1 通用的高速缓存存储器组织结构</h4><h4 id="6-4-2-直接映射高速缓存"><a href="#6-4-2-直接映射高速缓存" class="headerlink" title="6.4.2 直接映射高速缓存"></a>6.4.2 直接映射高速缓存</h4><h4 id="6-4-3-组相联高速缓存"><a href="#6-4-3-组相联高速缓存" class="headerlink" title="6.4.3 组相联高速缓存"></a>6.4.3 组相联高速缓存</h4><h4 id="6-4-4-全相联高速缓存"><a href="#6-4-4-全相联高速缓存" class="headerlink" title="6.4.4 全相联高速缓存"></a>6.4.4 全相联高速缓存</h4><h4 id="6-4-5-有关写的问题"><a href="#6-4-5-有关写的问题" class="headerlink" title="6.4.5 有关写的问题"></a>6.4.5 有关写的问题</h4><h4 id="6-4-6-一个真实的高速缓存层次结构的解剖"><a href="#6-4-6-一个真实的高速缓存层次结构的解剖" class="headerlink" title="6.4.6 一个真实的高速缓存层次结构的解剖"></a>6.4.6 一个真实的高速缓存层次结构的解剖</h4><h4 id="6-4-7-高速缓存参数的性能影响"><a href="#6-4-7-高速缓存参数的性能影响" class="headerlink" title="6.4.7 高速缓存参数的性能影响"></a>6.4.7 高速缓存参数的性能影响</h4><h3 id="6-5-编写高速缓存友好的代码"><a href="#6-5-编写高速缓存友好的代码" class="headerlink" title="6.5 编写高速缓存友好的代码"></a><center>6.5 编写高速缓存友好的代码</center></h3><h3 id="6-6-综合：高速缓存对程序性能的影响"><a href="#6-6-综合：高速缓存对程序性能的影响" class="headerlink" title="6.6 综合：高速缓存对程序性能的影响"></a><center>6.6 综合：高速缓存对程序性能的影响</center></h3><h4 id="6-6-1-存储器山"><a href="#6-6-1-存储器山" class="headerlink" title="6.6.1 存储器山"></a>6.6.1 存储器山</h4><p>一个程序从存储系统中读数据的速率称为读吞吐量（read throughput），或者有时称为（read bandwidth）。</p>
+<h4 id="6-6-2-重新排列循环以提高空间局部性"><a href="#6-6-2-重新排列循环以提高空间局部性" class="headerlink" title="6.6.2 重新排列循环以提高空间局部性"></a>6.6.2 重新排列循环以提高空间局部性</h4><h4 id="6-6-3-在程序中利用局部性"><a href="#6-6-3-在程序中利用局部性" class="headerlink" title="6.6.3 在程序中利用局部性"></a>6.6.3 在程序中利用局部性</h4>
       
     </div>
     
@@ -493,8 +576,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="luowen">
           <p class="site-author-name" itemprop="name">luowen</p>
@@ -507,7 +599,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-count">19</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -518,7 +610,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-count">12</span>
                 <span class="site-state-item-name">categories</span>
               </a>
             </div>
@@ -529,7 +621,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">11</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
@@ -554,6 +646,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1存储技术"><span class="nav-number">1.</span> <span class="nav-text">6.1存储技术</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#6-1-1-随机访问存储器"><span class="nav-number">1.1.</span> <span class="nav-text">6.1.1 随机访问存储器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-1-2-磁盘存储"><span class="nav-number">1.2.</span> <span class="nav-text">6.1.2 磁盘存储</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-1-3-固态硬盘"><span class="nav-number">1.3.</span> <span class="nav-text">6.1.3 固态硬盘</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-1-4-存储技术趋势"><span class="nav-number">1.4.</span> <span class="nav-text">6.1.4 存储技术趋势</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-2-局部性"><span class="nav-number">2.</span> <span class="nav-text">6.2 局部性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#6-2-1-对程序数据引用的局部性"><span class="nav-number">2.1.</span> <span class="nav-text">6.2.1 对程序数据引用的局部性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-2-2-取指令的局部性"><span class="nav-number">2.2.</span> <span class="nav-text">6.2.2 取指令的局部性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-2-3-局部性小结"><span class="nav-number">2.3.</span> <span class="nav-text">6.2.3 局部性小结</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-3-存储器层次结构"><span class="nav-number">3.</span> <span class="nav-text">6.3 存储器层次结构</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#6-3-1-存储器层次结构中的缓存"><span class="nav-number">3.1.</span> <span class="nav-text">6.3.1 存储器层次结构中的缓存</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-3-2-存储器层次结构概念小结"><span class="nav-number">3.2.</span> <span class="nav-text">6.3.2 存储器层次结构概念小结</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-4-高速缓存存储器"><span class="nav-number">4.</span> <span class="nav-text">6.4 高速缓存存储器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#6-4-1-通用的高速缓存存储器组织结构"><span class="nav-number">4.1.</span> <span class="nav-text">6.4.1 通用的高速缓存存储器组织结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-4-2-直接映射高速缓存"><span class="nav-number">4.2.</span> <span class="nav-text">6.4.2 直接映射高速缓存</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-4-3-组相联高速缓存"><span class="nav-number">4.3.</span> <span class="nav-text">6.4.3 组相联高速缓存</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-4-4-全相联高速缓存"><span class="nav-number">4.4.</span> <span class="nav-text">6.4.4 全相联高速缓存</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-4-5-有关写的问题"><span class="nav-number">4.5.</span> <span class="nav-text">6.4.5 有关写的问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-4-6-一个真实的高速缓存层次结构的解剖"><span class="nav-number">4.6.</span> <span class="nav-text">6.4.6 一个真实的高速缓存层次结构的解剖</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-4-7-高速缓存参数的性能影响"><span class="nav-number">4.7.</span> <span class="nav-text">6.4.7 高速缓存参数的性能影响</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-5-编写高速缓存友好的代码"><span class="nav-number">5.</span> <span class="nav-text">6.5 编写高速缓存友好的代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-6-综合：高速缓存对程序性能的影响"><span class="nav-number">6.</span> <span class="nav-text">6.6 综合：高速缓存对程序性能的影响</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#6-6-1-存储器山"><span class="nav-number">6.1.</span> <span class="nav-text">6.6.1 存储器山</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-6-2-重新排列循环以提高空间局部性"><span class="nav-number">6.2.</span> <span class="nav-text">6.6.2 重新排列循环以提高空间局部性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-6-3-在程序中利用局部性"><span class="nav-number">6.3.</span> <span class="nav-text">6.6.3 在程序中利用局部性</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
