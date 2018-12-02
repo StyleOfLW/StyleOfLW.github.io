@@ -94,18 +94,18 @@
 
 
 
-<meta name="description" content="###软件架构  随着软件系统规模的增加，计算相关的算法和数据结构不再构成主要的设计问题：当系统由许多部分组成时，整个系统的组织，也就是所说的“软甲架构”，导致了一系列新的设计问题。  只有规模较大的软件系统才会面临软件架构相关的问题，比如：  系统规模庞大，内部耦合严重，开发效率低; 系统耦合严重，牵一发动全身，后续修改和扩展困难; 系统逻辑复杂，容易出问题，出问题后很难排查和修复。  架构设计">
+<meta name="description" content="软件架构 随着软件系统规模的增加，计算相关的算法和数据结构不再构成主要的设计问题：当系统由许多部分组成时，整个系统的组织，也就是所说的“软甲架构”，导致了一系列新的设计问题。  只有规模较大的软件系统才会面临软件架构相关的问题，比如：  系统规模庞大，内部耦合严重，开发效率低; 系统耦合严重，牵一发动全身，后续修改和扩展困难; 系统逻辑复杂，容易出问题，出问题后很难排查和修复。  架构设计的目的架">
 <meta name="keywords" content="架构&amp;学习">
 <meta property="og:type" content="article">
 <meta property="og:title" content="架构02-架构设计的目的">
 <meta property="og:url" content="http://yoursite.com/2018/12/01/架构02-架构设计的目的/index.html">
 <meta property="og:site_name" content="Coding in life...">
-<meta property="og:description" content="###软件架构  随着软件系统规模的增加，计算相关的算法和数据结构不再构成主要的设计问题：当系统由许多部分组成时，整个系统的组织，也就是所说的“软甲架构”，导致了一系列新的设计问题。  只有规模较大的软件系统才会面临软件架构相关的问题，比如：  系统规模庞大，内部耦合严重，开发效率低; 系统耦合严重，牵一发动全身，后续修改和扩展困难; 系统逻辑复杂，容易出问题，出问题后很难排查和修复。  架构设计">
+<meta property="og:description" content="软件架构 随着软件系统规模的增加，计算相关的算法和数据结构不再构成主要的设计问题：当系统由许多部分组成时，整个系统的组织，也就是所说的“软甲架构”，导致了一系列新的设计问题。  只有规模较大的软件系统才会面临软件架构相关的问题，比如：  系统规模庞大，内部耦合严重，开发效率低; 系统耦合严重，牵一发动全身，后续修改和扩展困难; 系统逻辑复杂，容易出问题，出问题后很难排查和修复。  架构设计的目的架">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-12-01T06:53:57.522Z">
+<meta property="og:updated_time" content="2018-12-02T15:15:43.669Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="架构02-架构设计的目的">
-<meta name="twitter:description" content="###软件架构  随着软件系统规模的增加，计算相关的算法和数据结构不再构成主要的设计问题：当系统由许多部分组成时，整个系统的组织，也就是所说的“软甲架构”，导致了一系列新的设计问题。  只有规模较大的软件系统才会面临软件架构相关的问题，比如：  系统规模庞大，内部耦合严重，开发效率低; 系统耦合严重，牵一发动全身，后续修改和扩展困难; 系统逻辑复杂，容易出问题，出问题后很难排查和修复。  架构设计">
+<meta name="twitter:description" content="软件架构 随着软件系统规模的增加，计算相关的算法和数据结构不再构成主要的设计问题：当系统由许多部分组成时，整个系统的组织，也就是所说的“软甲架构”，导致了一系列新的设计问题。  只有规模较大的软件系统才会面临软件架构相关的问题，比如：  系统规模庞大，内部耦合严重，开发效率低; 系统耦合严重，牵一发动全身，后续修改和扩展困难; 系统逻辑复杂，容易出问题，出问题后很难排查和修复。  架构设计的目的架">
 
 
 
@@ -399,8 +399,7 @@
       
 
       
-        <p>###软件架构</p>
-<blockquote>
+        <h3 id="软件架构"><a href="#软件架构" class="headerlink" title="软件架构"></a>软件架构</h3><blockquote>
 <p>随着软件系统规模的增加，计算相关的算法和数据结构不再构成主要的设计问题：当系统由许多部分组成时，整个系统的组织，也就是所说的“软甲架构”，导致了一系列新的设计问题。</p>
 </blockquote>
 <p>只有规模较大的软件系统才会面临软件架构相关的问题，比如：</p>
@@ -496,7 +495,7 @@ Nginx提供的ACL控制、用户账号密码管理，数据库访问权限控制
 </code></pre><p>成本：</p>
 <pre><code>系统很简单，基本上几台服务器就能够搞定，无需过多关注。
 </code></pre><p>还有其他方面，这个分析下来，这个方案的主要复杂性体现在存储可靠性上，需要保证异常的时候，不要丢失所有数据即可（丢失几个或几十个学生信息问题不大）    </p>
-<h4 id="牛人评论"><a href="#牛人评论" class="headerlink" title="牛人评论"></a>牛人评论</h4>
+
       
     </div>
     
@@ -670,7 +669,7 @@ Nginx提供的ACL控制、用户账号密码管理，数据库访问权限控制
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#架构设计的目的"><span class="nav-number">1.</span> <span class="nav-text">架构设计的目的</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#架构设计的误区"><span class="nav-number">1.1.</span> <span class="nav-text">架构设计的误区</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#架构设计的真正目的"><span class="nav-number">1.2.</span> <span class="nav-text">架构设计的真正目的</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#简单的复杂度分析案例"><span class="nav-number">1.3.</span> <span class="nav-text">简单的复杂度分析案例</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#牛人评论"><span class="nav-number">1.4.</span> <span class="nav-text">牛人评论</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#软件架构"><span class="nav-number">1.</span> <span class="nav-text">软件架构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#架构设计的目的"><span class="nav-number">2.</span> <span class="nav-text">架构设计的目的</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#架构设计的误区"><span class="nav-number">2.1.</span> <span class="nav-text">架构设计的误区</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#架构设计的真正目的"><span class="nav-number">2.2.</span> <span class="nav-text">架构设计的真正目的</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#简单的复杂度分析案例"><span class="nav-number">2.3.</span> <span class="nav-text">简单的复杂度分析案例</span></a></li></ol></li></ol></div>
             
 
           </div>
