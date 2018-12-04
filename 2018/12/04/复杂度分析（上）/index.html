@@ -78,7 +78,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="算法,">
 
 
 
@@ -94,18 +94,18 @@
 
 
 
-<meta name="description" content="Blogging is a little fun">
-<meta name="keywords" content="Java JavaScript Network Algorithms compute 踩坑专业户">
-<meta property="og:type" content="website">
-<meta property="og:title" content="tags">
-<meta property="og:url" content="http://yoursite.com/tags/index.html">
+<meta name="description" content="复杂度分析：如何分析，统计算法的执行效率和资源消耗 算法和数据结构解决的是“快”和“省”的问题，即如何让代码运行的更快，如何让代码更节省资源。 复杂度分析是整个算法学习的精髓，只要掌握了它，算法和数据结构就掌握了一半了  为什么需要复杂度分析事后统计法  测试结果非常依赖于测试环境 测试结果规模受数据规模影响很大  我们需要一个不需要依赖于测试环境，就可以粗略的估算整个算法的执行效率的方法 大O复">
+<meta name="keywords" content="算法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="复杂度分析（上）">
+<meta property="og:url" content="http://yoursite.com/2018/12/04/复杂度分析（上）/index.html">
 <meta property="og:site_name" content="Coding in life...">
-<meta property="og:description" content="Blogging is a little fun">
+<meta property="og:description" content="复杂度分析：如何分析，统计算法的执行效率和资源消耗 算法和数据结构解决的是“快”和“省”的问题，即如何让代码运行的更快，如何让代码更节省资源。 复杂度分析是整个算法学习的精髓，只要掌握了它，算法和数据结构就掌握了一半了  为什么需要复杂度分析事后统计法  测试结果非常依赖于测试环境 测试结果规模受数据规模影响很大  我们需要一个不需要依赖于测试环境，就可以粗略的估算整个算法的执行效率的方法 大O复">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-11-24T08:11:03.749Z">
+<meta property="og:updated_time" content="2018-12-04T15:57:22.395Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="tags">
-<meta name="twitter:description" content="Blogging is a little fun">
+<meta name="twitter:title" content="复杂度分析（上）">
+<meta name="twitter:description" content="复杂度分析：如何分析，统计算法的执行效率和资源消耗 算法和数据结构解决的是“快”和“省”的问题，即如何让代码运行的更快，如何让代码更节省资源。 复杂度分析是整个算法学习的精髓，只要掌握了它，算法和数据结构就掌握了一半了  为什么需要复杂度分析事后统计法  测试结果非常依赖于测试环境 测试结果规模受数据规模影响很大  我们需要一个不需要依赖于测试环境，就可以粗略的估算整个算法的执行效率的方法 大O复">
 
 
 
@@ -134,13 +134,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/tags/">
+  <link rel="canonical" href="http://yoursite.com/2018/12/04/复杂度分析（上）/">
 
 
 
 
 
-  <title>tags | Coding in life...</title>
+  <title>复杂度分析（上） | Coding in life...</title>
   
 
 
@@ -293,40 +293,203 @@
 
   <div id="posts" class="posts-expand">
     
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/04/复杂度分析（上）/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="luowen">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Coding in life...">
+    </span>
+
     
-    
-    <div class="post-block page">
       <header class="post-header">
 
-	<h1 class="post-title" itemprop="name headline">tags</h1>
-
-
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
         
         
-          <div class="tag-cloud">
-            <div class="tag-cloud-title">
-                12 tags in total
-            </div>
-            <div class="tag-cloud-tags">
-              <a href="/tags/ARTS/" style="font-size: 12px; color: #ccc">ARTS</a> <a href="/tags/ARTS-挑战/" style="font-size: 30px; color: #111">ARTS&挑战</a> <a href="/tags/CSAPP/" style="font-size: 12px; color: #ccc">CSAPP</a> <a href="/tags/python/" style="font-size: 12px; color: #ccc">python</a> <a href="/tags/tags/" style="font-size: 12px; color: #ccc">tags</a> <a href="/tags/学习-英语/" style="font-size: 12px; color: #ccc">学习&英语</a> <a href="/tags/架构-学习/" style="font-size: 30px; color: #111">架构&学习</a> <a href="/tags/算法/" style="font-size: 12px; color: #ccc">算法</a> <a href="/tags/英语语法/" style="font-size: 12px; color: #ccc">英语语法</a> <a href="/tags/计划/" style="font-size: 12px; color: #ccc">计划</a> <a href="/tags/计划-行动/" style="font-size: 12px; color: #ccc">计划&行动</a> <a href="/tags/随笔记录/" style="font-size: 12px; color: #ccc">随笔记录</a>
-            </div>
-          </div>
+          <h1 class="post-title" itemprop="name headline">复杂度分析（上）</h1>
         
-      </div>
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-04T23:24:18+08:00">
+                2018-12-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i> 阅读数
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
       
+
+      
+        <h3 id="复杂度分析：如何分析，统计算法的执行效率和资源消耗"><a href="#复杂度分析：如何分析，统计算法的执行效率和资源消耗" class="headerlink" title="复杂度分析：如何分析，统计算法的执行效率和资源消耗"></a>复杂度分析：如何分析，统计算法的执行效率和资源消耗</h3><ul>
+<li>算法和数据结构解决的是“快”和“省”的问题，即如何让代码运行的更快，如何让代码更节省资源。</li>
+<li>复杂度分析是整个算法学习的精髓，只要掌握了它，算法和数据结构就掌握了一半了</li>
+</ul>
+<h4 id="为什么需要复杂度分析"><a href="#为什么需要复杂度分析" class="headerlink" title="为什么需要复杂度分析"></a>为什么需要复杂度分析</h4><p>事后统计法</p>
+<ul>
+<li>测试结果非常依赖于测试环境</li>
+<li>测试结果规模受数据规模影响很大</li>
+</ul>
+<p>我们需要一个不需要依赖于测试环境，就可以粗略的估算整个算法的执行效率的方法</p>
+<h5 id="大O复杂度表示法"><a href="#大O复杂度表示法" class="headerlink" title="大O复杂度表示法"></a>大O复杂度表示法</h5><ul>
+<li><p>所有代码的执行时间T(n)与每行代码的执行次数n成正比。</p>
+<ul>
+<li><p>公式： T(n) = O(f(n))</p>
+<ul>
+<li>T(n) 它表示代码执行的时间</li>
+<li>n  代表示数据规模的大小</li>
+<li>f(n) 表示每行代码执行次数的总数。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>大O时间复杂度表示法</p>
+<pre><code>大O时间复杂度实际上并不具体表示代码真正运行的时间，而是表示代码执行时间随着数据规模增长的变化趋势。所以，也叫做渐进复杂度分析（asymptotic time complexity）,简称时间复杂度
+</code></pre><hr>
+<h4 id="时间复杂度分析"><a href="#时间复杂度分析" class="headerlink" title="时间复杂度分析"></a>时间复杂度分析</h4><p>这有三种比较实用的方法，进行时间复杂度分析</p>
+<ol>
+<li>只关注循环次数最多的一段代码</li>
+<li>加法法则，总复杂度等于量级最大的那段代码的复杂度</li>
+<li>乘法法则，嵌套代码的复杂度等于嵌套内外代码复杂度的乘积</li>
+</ol>
+<h4 id="空间复杂度分析"><a href="#空间复杂度分析" class="headerlink" title="空间复杂度分析"></a>空间复杂度分析</h4><p>渐进空间复杂度：算法的执行时间与数据规模之间的增长关系。表示</p>
+
       
     </div>
     
     
     
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/算法/" rel="tag"># 算法</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/12/02/ARTS-第三周挑战/" rel="next" title="ARTS-第三周挑战">
+                <i class="fa fa-chevron-left"></i> ARTS-第三周挑战
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
   </div>
 
 
@@ -359,8 +522,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="luowen">
           <p class="site-author-name" itemprop="name">luowen</p>
@@ -420,6 +592,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#复杂度分析：如何分析，统计算法的执行效率和资源消耗"><span class="nav-number">1.</span> <span class="nav-text">复杂度分析：如何分析，统计算法的执行效率和资源消耗</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#为什么需要复杂度分析"><span class="nav-number">1.1.</span> <span class="nav-text">为什么需要复杂度分析</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#大O复杂度表示法"><span class="nav-number">1.1.1.</span> <span class="nav-text">大O复杂度表示法</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#时间复杂度分析"><span class="nav-number">1.2.</span> <span class="nav-text">时间复杂度分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#空间复杂度分析"><span class="nav-number">1.3.</span> <span class="nav-text">空间复杂度分析</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -553,10 +741,10 @@
   
 
   
-    <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
 <script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
 
-  
+
 
   
 
