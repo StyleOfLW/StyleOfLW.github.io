@@ -306,6 +306,771 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/09/第七章-链接/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="luowen">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Coding in life...">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/12/09/第七章-链接/" itemprop="url">第七章-链接</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-09T19:51:42+08:00">
+                2018-12-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/《深入理解计算机系统》/" itemprop="url" rel="index">
+                    <span itemprop="name">《深入理解计算机系统》</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a><center>概述</center></h2><p>链接（linking）是将各种代码和数据片段搜集并组合成为一个单一文件的过程，这个文件可被加载（复制）到内存并执行。</p>
+<ul>
+<li>链接可以执行于编译时（compile time），也就是在源代码被翻译成机器代码时；</li>
+<li>也可以执行于加载时（load time），也就是在程序被加载（loader）加载到内存并执行时；</li>
+<li>甚至于执行于运行时（run time），也就是由应用程序来执行。</li>
+</ul>
+<blockquote>
+<p>在早期的计算机系统中，链接是手动执行的。在现代系统中，链接是由连接器（linker）的程序自动执行的。</p>
+</blockquote>
+<p>连接器在软件开发中扮演一个重要的角色，因为它们使得分离编译（separate compilation）成为可能。</p>
+<pre><code>我们不用将一个大型的应用程序组织为一个巨大的源文件，而是可以吧它分解成为更小、更好管理的模块，可以独立地修改和编译这些模块。当我们改变这些模块中的一个时，只需简单地重新编译它，并重新连接应用，而不必重新编译其它文件。
+</code></pre><p>为什么需要连接的知识？</p>
+<ul>
+<li>理解连接器将帮助构造大型程序<ul>
+<li>构建大型程序经常会遇到缺少模块、缺少库或者不兼容的库版本引起的连接器错误。</li>
+<li>除非你理解连接器是如何解析引用、什么是库以及连接器是如何使用库来解析引用的，菲欧这类错误将令你感到迷惑和挫败</li>
+</ul>
+</li>
+<li><p>帮助避免一些危险的编译错误</p>
+<ul>
+<li>Linux连接器解析符号引用时所做的决定可以不动声色地影响你程序的正确性。</li>
+</ul>
+</li>
+<li><p>帮助理解语言的作用域规则是如何实现的</p>
+<ul>
+<li>全局和局部变量之间的区别是什么？当你定义一个具有static属性的变量或者函数时，实际到底意味着什么？</li>
+</ul>
+</li>
+<li><p>理解其它重要的系统概念</p>
+<ul>
+<li>连接器产生的可执行目标文件在重要的系统功能中扮演着关键角色，比如加载和运行程序、虚拟内存、分页、内存映射。</li>
+</ul>
+</li>
+<li><p>将使你能够利用共享库</p>
+<ul>
+<li>随着共享库和动态链接在现代操作系统中重要性的日益增强，链接成为一个复杂的过程。比如，许多软件产品在运行时使用共享库来升级压缩包装的（shrink-wrapped）二级制程序。还有，大多数Web服务器都依赖于共享库的动态链接来提供内容。</li>
+</ul>
+</li>
+</ul>
+<p>这一章提供了关于链接各方面的全面讨论，从传统静态链接到加载时的共享库的动态链接，以及到运行时的共享库的动态链接。</p>
+<blockquote>
+<p>无论什么样的操作系统，ISA或者目标文件格式、基本的链接概念是通用的。</p>
+</blockquote>
+<h3 id="编译器驱动程序"><a href="#编译器驱动程序" class="headerlink" title="编译器驱动程序"></a><center>编译器驱动程序</center></h3><h3 id="静态链接"><a href="#静态链接" class="headerlink" title="静态链接"></a><center>静态链接</center></h3><p>静态连接器（static linker）以<font style="color:red">一组可重定位目标文件和命令行参数作为输入，生成一个完全链接的、可以加载和运行的可执行目标文件作为输出</font>。</p>
+<pre><code>输入的可重定位目标文件由各种不同的代码和数据结节（section）组成，每一节都是一个连续的字节序列。指令在一节中，初始化了的全局变量在另一节中，而未初始化的变量又在另外一节中。
+</code></pre><p>为了构造可执行文件，链接器必须完成两个主要任务。</p>
+<ul>
+<li><p>符号解析（symbol resolution）。目标文件定义和引用符号，每个符号对应于一个函数、一个全局变量或一个静态变量（即C语言中任何以static属性声明的变量）。</p>
+<ul>
+<li>符号解析的目的是将每个符号引用正好和一个符号定义关联起来。</li>
+</ul>
+</li>
+<li>重定位（relocation）。编译器和汇编器生成从地址0开始的代码和数据节。链接器通过把每个符号定义与一个内存位置关联起来，从而重定位这些节，然后修改所有对这些符号的引用，使得它们指向这个内存位置。链接器使用汇编器产生的重定位条目（relocation entry）的详细指令，不加甄别地执行这样的重定位。</li>
+</ul>
+<blockquote>
+<p>要记住关于链接器的一些基本事实：</p>
+<ol>
+<li>目标文件纯粹是字节块的集合</li>
+<li>这些块中，有些包含程序代码，有些包含程序数据，而其他的则包含引导链接器和加载器的数据结构。</li>
+<li>链接器将这些块连接起来，确定被链接块的运行时位置，并且修改代码和数据块中的各种位置。</li>
+</ol>
+</blockquote>
+<h3 id="目标文件"><a href="#目标文件" class="headerlink" title="目标文件"></a><center>目标文件</center></h3><p>目标文件有三种形似：</p>
+<ul>
+<li><p>可重定向目标文件</p>
+<ul>
+<li>包含二进制代码和数据，其形式可以在编译时与其他可重定位目标文件合并起来，创建一个可执行目标文件。</li>
+</ul>
+</li>
+<li><p>可执行目标文件</p>
+<ul>
+<li>包含二进制代码和数据，其形式可以被直接复制到内存并执行。</li>
+</ul>
+</li>
+<li><p>共享目标文件</p>
+<ul>
+<li>一种特殊类型的可重定位目标文件，可以在加载或者运行时被动态地加载进内存并连接。</li>
+</ul>
+</li>
+</ul>
+<p><font style="color:green">编译器和汇编器生成可重定位目标文件（包括共享目标文件）。<br>连接器生成可执行目标文件</font>。<br><br>从技术上来说，一个目标模块（object module）就是一个字节序列，而一个目标文件（object file）就是一个以文件形式存放在磁盘中的目标模块。    </p>
+<h3 id="可重定向目标文件"><a href="#可重定向目标文件" class="headerlink" title="可重定向目标文件"></a><center>可重定向目标文件</center></h3><h3 id="符号和符号表"><a href="#符号和符号表" class="headerlink" title="符号和符号表"></a><center>符号和符号表</center></h3><h3 id="符号解析"><a href="#符号解析" class="headerlink" title="符号解析"></a><center>符号解析</center></h3><h3 id="重定位"><a href="#重定位" class="headerlink" title="重定位"></a><center>重定位</center></h3><h3 id="可执行目标文件"><a href="#可执行目标文件" class="headerlink" title="可执行目标文件"></a><center>可执行目标文件</center></h3><h3 id="加载可执行文件"><a href="#加载可执行文件" class="headerlink" title="加载可执行文件"></a><center>加载可执行文件</center></h3><h3 id="动态链接共享库"><a href="#动态链接共享库" class="headerlink" title="动态链接共享库"></a><center>动态链接共享库</center></h3><h3 id="位置无关代码"><a href="#位置无关代码" class="headerlink" title="位置无关代码"></a><center>位置无关代码</center></h3><h3 id="库打桩机制"><a href="#库打桩机制" class="headerlink" title="库打桩机制"></a><center>库打桩机制</center></h3><h3 id="处理目标文件的工具"><a href="#处理目标文件的工具" class="headerlink" title="处理目标文件的工具"></a><center>处理目标文件的工具</center></h3><h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a><center>小结</center></h3>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/09/aaaaaaaaaaaa/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="luowen">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Coding in life...">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/12/09/aaaaaaaaaaaa/" itemprop="url">模板</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-09T16:33:18+08:00">
+                2018-12-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="ARTS模板"><a href="#ARTS模板" class="headerlink" title="ARTS模板"></a>ARTS模板</h3><ol>
+<li>Algorithm：每周至少做一个 leetcode 的算法题<br></li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>Review：阅读并点评至少一篇英文技术文章<br></li>
+</ol>
+<ol start="3">
+<li>Tip：学习至少一个技术技巧<br></li>
+</ol>
+<ol start="4">
+<li>Share：分享一篇有观点和思考的技术文章<br></li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/09/ARTS-第四周挑战/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="luowen">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Coding in life...">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/12/09/ARTS-第四周挑战/" itemprop="url">ARTS-第四周挑战</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-09T16:31:17+08:00">
+                2018-12-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <ol>
+<li>Algorithm：每周至少做一个 leetcode 的算法题<br></li>
+</ol>
+<p><a href="https://leetcode.com/problems/linked-list-cycle" target="_blank" rel="noopener"> 判断一个链表是否有环 </a></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">hasCycle</span><span class="params">(ListNode head)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">if</span> (head == <span class="keyword">null</span>) &#123;</span><br><span class="line">           <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">       &#125;</span><br><span class="line">       ListNode fast , slow ;</span><br><span class="line">       slow = head;</span><br><span class="line">       fast = head;</span><br><span class="line">       <span class="keyword">while</span> (slow.next != <span class="keyword">null</span> &amp;&amp; fast.next!=<span class="keyword">null</span> &amp;&amp; fast.next.next != <span class="keyword">null</span>) &#123;</span><br><span class="line">           slow = slow.next;</span><br><span class="line">           fast = fast.next.next;</span><br><span class="line">           </span><br><span class="line">           <span class="keyword">if</span> (slow == fast) &#123;</span><br><span class="line">               <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line"></span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>Review：阅读并点评至少一篇英文技术文章<br></li>
+</ol>
+<ol start="3">
+<li>Tip：学习至少一个技术技巧<br></li>
+</ol>
+<ol start="4">
+<li>Share：分享一篇有观点和思考的技术文章<br></li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/07/UML笔记一/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="luowen">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Coding in life...">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/12/07/UML笔记一/" itemprop="url">UML笔记一</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-07T22:28:44+08:00">
+                2018-12-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>基础篇：</p>
+<ul>
+<li><p>核心元素</p>
+<ul>
+<li>描述基本事物</li>
+</ul>
+</li>
+<li><p>核心视图</p>
+<ul>
+<li>表达这些事物构成的有意义的观点</li>
+</ul>
+</li>
+<li><p>核心模型</p>
+<ul>
+<li>使用视图来描述某种需求、</li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/06/复杂度分析（下）/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="luowen">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Coding in life...">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/12/06/复杂度分析（下）/" itemprop="url">复杂度分析（下）</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-06T00:02:06+08:00">
+                2018-12-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="浅析："><a href="#浅析：" class="headerlink" title="浅析："></a>浅析：</h2>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/04/复杂度分析（上）/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -431,7 +1196,7 @@
 <li>加法法则，总复杂度等于量级最大的那段代码的复杂度</li>
 <li>乘法法则，嵌套代码的复杂度等于嵌套内外代码复杂度的乘积</li>
 </ol>
-<h4 id="空间复杂度分析"><a href="#空间复杂度分析" class="headerlink" title="空间复杂度分析"></a>空间复杂度分析</h4><p>渐进空间复杂度：算法的执行时间与数据规模之间的增长关系。表示</p>
+<h4 id="空间复杂度分析"><a href="#空间复杂度分析" class="headerlink" title="空间复杂度分析"></a>空间复杂度分析</h4><p>渐进空间复杂度：算法的执行所需要的空间与数据规模之间的增长关系表示</p>
 
           
         
@@ -1326,1262 +2091,11 @@ Nginx提供的ACL控制、用户账号密码管理，数据库访问权限控制
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/30/Python-study-record/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="luowen">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Coding in life...">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/11/30/Python-study-record/" itemprop="url">Python_study_record</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-30T19:43:27+08:00">
-                2018-11-30
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="Python如何运行程序"><a href="#Python如何运行程序" class="headerlink" title="Python如何运行程序"></a><center>Python如何运行程序</center></h2><h4 id="Python解释器简介"><a href="#Python解释器简介" class="headerlink" title="Python解释器简介"></a>Python解释器简介</h4><ul>
-<li>从目前的实现上来讲，Python也是一个名为解释器的软件包</li>
-<li>解释器是一种让其他程序运行起来的程序</li>
-<li>解释器就是代码与机器的计算机硬件之间的软件逻辑层</li>
-<li>当Python包安装在机器上后，它包含了一些最小化的组件：一个解释器和支持的库</li>
-</ul>
-<h4 id="Python虚拟机（PVM）"><a href="#Python虚拟机（PVM）" class="headerlink" title="Python虚拟机（PVM）"></a>Python虚拟机（PVM）</h4><ul>
-<li>python编译成的字节码，在PVM上执行</li>
-<li>PVM不是一个独立的程序，bu’xu’yao</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/27/Vim常用快捷键/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="luowen">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Coding in life...">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/11/27/Vim常用快捷键/" itemprop="url">Untitled</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-27T12:49:03+08:00">
-                2018-11-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <hr>
-<p>title: Vim常用快捷键<br>date: 2018-11-27 12:49:03<br>tags: shortcut</p>
-<h2 id="categories-Vim"><a href="#categories-Vim" class="headerlink" title="categories: Vim"></a>categories: Vim</h2><h2 id="Vim按键说明"><a href="#Vim按键说明" class="headerlink" title="Vim按键说明"></a><center>Vim按键说明</center></h2><blockquote>
-<p>注意：按钮是大小写分明的，字母大写或小写具有不同的功能。</p>
-</blockquote>
-<p>在描述快捷键之前，先描述一下这三种模式，因为这个能更好的理解相应的快捷键。</p>
-<h3 id="vim三种模式简述"><a href="#vim三种模式简述" class="headerlink" title="vim三种模式简述"></a><center>vim三种模式简述</center></h3><ul>
-<li><p>一般模式</p>
-<ul>
-<li>这个模式就是用键盘快捷键的模式 （最重要的一个模式）</li>
-</ul>
-</li>
-<li><p>编辑模式</p>
-<ul>
-<li>这个模式就是在一般模式下，按下了i，o..（注：大小写都行，效果相反）其中一个键之后，进入可以编辑的模式</li>
-</ul>
-</li>
-<li><p>命令行模式</p>
-<ul>
-<li>一般模式下，按下 “/”或者 “:” 之类的，在编辑器的最底层会有一行显示，也再此操作</li>
-</ul>
-</li>
-</ul>
-<blockquote>
-<p>注意：只有一般模式可以与编辑或者命令行模式切换，编辑模式和命令行模式是不可以切换</p>
-</blockquote>
-<h3 id="第一部分：一般模式下的按键说明"><a href="#第一部分：一般模式下的按键说明" class="headerlink" title="第一部分：一般模式下的按键说明"></a><center>第一部分：一般模式下的按键说明</center></h3><p>在一般模式下可用的按钮说明，光标移动，复制粘贴，查找替换等</p>
-<h4 id="移动光标的方法"><a href="#移动光标的方法" class="headerlink" title="移动光标的方法"></a><center>移动光标的方法</center></h4><ul>
-<li><p>h或左键头</p>
-<ul>
-<li>向左移动一个字符</li>
-</ul>
-</li>
-<li><p>j或下箭头</p>
-<ul>
-<li>向下移动一个字符</li>
-</ul>
-</li>
-<li><p>k或上箭头</p>
-<ul>
-<li>向上移动一个字符</li>
-</ul>
-</li>
-<li><p>l或右箭头</p>
-<ul>
-<li>向右移动一个字符</li>
-</ul>
-</li>
-</ul>
-<blockquote>
-<p>技巧提示：<br>   如果想要进行多次移动的话 </p>
-<blockquote>
-<p>（列如：向下移动30行）</p>
-<p>可以使用30j 或者 30下箭头</p>
-</blockquote>
-</blockquote>
-<ul>
-<li><p>ctrl + f</p>
-<ul>
-<li>向下翻一页</li>
-</ul>
-</li>
-<li><p>ctrl + b</p>
-<ul>
-<li>向上翻一页</li>
-</ul>
-</li>
-<li><p>+</p>
-<ul>
-<li>光标移动到非空格符的下一行</li>
-</ul>
-</li>
-<li><p>-</p>
-<ul>
-<li>光标移动到非空格符的上一行</li>
-</ul>
-</li>
-<li><p>n\<space></space></p>
-<ul>
-<li>n表示数字，后面是空格，例如20\<space>,光标会想后面移动20个字符距离 </space></li>
-</ul>
-</li>
-<li><p>0或功能键【Home】</p>
-<ul>
-<li>这是数字0，移动到这一行的最前面字符处</li>
-</ul>
-</li>
-<li><p>$或功能键【End】</p>
-<ul>
-<li>移动到这一行的最后面字符处</li>
-</ul>
-</li>
-<li><p>H</p>
-<ul>
-<li>光标移动到这个屏幕的最上方那一行的一个字符</li>
-</ul>
-</li>
-<li><p>M</p>
-<ul>
-<li>光标移动到这个屏幕的中央那一行的第一个字符</li>
-</ul>
-</li>
-<li><p>L</p>
-<ul>
-<li>光标移动到这个屏幕的最下方那一行的第一个字符</li>
-</ul>
-</li>
-<li><p>G</p>
-<ul>
-<li>光标移动这个文件的最后一行 </li>
-</ul>
-</li>
-<li><p>nG</p>
-<ul>
-<li>n为数字，移动到这个文件的第n行 //可以配合:set nu （显示行号）</li>
-</ul>
-</li>
-<li><p>gg</p>
-<ul>
-<li>移动到这个文件的第一行 ，相当于1G</li>
-</ul>
-</li>
-<li><p>N【Enter】</p>
-<ul>
-<li>N为数字，光标向下移动n行</li>
-</ul>
-</li>
-</ul>
-<h4 id="查找与替换"><a href="#查找与替换" class="headerlink" title="查找与替换"></a><center>查找与替换</center></h4><ul>
-<li><p>/word </p>
-<ul>
-<li>向下寻找一个名称为word的字符串</li>
-</ul>
-</li>
-<li><p>？word</p>
-<ul>
-<li>向上寻找一个名称为word的字符串</li>
-</ul>
-</li>
-<li><p>n</p>
-<ul>
-<li>代表重复前一个操作。比如查找了一个word，又点击了一次，就是查找下一个word</li>
-</ul>
-</li>
-<li><p>N</p>
-<ul>
-<li>相反的，向上查找word</li>
-</ul>
-</li>
-</ul>
-<blockquote>
-<p>技巧小提示：</p>
-<blockquote>
-<p>使用/word配合n或者N是非常有帮助的，可以查找重复的关键字</p>
-</blockquote>
-</blockquote>
-<ul>
-<li><p>n1,n2s/word1/word2/g</p>
-<ul>
-<li>n1,n2为数字。在第n1与n2行之间寻找word1这个字符串，并将该字符串替换为word2.</li>
-</ul>
-</li>
-<li><p>:1,$s/word1/word2/g</p>
-<ul>
-<li>从第一行到最后一行查找word1字符串，并将该字符串替换为word2</li>
-</ul>
-</li>
-<li><p>:1,$s/word1/word2/gc</p>
-<ul>
-<li>和上面一样，只是多了一步，替换前显示提示字符给用户确认（confirm）是否需要替换</li>
-</ul>
-</li>
-</ul>
-<h4 id="删除，复制与粘贴"><a href="#删除，复制与粘贴" class="headerlink" title="删除，复制与粘贴"></a><center>删除，复制与粘贴</center></h4><ul>
-<li><p>x,X</p>
-<ul>
-<li>在一行字当中，x为向后删除一个字符（相当于[Del]键），X为向前删除一个字符（相当于[Backspace]）</li>
-</ul>
-</li>
-<li><p>nx</p>
-<ul>
-<li>n为数字，向后删除n个字符 </li>
-</ul>
-</li>
-<li><p>dd</p>
-<ul>
-<li>删除光标所在的整行</li>
-</ul>
-</li>
-<li><p>ndd</p>
-<ul>
-<li>n为数字，删除光标所在的向下n行</li>
-</ul>
-</li>
-<li><p>d1G</p>
-<ul>
-<li>删除光标所在到第一行的所有数据</li>
-</ul>
-</li>
-<li><p>dG</p>
-<ul>
-<li>删除光标所在到最后一行的所有数据</li>
-</ul>
-</li>
-<li><p>d$</p>
-<ul>
-<li>删除从光标所在处到该行的最后一个字符</li>
-</ul>
-</li>
-<li><p>d0</p>
-<ul>
-<li>删除从光标所在处到该行的最前面的一个字符</li>
-</ul>
-</li>
-<li><p>yy</p>
-<ul>
-<li>复制光标所在的哪一行</li>
-</ul>
-</li>
-<li><p>nyy</p>
-<ul>
-<li>n为数字，复制光标所在的向下n行</li>
-</ul>
-</li>
-<li><p>y1G</p>
-<ul>
-<li>复制光标所在行到第一行的所有数据</li>
-</ul>
-</li>
-<li><p>yG</p>
-<ul>
-<li>复制光标所在行到最后一行的所有数据</li>
-</ul>
-</li>
-<li><p>y0</p>
-<ul>
-<li>复制光标所在的那个字符到该行行首的所有数据</li>
-</ul>
-</li>
-<li><p>y$</p>
-<ul>
-<li>复制光标所在的那个字符到该行行尾的所有数据</li>
-</ul>
-</li>
-<li><p>p,P</p>
-<ul>
-<li>p为将已复制的数据在光标下一行粘贴，P则为粘贴在光标上一行</li>
-</ul>
-</li>
-<li><p>J</p>
-<ul>
-<li>将光标所在行与下一行的数据结合成同一行</li>
-</ul>
-</li>
-<li><p>u</p>
-<ul>
-<li>复原前一个操作</li>
-</ul>
-</li>
-<li><p>ctrl + r</p>
-<ul>
-<li>重做上一个操作</li>
-</ul>
-</li>
-<li><p>.</p>
-<ul>
-<li>不要怀疑。这就是小数点。意思是重复前一个操作的意思。如果你想要重复删除，重复粘贴等。</li>
-</ul>
-</li>
-</ul>
-<h3 id="第二部分：一般模式切换编辑模式"><a href="#第二部分：一般模式切换编辑模式" class="headerlink" title=" 第二部分：一般模式切换编辑模式"></a><center> 第二部分：一般模式切换编辑模式</center></h3><h4 id="进入插入或替换的编辑模式"><a href="#进入插入或替换的编辑模式" class="headerlink" title="进入插入或替换的编辑模式"></a>进入插入或替换的编辑模式</h4><ul>
-<li><p>i,I</p>
-<ul>
-<li>进入插入模式（insert mode）</li>
-<li>i为从目前光标处插入，I为在目前所在行的第一个非空格符处开始插入</li>
-</ul>
-</li>
-<li><p>a,A</p>
-<ul>
-<li>进入插入模式（insert mode）</li>
-<li>a为从目前光标所在的下一个字符处开始插入，A为从光标所在行的最后一个字符处开始插入</li>
-</ul>
-</li>
-<li><p>o,O</p>
-<ul>
-<li>进入插入模式（insert mode）</li>
-<li>o为在目前光标的所在的下一行处插入新的一行；O为在目前光标所在处的上一行插入新的一行。</li>
-</ul>
-</li>
-<li><p>r,R</p>
-<ul>
-<li>进入替换模式 (Replace mode)</li>
-<li>r只会替换光标所在的哪一个字符一次；R会一直替换光标所在的文字，直到按下【Esc】键为止</li>
-</ul>
-</li>
-</ul>
-<blockquote>
-<p>注意：上面这些按键中，在vi界面的左下角会出现“–INSERT–”或“–REPLEACE”的字样。如果我们想要在文件中输入字符时，也就是在编辑模式中，一定会有上述这两种提示。</p>
-</blockquote>
-<ul>
-<li><p>[Esc]</p>
-<ul>
-<li>退出编辑模式，回到一般模式中；</li>
-</ul>
-</li>
-</ul>
-<h3 id="第三部分：一般模式切换到命令行模式"><a href="#第三部分：一般模式切换到命令行模式" class="headerlink" title="第三部分：一般模式切换到命令行模式"></a>第三部分：一般模式切换到命令行模式</h3><h4 id="命令行的保存、离开等命令"><a href="#命令行的保存、离开等命令" class="headerlink" title="命令行的保存、离开等命令"></a>命令行的保存、离开等命令</h4><ul>
-<li><p>:w</p>
-<ul>
-<li>将编辑的数据写入硬盘文件中</li>
-</ul>
-</li>
-<li><p>:q</p>
-<ul>
-<li>离开vi</li>
-</ul>
-</li>
-<li><p>:q!</p>
-<ul>
-<li>若曾经修改过文件，又不想存储，使用“！”为强制离开不保存文件</li>
-</ul>
-</li>
-</ul>
-<blockquote>
-<p>注意：感叹号（！），在vi中经常都是强制的意思</p>
-</blockquote>
-<ul>
-<li><p>:wq</p>
-<ul>
-<li>保存后离开</li>
-</ul>
-</li>
-<li><p>:w[fileName]</p>
-<ul>
-<li>将编辑的数据保存成另一个文件（类似于另存为）</li>
-</ul>
-</li>
-<li><p>:! command</p>
-<ul>
-<li>暂时离开vi到命令行模式下执行command的显示结果    </li>
-</ul>
-</li>
-<li><p>:set nu</p>
-<ul>
-<li>显示行号，设置之后，会在每一行的前缀显示该行的行号</li>
-</ul>
-</li>
-</ul>
-<blockquote>
-<p>注意：在vi中，数字是很有意义的，数字通常代表重复做几次的意思，也有可能是代表去到第几个什么什么的意思。</p>
-<blockquote>
-<p>例如：要删除50行， 50dd<br>向下移动30行， 30j</p>
-</blockquote>
-</blockquote>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/26/第六章-存储器层次结构/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="luowen">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Coding in life...">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/11/26/第六章-存储器层次结构/" itemprop="url">第六章-存储器层次结构</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-26T21:28:30+08:00">
-                2018-11-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/《深入理解计算机系统》/" itemprop="url" rel="index">
-                    <span itemprop="name">《深入理解计算机系统》</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>概述：</p>
-<pre><code>前面学习的都是依赖于一个简单的计算机系统模型，CPU执行指令，而存储器系统为CPU存放指令和数据。在简单模型中，存储器系统是一个线性的字节数组，而CPU能够在一个常数时间内访问每个存储器位置。虽然迄今为止这都是一个有效的模型，但是它没有反映现代系统实际工作的方式。
-</code></pre><p>实际上，存储器系统（memory system）是一个具有不同容量、成本和访问时间的存储设备的层次结构。</p>
-<ul>
-<li>L0 CPU寄存器保存着最常用的数据。</li>
-<li>L1 靠近CPU的小的、快速的高速缓存存储器（cache memory）作为一部分存储在相对慢速的主存储器（main memory）中数据和指令的缓冲区域。主存缓存存储在容量较大的、慢速磁盘上大数据，而这些磁盘常常又作为存储在通过网络连接的其他机器的磁盘或磁带上的数据的缓冲区域。</li>
-</ul>
-<p>计算机系统中一个基本持久的思想：使数据项存储在层次结构中较高的地方，在哪里CPU能更快地访问到它们。</p>
-<pre><code>这种思想围绕着计算机程序的一个称为局部性（locality）的基本属性。具有良好局部性的程序倾向于一次又一次地访问相同的数据项集合
-</code></pre><h3 id="6-1存储技术"><a href="#6-1存储技术" class="headerlink" title="6.1存储技术"></a><center>6.1存储技术</center></h3><h4 id="6-1-1-随机访问存储器"><a href="#6-1-1-随机访问存储器" class="headerlink" title="6.1.1 随机访问存储器"></a>6.1.1 随机访问存储器</h4><p>  随机访问存储器（Random-Access Memory，RAM）分为两类：静态的和动态的。静态RAM(SARM)比动态的（DRAM）更快，但也贵很多。SRAM用来作为高速存储器，既可以在CPU芯片上，也可以在片下。DRAM用来作为主存以及图形系统的帧缓冲区。典型地，一个笔记本，SRAM不会操过几兆字节。</p>
-<ol>
-<li>静态RAM</li>
-</ol>
-<blockquote>
-<p>SRAM将每个位存储在一个双稳态的（bistable）存储器单元里。每个单元是用一个六晶体管电路来实现的。</p>
-<p>SRAM存储器单元有双稳态特性，只要有电，它就会永远地保持它的值。</p>
-</blockquote>
-<ol start="2">
-<li>动态RAM</li>
-</ol>
-<ol start="3">
-<li><p>传统的DRAM</p>
-</li>
-<li><p>内存模块</p>
-</li>
-</ol>
-<ul>
-<li>DRAM芯片封装在内存模块，通过将多个内存模块链接到内存控制器，能够聚合成主存</li>
-</ul>
-<ol start="5">
-<li><p>增强的DRAM</p>
-</li>
-<li><p>非易失性存储器</p>
-</li>
-</ol>
-<blockquote>
-<p>如果断电，DRAM和SRAM会丢失它们的信息，从这个意义上来书，它们是（volatile, 挥发性的）。<br>非易失性存储器（novolatile memory）即使是在关电后，仍然保存着它们的信息</p>
-</blockquote>
-<blockquote>
-<p>ROM,其中有的类型可以读也可以写，但是它们整体上都被称为（Read-Only Memory, ROM）。ROM是以它们能够被重编程（写）的次数和它们对进行重编所用的机制来区分的</p>
-</blockquote>
-<p>闪存（flash memory）是一类非易失性存储器。</p>
-<ul>
-<li>SSD,一种新型的基于闪存的磁盘驱动技术，称为固态硬盘（Solid State Disk， SSD）</li>
-</ul>
-<p>存储在ROM设备中的程序通常被称为（firmware）固件。当一个计算机系统通电以后，它会运行存储在ROM中的固件。</p>
-<pre><code>- 一些系统在固件中提供了少量的基本的输入和输出函数--例如PC的BIOS（基本输入/输出系统）例程。
-</code></pre><ol start="7">
-<li>访问主存</li>
-</ol>
-<p>数据流通过称为总线（bus）的共享电子电路在处理器和DRAM主存之间来来回回。</p>
-<pre><code>每次CPU和主存之间的数据传送都是通过一系列步骤来完成的，这些步骤称为总线事物（bus transaction）。读事物（read transaction）从主存传送数据到CPU。写事物（write transaction）从CPU传送数据到主存
-</code></pre><p>一个计算机系统的配置（主要部分）</p>
-<ul>
-<li>CPU芯片</li>
-<li>I/O桥接器（I/O bridge）的芯片组（其中包括内存控制器）</li>
-<li>以及组成主存的DRAM内存模块 </li>
-</ul>
-<blockquote>
-<p>这些部件由一对总线连接起来，其中一条总线是系统总线（system bus），它连接CPU和I/O桥接器，另一条总线是内存总线（memory bus），它连接I/O桥接器和主存。I/O桥接器将系统总线的电子信号翻译成内存总线的电子信号。</p>
-</blockquote>
-<h4 id="6-1-2-磁盘存储"><a href="#6-1-2-磁盘存储" class="headerlink" title="6.1.2 磁盘存储"></a>6.1.2 磁盘存储</h4><ol>
-<li><p>磁盘构造<br>磁盘是由盘片（platter）构成的。每个盘片有两面或者称为表面（surface），表面覆盖着磁性记录材料。盘片中央有一个可以旋转的主轴（spindle），它使得盘片以固定的旋转速率（rotational rate）旋转，通常是5400-15000转每分钟（Revolution Per Minute， RPM）。磁盘通常包含一个或多个这样的盘片，并封装在一个密封的容器类</p>
-</li>
-<li><p>磁盘容量</p>
-</li>
-<li><p>磁盘操作</p>
-</li>
-<li>逻辑磁盘块</li>
-<li>连接I/O设备</li>
-</ol>
-<p>例如图形卡、监视器、鼠标、键盘和磁盘这样的输入/输出（I/O）设备，都是通过I/O总线，连接到CPU和主存的。</p>
-<p>虽然I/O总线比系统总线和内存总线慢，但是它可以容纳种类繁多的第三方I/O设备。</p>
-<ul>
-<li>通用串行总线（Universal Serial Bus，USB）控制器是一个连接到USB总显得设备的中转机构，USB总显示一个广泛使用的标准，连接各种外围I/O设备。</li>
-<li>图形卡（或适配器）包含硬件和软件逻辑，它们负载代表CPU在显示器上画像素。</li>
-<li>主机总线适配器将一个或多个磁盘连接到I/O总线，使用的是一个特别的主机总线接口定义的通信协议。</li>
-</ul>
-<ol start="6">
-<li>访问磁盘<br>设备可以自己执行读或者写总线事物而不需要CPU干涉的过程，称为直接内存访问（Direct Memory Access，DMA）。这种数据传送称为DMA传送🤩（DMA transfer）<h4 id="6-1-3-固态硬盘"><a href="#6-1-3-固态硬盘" class="headerlink" title="6.1.3 固态硬盘"></a>6.1.3 固态硬盘</h4></li>
-</ol>
-<h4 id="6-1-4-存储技术趋势"><a href="#6-1-4-存储技术趋势" class="headerlink" title="6.1.4 存储技术趋势"></a>6.1.4 存储技术趋势</h4><h3 id="6-2-局部性"><a href="#6-2-局部性" class="headerlink" title="6.2 局部性"></a><center>6.2 局部性</center></h3><h4 id="6-2-1-对程序数据引用的局部性"><a href="#6-2-1-对程序数据引用的局部性" class="headerlink" title="6.2.1 对程序数据引用的局部性"></a>6.2.1 对程序数据引用的局部性</h4><h4 id="6-2-2-取指令的局部性"><a href="#6-2-2-取指令的局部性" class="headerlink" title="6.2.2 取指令的局部性"></a>6.2.2 取指令的局部性</h4><h4 id="6-2-3-局部性小结"><a href="#6-2-3-局部性小结" class="headerlink" title="6.2.3 局部性小结"></a>6.2.3 局部性小结</h4><h3 id="6-3-存储器层次结构"><a href="#6-3-存储器层次结构" class="headerlink" title="6.3 存储器层次结构"></a><center>6.3 存储器层次结构</center></h3><h4 id="6-3-1-存储器层次结构中的缓存"><a href="#6-3-1-存储器层次结构中的缓存" class="headerlink" title="6.3.1 存储器层次结构中的缓存"></a>6.3.1 存储器层次结构中的缓存</h4><p>一般而言，高速缓存（cache，读作‘cash’）是一个小而快速的存储设备，它作为存储在更大、也更慢的设备中的数据对象的缓冲区域。使用高速缓存的过程称为缓存（caching，读作‘cashing’）</p>
-<h4 id="6-3-2-存储器层次结构概念小结"><a href="#6-3-2-存储器层次结构概念小结" class="headerlink" title="6.3.2 存储器层次结构概念小结"></a>6.3.2 存储器层次结构概念小结</h4><h3 id="6-4-高速缓存存储器"><a href="#6-4-高速缓存存储器" class="headerlink" title="6.4 高速缓存存储器"></a><center>6.4 高速缓存存储器</center></h3><h4 id="6-4-1-通用的高速缓存存储器组织结构"><a href="#6-4-1-通用的高速缓存存储器组织结构" class="headerlink" title="6.4.1 通用的高速缓存存储器组织结构"></a>6.4.1 通用的高速缓存存储器组织结构</h4><h4 id="6-4-2-直接映射高速缓存"><a href="#6-4-2-直接映射高速缓存" class="headerlink" title="6.4.2 直接映射高速缓存"></a>6.4.2 直接映射高速缓存</h4><h4 id="6-4-3-组相联高速缓存"><a href="#6-4-3-组相联高速缓存" class="headerlink" title="6.4.3 组相联高速缓存"></a>6.4.3 组相联高速缓存</h4><h4 id="6-4-4-全相联高速缓存"><a href="#6-4-4-全相联高速缓存" class="headerlink" title="6.4.4 全相联高速缓存"></a>6.4.4 全相联高速缓存</h4><h4 id="6-4-5-有关写的问题"><a href="#6-4-5-有关写的问题" class="headerlink" title="6.4.5 有关写的问题"></a>6.4.5 有关写的问题</h4><h4 id="6-4-6-一个真实的高速缓存层次结构的解剖"><a href="#6-4-6-一个真实的高速缓存层次结构的解剖" class="headerlink" title="6.4.6 一个真实的高速缓存层次结构的解剖"></a>6.4.6 一个真实的高速缓存层次结构的解剖</h4><h4 id="6-4-7-高速缓存参数的性能影响"><a href="#6-4-7-高速缓存参数的性能影响" class="headerlink" title="6.4.7 高速缓存参数的性能影响"></a>6.4.7 高速缓存参数的性能影响</h4><h3 id="6-5-编写高速缓存友好的代码"><a href="#6-5-编写高速缓存友好的代码" class="headerlink" title="6.5 编写高速缓存友好的代码"></a><center>6.5 编写高速缓存友好的代码</center></h3><h3 id="6-6-综合：高速缓存对程序性能的影响"><a href="#6-6-综合：高速缓存对程序性能的影响" class="headerlink" title="6.6 综合：高速缓存对程序性能的影响"></a><center>6.6 综合：高速缓存对程序性能的影响</center></h3><h4 id="6-6-1-存储器山"><a href="#6-6-1-存储器山" class="headerlink" title="6.6.1 存储器山"></a>6.6.1 存储器山</h4><p>一个程序从存储系统中读数据的速率称为读吞吐量（read throughput），或者有时称为（read bandwidth）。</p>
-<h4 id="6-6-2-重新排列循环以提高空间局部性"><a href="#6-6-2-重新排列循环以提高空间局部性" class="headerlink" title="6.6.2 重新排列循环以提高空间局部性"></a>6.6.2 重新排列循环以提高空间局部性</h4><h4 id="6-6-3-在程序中利用局部性"><a href="#6-6-3-在程序中利用局部性" class="headerlink" title="6.6.3 在程序中利用局部性"></a>6.6.3 在程序中利用局部性</h4>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/25/ARTS-第二周挑战/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="luowen">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Coding in life...">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/11/25/ARTS-第二周挑战/" itemprop="url">ARTS-第二周挑战</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-25T23:44:38+08:00">
-                2018-11-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/ARTS/" itemprop="url" rel="index">
-                    <span itemprop="name">ARTS</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <ol>
-<li>Algorithm：每周至少做一个 leetcode 的算法题<br><br><a href="https://leetcode.com/problems/reverse-linked-list/" target="_blank" rel="noopener"> reverse linked list（翻转链表） </a></li>
-</ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * public class ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     ListNode next;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x) &#123; val = x; &#125;</span></span><br><span class="line"><span class="comment"> * &#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ListNode <span class="title">reverseList</span><span class="params">(ListNode head)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(head == <span class="keyword">null</span> || head.next == <span class="keyword">null</span>)</span><br><span class="line">            <span class="keyword">return</span> head;</span><br><span class="line">        List&lt;ListNode&gt; tempList = <span class="keyword">new</span> ArrayList&lt;ListNode&gt;();</span><br><span class="line">        reverseList(head,head.next,tempList);</span><br><span class="line">        <span class="keyword">return</span> tempList.get(<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ListNode <span class="title">reverseList</span><span class="params">(ListNode currentNode, ListNode nextNode,List objList)</span> </span>&#123;</span><br><span class="line">        ListNode changedNextNode;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> (nextNode.next == <span class="keyword">null</span>) &#123;</span><br><span class="line">            objList.add(nextNode);</span><br><span class="line">            changeNodeOrder(currentNode,nextNode);</span><br><span class="line">            <span class="keyword">return</span> currentNode;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            changedNextNode = reverseList(nextNode, nextNode.next,objList);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        changeNodeOrder(currentNode, changedNextNode);</span><br><span class="line">        <span class="keyword">return</span> currentNode;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">changeNodeOrder</span><span class="params">(ListNode prevNode, ListNode nextNode)</span> </span>&#123;</span><br><span class="line">        nextNode.next = prevNode;</span><br><span class="line">        prevNode.next = <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ol start="2">
-<li><p>Review：阅读并点评至少一篇英文技术文章<br><br>自己翻译练习的Effective Java （注：翻译水平很有限，欢迎大家指正），第二篇未完待续。。。</p>
-<p> <a href="https://styleoflw.github.io/2018/11/20/Effective-Java-Item01/" target="_blank" rel="noopener">Effective Java Item01_静态工厂方法</a></p>
-</li>
-<li><p>Tip：学习至少一个技术技巧<br><br><a href="https://styleoflw.github.io/2018/11/21/%E5%8F%A5%E5%AD%90%E7%9A%84%E5%BD%A2%E6%88%90-%E5%8F%AF%E5%81%9A%E4%B8%BB%E8%AF%AD%E7%9A%84%E8%AF%8D%E7%B1%BB/" target="_blank" rel="noopener"> 英语语法<em>句子的形成</em>名词作主语</a></p>
-</li>
-<li><p>Share：分享一篇有观点和思考的技术文章<br><br><a href="https://styleoflw.github.io/2018/11/24/%E6%9E%B6%E6%9E%8401-%E6%9E%B6%E6%9E%84%E5%88%B0%E5%BA%95%E6%8C%87%E4%BB%80%E4%B9%88/" target="_blank" rel="noopener"> 架构01_架构到底指什么</a></p>
-</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/25/算法系列/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="luowen">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Coding in life...">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/11/25/算法系列/" itemprop="url">算法系列</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-25T08:41:37+08:00">
-                2018-11-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="以后不管干什么，都必须从宏观入手"><a href="#以后不管干什么，都必须从宏观入手" class="headerlink" title="以后不管干什么，都必须从宏观入手"></a><center>以后不管干什么，都必须从宏观入手</center></h2><p>这次算法&amp;数据结构的学习，和我以前学习的方式不太一样了，不在是抱着一本书，从前往后看，而是立下自己要学习的目标。反过去从书中学，网上学，不在是书指导我的思维</p>
-<h3 id="我对于该知识学习的等级，越深入，所需时间是几何倍的增长。（所以需要自己掌握这个度）"><a href="#我对于该知识学习的等级，越深入，所需时间是几何倍的增长。（所以需要自己掌握这个度）" class="headerlink" title="我对于该知识学习的等级，越深入，所需时间是几何倍的增长。（所以需要自己掌握这个度）"></a><center>我对于该知识学习的等级，越深入，所需时间是几何倍的增长。（所以需要自己掌握这个度）</center></h3><ol>
-<li>宏观篇（有一个大体的了解，最少仅限于概念懂，最多看懂代码实现）</li>
-<li>微观篇（不深入怎么能叫微观呢？最少有一个自己的实现，和一个完美的实现）</li>
-<li>极致篇（多半我不会来这里，来了，就是死磕，不允许自己心中还有疑问）</li>
-</ol>
-<hr>
-<p>眉毛胡子一把抓，是不行的，但下面这些是我必须掌握的</p>
-<h2 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a><center>数据结构</center></h2><h4 id="线性表"><a href="#线性表" class="headerlink" title="线性表"></a><center>线性表</center></h4><ul>
-<li>数组</li>
-<li>链表<ul>
-<li>单链表</li>
-<li>双向链表</li>
-<li>循环链表</li>
-<li>双向循环链表</li>
-<li>静态链表</li>
-</ul>
-</li>
-<li>栈<ul>
-<li>顺序栈</li>
-<li>链式栈</li>
-</ul>
-</li>
-<li>队列<ul>
-<li>普通队列</li>
-<li>双端队列</li>
-<li>阻塞队列</li>
-<li>并发队列</li>
-<li>阻塞并发队列</li>
-</ul>
-</li>
-</ul>
-<h4 id="散列表"><a href="#散列表" class="headerlink" title="散列表"></a><center>散列表</center></h4><ul>
-<li>顺序散列</li>
-<li>冲突散列<ul>
-<li>链表法</li>
-<li>开发寻址</li>
-<li>其它</li>
-</ul>
-</li>
-<li>动态扩容</li>
-<li>位图 <h4 id="树"><a href="#树" class="headerlink" title="树"></a><center>树</center></h4></li>
-<li>二叉树<ul>
-<li>平衡二叉树</li>
-<li>二叉查找树</li>
-<li>平衡二叉查找树</li>
-<li>完全二叉树</li>
-<li>满二叉树</li>
-</ul>
-</li>
-<li>多路查找树<ul>
-<li>B树</li>
-<li>B+树</li>
-<li>2-3树</li>
-<li>2-3-4树</li>
-</ul>
-</li>
-<li>堆<ul>
-<li>小顶堆</li>
-<li>大顶堆</li>
-<li>优先级队列</li>
-<li>斐波那契堆</li>
-<li>二顶堆</li>
-</ul>
-</li>
-<li>其它     <ul>
-<li>树状数组</li>
-<li>线段树<h4 id="图"><a href="#图" class="headerlink" title="图"></a><center>图</center></h4></li>
-</ul>
-</li>
-<li>图的存储<ul>
-<li>邻接矩阵</li>
-<li>邻接表</li>
-</ul>
-</li>
-<li>拓扑排序</li>
-<li>最短路径</li>
-<li>关键路径</li>
-<li>最小生成树</li>
-<li>二分图</li>
-<li>最大流</li>
-</ul>
-<h2 id="算法"><a href="#算法" class="headerlink" title="算法"></a><center>算法</center></h2><h4 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a><center>复杂度分析</center></h4><ul>
-<li>空间复杂度</li>
-<li>时间复杂度<ul>
-<li>最好</li>
-<li>最坏</li>
-<li>平均</li>
-<li>均摊</li>
-</ul>
-</li>
-</ul>
-<h4 id="基本算法思想"><a href="#基本算法思想" class="headerlink" title="基本算法思想"></a><center>基本算法思想</center></h4><ul>
-<li>贪心算法</li>
-<li>分治算法</li>
-<li>动态规划</li>
-<li>回溯算法</li>
-<li>枚举算法</li>
-</ul>
-<h4 id="排序"><a href="#排序" class="headerlink" title="排序"></a><center>排序</center></h4><ul>
-<li>时间复杂度：O（n^2）</li>
-<li>时间复杂度：O（nlogn）</li>
-<li>时间复杂度：O（n）</li>
-</ul>
-<h4 id="搜索"><a href="#搜索" class="headerlink" title="搜索"></a><center>搜索</center></h4><ul>
-<li>深度优先搜索</li>
-<li>广度优先搜索</li>
-<li>A*启发式搜索</li>
-</ul>
-<h4 id="查找"><a href="#查找" class="headerlink" title="查找"></a><center>查找</center></h4><ul>
-<li>线性表查找</li>
-<li>树结构查找</li>
-<li>散列表查找</li>
-</ul>
-<h4 id="字符串匹配"><a href="#字符串匹配" class="headerlink" title="字符串匹配"></a><center>字符串匹配</center></h4><ul>
-<li>朴素</li>
-<li>KMP</li>
-<li>Robin-Karp</li>
-<li>Boyer-Moore</li>
-<li>AC自动机</li>
-<li>Trie</li>
-<li>后缀数组<h4 id="其它"><a href="#其它" class="headerlink" title="其它"></a><center>其它</center></h4></li>
-<li>数论</li>
-<li>计算几何</li>
-<li>概率分析</li>
-<li>并查集</li>
-<li>拓扑网络</li>
-<li>矩阵运算</li>
-<li>线性规划</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2625,7 +2139,7 @@ Nginx提供的ACL控制、用户账号密码管理，数据库访问权限控制
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-count">25</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -2647,7 +2161,7 @@ Nginx提供的ACL控制、用户账号密码管理，数据库访问权限控制
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-count">13</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
