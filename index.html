@@ -737,13 +737,13 @@
 <p><a href="https://leetcode.com/problems/linked-list-cycle" target="_blank" rel="noopener"> 判断一个链表是否有环 </a></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">hasCycle</span><span class="params">(ListNode head)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">if</span> (head == <span class="keyword">null</span>) &#123;</span><br><span class="line">           <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">       &#125;</span><br><span class="line">       ListNode fast , slow ;</span><br><span class="line">       slow = head;</span><br><span class="line">       fast = head;</span><br><span class="line">       <span class="keyword">while</span> (slow.next != <span class="keyword">null</span> &amp;&amp; fast.next!=<span class="keyword">null</span> &amp;&amp; fast.next.next != <span class="keyword">null</span>) &#123;</span><br><span class="line">           slow = slow.next;</span><br><span class="line">           fast = fast.next.next;</span><br><span class="line">           </span><br><span class="line">           <span class="keyword">if</span> (slow == fast) &#123;</span><br><span class="line">               <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line"></span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
 <ol start="2">
-<li>Review：阅读并点评至少一篇英文技术文章<br></li>
+<li>Review：阅读并点评至少一篇英文技术文章<br><br><a href="https://medium.com/s/story/reflections-on-clean-code-8c9b683277ca" target="_blank" rel="noopener">clean code</a><br><br>为什么我们要写好的代码，以及我们最低的标准是什么。</li>
 </ol>
 <ol start="3">
-<li>Tip：学习至少一个技术技巧<br></li>
+<li>Tip：学习至少一个技术技巧<br><br>UML图 ： 连接抽象世界和现实世界的重要桥梁（未完成，正在学习中，学完一并发）</li>
 </ol>
 <ol start="4">
-<li>Share：分享一篇有观点和思考的技术文章<br></li>
+<li>Share：分享一篇有观点和思考的技术文章<br><br><a href="https://styleoflw.github.io/2018/12/01/%E6%9E%B6%E6%9E%8402-%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%E7%9A%84%E7%9B%AE%E7%9A%84/" target="_blank" rel="noopener">架构设计的目的</a></li>
 </ol>
 
           
