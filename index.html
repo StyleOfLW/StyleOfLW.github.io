@@ -306,6 +306,1169 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/01/第八章-异常控制流/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="luowen">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Coding in life...">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/01/01/第八章-异常控制流/" itemprop="url">第八章-异常控制流</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-01T19:42:15+08:00">
+                2019-01-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/《深入理解计算机系统》/" itemprop="url" rel="index">
+                    <span itemprop="name">《深入理解计算机系统》</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="前言"><a href="#前言" class="headerlink" title=" 前言"></a><center> 前言</center></h3><ul>
+<li>处理器的控制序列：</li>
+</ul>
+<p>从给处理器加电开始，直到你断电为止，程序计数器假设一个值的序列</p>
+<pre><code>a0,a1,...an-1
+</code></pre><p>其中，每个ak是某个相应的指令Ik的地址。每次从ak到ak+1的过度称为控制转移（control transfer）。这样的控制转移序列叫做处理器的控制流（flow of control 或 control flow）</p>
+<ul>
+<li><p>最简单的一种控制流</p>
+<ul>
+<li>是一个“平滑的”序列，其中每个Ik和Ik+1在内存中都是相邻的。</li>
+</ul>
+</li>
+<li><p>平滑流的突变</p>
+</li>
+<li><p>异常控制流（Exception control flow）</p>
+<ul>
+<li>现代系统通过使控制流发生突变来对这些情况做出反应。</li>
+<li>异常控制流发生在计算机系统的各个层次<ul>
+<li>硬件层</li>
+<li>操作系统层</li>
+<li>应用层</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>理解ECF，有很多原因：</p>
+<ol>
+<li>理解重要的系统概念</li>
+<li>理解应用程序是如何与操作系统交互的</li>
+<li>编写有趣的应用程序</li>
+<li>理解并发</li>
+<li>理解软件异常如何工作</li>
+</ol>
+<h3 id="8-1-异常"><a href="#8-1-异常" class="headerlink" title="8.1 异常"></a><center>8.1 异常</center></h3><p>异常是异常控制流的一种形式，它一部分由硬件实现，一部分由操作系统实现</p>
+<p>异常（exception）就是控制流中的突变，用来响应处理器状态中的某些变化</p>
+<p>在处理器中，状态被编码为不同的信号和位，状态的变化称之为事件（event）</p>
+<p>在任何情况下，当处理器检测到有事件发生时，它就会通过一张叫做异常表（exception table）的跳转表，进行一个间接过程调用（异常），到一个专门设计用来处理这类事件的操作系统子程序（异常处理程序（exception handler））。当异常处理程序完成处理后，根据引起异常的事件的类型，会发生以下3种情况中的一种：</p>
+<ol>
+<li>处理程序将控制返回给当前指令Icurr，即当事件发生时正在执行的指令</li>
+<li>处理程序将控制流返回给Inext，如果没有发生异常将会执行的下一条指令</li>
+<li>处理程序终止被中断的程序。</li>
+</ol>
+<p>8.1.2 异常的类别<br>异常可以分为四类：</p>
+<ul>
+<li><p>中断（interrupt）</p>
+<ul>
+<li>原因： 来自I/O设备的信号</li>
+<li>异步</li>
+<li>返回的行为：总是返回到下一条指令</li>
+</ul>
+</li>
+<li><p>陷阱（trap）</p>
+<ul>
+<li>原因：有意的异常</li>
+<li>同步</li>
+<li>总是返回到下一条指令</li>
+</ul>
+</li>
+<li><p>故障（fault）</p>
+<ul>
+<li>潜在可恢复的错误</li>
+<li>同步</li>
+<li>可能返回到当前指令</li>
+</ul>
+</li>
+<li><p>终止（abort）</p>
+<ul>
+<li>不可恢复的错误</li>
+<li>同步</li>
+<li>不会返回</li>
+</ul>
+</li>
+</ul>
+<h3 id="8-2-进程"><a href="#8-2-进程" class="headerlink" title="8.2 进程"></a><center>8.2 进程</center></h3><p>异常时允许操作系统内核提供进程（process）概念的基本构造块</p>
+<p>进程的经典定义就是一个执行中程序的实例。系统中每个程序都运行在某个进程的上下文（context）中。上下文是由程序运行所需的状态组成的。</p>
+<pre><code>这个状态包括存放在内存中的代码和数据，它的栈、通用目的寄存器的内容、程序计数器、环境变量以及打开文件描述符的集合。
+</code></pre><p>进程提供给应用程序的抽象</p>
+<ul>
+<li><p>一个独立的逻辑控制流</p>
+<ul>
+<li>它提供一个假象，好像我们的程序独占地使用处理器</li>
+</ul>
+</li>
+<li><p>一个独立的地址空间    </p>
+<ul>
+<li>它提供一个假象，好像我们的程序独占地使用内存系统</li>
+</ul>
+</li>
+</ul>
+<p>8.2.2 并发流<br>一个逻辑流的执行时间上与另一个流重叠，称为并发流（concurrent flow），这两个流被称为并发地运行</p>
+<p>多个流并发地执行的一般现象被称为并发（concurrency）。一个进程和其它进程轮流运行的概念称为多任务（multitasking）。一个进程执行它的控制流的一部分的每一时间段叫做时间片（time slice）<br>并行流是并发流的一个真子集。</p>
+<pre><code>如果两个流并发地运行在不同的处理器核或者计算机上，那么我们称它们为并行流（parallel flow），它们并行的运行（running in parallel），且并行地执行（parallel execution）
+</code></pre><p>8.2.3 私有地址空间<br>进程也为每个地址空间提供一种假象，好像它独占地使用系统地址空间。进程为每个程序提供它自己的私有地址空间。</p>
+<ul>
+<li>一般而言，和这个空间中某个地址相关联的那个内存字节是不能被其他进程读或者写的，从这个意义上说，这个地址空间是私有的。</li>
+<li>私有地址空间，内容都不相同，但是每个这样的空间都有相同的通用结构。</li>
+</ul>
+<p>地址空间底部是保留给用户程序的，包括通常的代码、数据、堆和栈段。</p>
+<ul>
+<li>代码段总是从地址0x400000开始。地址空间顶部保留给内核（操作系统常驻内存的部分）。地址空间的这个部分包含内核在代表进程执行时（比如当应用程序执行系统调用时）使用的代码、数据和栈</li>
+</ul>
+<h3 id="8-3-系统调用错误处理"><a href="#8-3-系统调用错误处理" class="headerlink" title="8.3 系统调用错误处理"></a><center>8.3 系统调用错误处理</center></h3><h3 id="8-4-进程控制"><a href="#8-4-进程控制" class="headerlink" title="8.4 进程控制"></a><center>8.4 进程控制</center></h3><h3 id="8-5-信号"><a href="#8-5-信号" class="headerlink" title="8.5 信号"></a><center>8.5 信号</center></h3><h3 id="8-6-非本地跳转"><a href="#8-6-非本地跳转" class="headerlink" title="8.6 非本地跳转"></a><center>8.6 非本地跳转</center></h3><h3 id="8-7-操作进程的工具"><a href="#8-7-操作进程的工具" class="headerlink" title="8.7 操作进程的工具"></a><center>8.7 操作进程的工具</center></h3><h3 id="8-8-小结"><a href="#8-8-小结" class="headerlink" title="8.8 小结"></a><center>8.8 小结</center></h3>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/18/设计模式01》/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="luowen">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Coding in life...">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/12/18/设计模式01》/" itemprop="url">设计模式01</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-18T21:32:46+08:00">
+                2018-12-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>阶段一：</p>
+<ul>
+<li>有一个Duck的超类。里面包含了一些正常的方法。</li>
+</ul>
+<p>需 求：需要给鸭子们实现一个会飞的动作。fly()</p>
+<p>第一次实现：在父类中进行实现fly()</p>
+<p>结果： 对于部分子类来说，没有必要的行为这个行为，比如橡皮鸭子不应该有fly（）方法。这个地方即使重写了此方法。用doNothing（）什么都不做。还是不好算是垃圾代码。</p>
+<p>阶段二：</p>
+<p>我们应该把变化的部分，和不变的部分进行区分。</p>
+<p>比如fly()方法不应该放入duck类中。我们可以将其抽取为接口flyable()，将其和duck类进行解耦。当部分subDuck类需要实现fly()方法时，直接实现就行。这样就让比如橡皮鸭这种子类，就可以脱离部分垃圾代码了。</p>
+<p>问题：解耦确实解耦，目的也达到了，但是有个问题。代码将不能复用，每个实现该fly()接口的，如果方法实现都是一样的，则会出现每实现一次该接口，就得重写该方法，即便逻辑未变。</p>
+<p>解决方法：面向接口编程。用一个更加具体的接口去实现fly()接口，这种类称为行为类。</p>
+<p>阶段三：</p>
+<p>这个地方主要在于面向接口编程。千万别面向继承编程。充分利用多态的功能。</p>
+<p>比如有一个animate超类 ，有dog 和 cat子类。以下为演进过程</p>
+<ul>
+<li>Dog a = new Dog();</li>
+<li>Animate b = new Dog();</li>
+<li>Animate c = getAnimate();</li>
+</ul>
+<p>设计原则</p>
+<ol>
+<li>区分不变的和变的 。 封装变化的。</li>
+<li></li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/18/MySQL必知必会11-14章/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="luowen">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Coding in life...">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/12/18/MySQL必知必会11-14章/" itemprop="url">MySQL必知必会11-14章</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-18T10:17:39+08:00">
+                2018-12-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/《MySQL必知必会》/" itemprop="url" rel="index">
+                    <span itemprop="name">《MySQL必知必会》</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="第11章-使用数据处理函数"><a href="#第11章-使用数据处理函数" class="headerlink" title="第11章 使用数据处理函数"></a><center>第11章 使用数据处理函数</center></h2><p>函数：</p>
+<pre><code>SQL支持利用函数来处理数据。函数一般是在数据上执行的，它给数据的转换和处理提供了方便
+</code></pre><blockquote>
+<p>函数没有SQL的可移植性强</p>
+<blockquote>
+<p>能运行在多个系统上的代码称为可移植的（portable）</p>
+</blockquote>
+</blockquote>
+<ul>
+<li>文本处理函数</li>
+<li>日期和时间处理函数</li>
+<li>数值处理函数</li>
+</ul>
+<h2 id="第12章-汇总数据"><a href="#第12章-汇总数据" class="headerlink" title="第12章 汇总数据"></a><center>第12章 汇总数据</center></h2><p>我们经常需要汇总数据而不用把它们实际检索出来，为此聚集函数</p>
+<p>聚集函数（aggregate function）</p>
+<pre><code>运行在行组上，计算和返回单个值的函数
+</code></pre><ul>
+<li><p>AVG()</p>
+<ul>
+<li>只用于单个列</li>
+<li>AVG()只能用来确定特定数值列的平均值，而且列名必须作为函数参数给出。为了获得多个列的平均值，必须使用多个AVG（）函数</li>
+</ul>
+</li>
+<li>COUNT()</li>
+<li>MAX()</li>
+<li>MIN()</li>
+<li>SUM()</li>
+</ul>
+<blockquote>
+<p>NULL值 AVG()函数忽略列值为NULL的行 （这几个都忽略）</p>
+</blockquote>
+<hr>
+<h2 id="第13章-分组数据"><a href="#第13章-分组数据" class="headerlink" title="第13章 分组数据"></a>第13章 分组数据</h2><p>注意事项：</p>
+<ul>
+<li><p>group by 子句可以包含任意数目的列。</p>
+<ul>
+<li>这使得能对分组进行嵌套</li>
+</ul>
+</li>
+<li><p>group by 如果在子句中嵌套了分组，数据将在最后规定的分组上进行汇总。换句话说，在建立分组时，指定的所有列都一起计算（所以不能从单个列中取回数据）</p>
+</li>
+<li>group by子句中列出的每个列都必须是检索列或有效的表达式（但不能是集聚函数）。如果在select 中使用表达式，则必须在group by子句中指定相同的表达式。不能使用别名。</li>
+<li>除集聚计算语句外，select语句中的每个列都必须在groub by子句中指定相同的表达式。不能使用别名</li>
+<li>除集聚计算语句外，select语句中的每个列都必须在group by子句中给出</li>
+<li>如果分组列中具有null值，则null将作为一个分组返回。如果列中有多行null值，它们将分为一组</li>
+<li>group by子句必须出现在where子句后，order by子句之前。</li>
+</ul>
+<h4 id="过滤分组"><a href="#过滤分组" class="headerlink" title="过滤分组"></a>过滤分组</h4><p>where子句只能过滤行，而不能过滤分组 。Having子句可以过滤分组，</p>
+<p>Having非常类似于where，事实上，目前为止所学过的所有类型的WHERE子句都可以用having子句来代替。</p>
+<blockquote>
+<p>唯一的区别是where过滤行，having过滤的是分组。<br>还可以这么理解：where在数据分组前进行过滤，having在数据分组后进行过滤。where排除的行不包括在分组中。</p>
+<blockquote>
+<p>having支持所有where操作符</p>
+</blockquote>
+</blockquote>
+<font style="color:red">SELECT子句顺序</font>
+
+<ol>
+<li>select</li>
+<li>from</li>
+<li>where</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/17/MySQL必知必会4-10章/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="luowen">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Coding in life...">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/12/17/MySQL必知必会4-10章/" itemprop="url">MySQL必知必会4-10章</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-17T16:30:09+08:00">
+                2018-12-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/《MySQL必知必会》/" itemprop="url" rel="index">
+                    <span itemprop="name">《MySQL必知必会》</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="第5章-排序检索数据"><a href="#第5章-排序检索数据" class="headerlink" title="第5章 排序检索数据"></a>第5章 排序检索数据</h2><p>子句（clause）</p>
+<ul>
+<li><p>SQL语句由子句构成，有些子句是必需的，而有的是可选的。一个子句通常由一个关键字和所提供的数据组成。</p>
+<ul>
+<li>子句的例子有：SELECT语句的FROM子句</li>
+</ul>
+</li>
+</ul>
+<p>谓词（predicate）</p>
+<ul>
+<li>操作符何时不是操作符？答案是在它作为谓词时，从技术上来说，LIKE是谓词而不是操作符。</li>
+</ul>
+<p>区分大小写</p>
+<ul>
+<li>根据MySQL的配置方式，搜索可以是区分大小写的。</li>
+</ul>
+<hr>
+<h2 id="第9章-用正则表达式进行搜索"><a href="#第9章-用正则表达式进行搜索" class="headerlink" title="第9章 用正则表达式进行搜索"></a>第9章 用正则表达式进行搜索</h2><p>正则表达式是用来匹配文本的特殊的串（字符集合）</p>
+<p>为了匹配特殊字符</p>
+<ul>
+<li><p>必须使用 \</p>
+<ul>
+<li>多数正则表达式实现使用单个反斜杠转义特殊字符，以便能使用这些字符本身。但MySQL要求两个反斜杠（MySQL自己解释一个，正则表达式库解释另一个）</li>
+</ul>
+</li>
+</ul>
+<h4 id="重复元字符"><a href="#重复元字符" class="headerlink" title="重复元字符"></a>重复元字符</h4><ul>
+<li><p>*</p>
+<ul>
+<li>0个或多个匹配</li>
+</ul>
+</li>
+<li><p>+</p>
+<ul>
+<li>1个或多个匹配</li>
+<li>等于 {1,}</li>
+</ul>
+</li>
+<li><p>？</p>
+<ul>
+<li>0个或1个匹配</li>
+<li>等于 {0,1}</li>
+</ul>
+</li>
+<li><p>{n}</p>
+<ul>
+<li>指定数目的匹配</li>
+</ul>
+</li>
+<li><p>{n,}</p>
+<ul>
+<li>不少于指定数目的匹配</li>
+</ul>
+</li>
+<li><p>{n,m}    </p>
+<ul>
+<li>匹配数目的范围（m不超过255）</li>
+</ul>
+</li>
+</ul>
+<h4 id="定位元字符"><a href="#定位元字符" class="headerlink" title="定位元字符"></a>定位元字符</h4><ul>
+<li><p>^</p>
+<ul>
+<li>文本的开始</li>
+<li>^有双重用途<ul>
+<li>在集合中（用[和]定义），用它来否定该集合</li>
+<li>否则，用来指定串的开始处。 </li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>$</p>
+<ul>
+<li>文本的结尾</li>
+</ul>
+</li>
+<li><p>[[:&lt;:]]</p>
+<ul>
+<li>词的开始</li>
+</ul>
+</li>
+<li><p>[[:&gt;:]]</p>
+<ul>
+<li>词的结尾</li>
+</ul>
+</li>
+</ul>
+<h2 id="第10章-创建计算字段"><a href="#第10章-创建计算字段" class="headerlink" title="第10章 创建计算字段"></a>第10章 创建计算字段</h2><ul>
+<li><p>字段（field）</p>
+<ul>
+<li>基本上与列（column）的意思相同，经常互换使用，不过数据库例一般称为列，而术语字段通常用在计算字段的连接上。</li>
+<li>要知道：只有数据库知道select语句中哪些列是实际的表列，哪些列是计算字段。从客户机（如应用程序）的角度来看，计算字段的数据是以与其他列的数据相同的方式返回的。</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>这个还能进行算数计算的哦！</p>
+</blockquote>
+<ul>
+<li><p>别名（alias）</p>
+<ul>
+<li>别名（alias）是一个字段或值的替换名。别名用AS关键字赋予。</li>
+<li>导出列： 别名有时也称为导出列（derived column），不管称为什么，它们所代表的都是相同的东西。</li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/17/mysql必知必会1-3章/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="luowen">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Coding in life...">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/12/17/mysql必知必会1-3章/" itemprop="url">mysql必知必会1-3章</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-17T15:38:32+08:00">
+                2018-12-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/《MySQL必知必会》/" itemprop="url" rel="index">
+                    <span itemprop="name">《MySQL必知必会》</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="第一章-了解SQL"><a href="#第一章-了解SQL" class="headerlink" title="第一章 了解SQL"></a><center>第一章 了解SQL</center></h2><ul>
+<li><p>数据库（database）</p>
+<ul>
+<li>保存有组织的数据的容器（通常是一个文件或一组文件）</li>
+</ul>
+</li>
+<li><p>表（table）</p>
+<ul>
+<li>某种特定类型数据的结构化清单</li>
+</ul>
+</li>
+<li><p>模式（schema）</p>
+<ul>
+<li>关于数据库和表的布局及特性的信息</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>描述表的这组信息就是所谓的模式，模式可以用来描述数据库中特定的表以及整个数据库（和其中表的关系）</p>
+</blockquote>
+<hr>
+<h3 id="什么是SQL"><a href="#什么是SQL" class="headerlink" title="什么是SQL"></a>什么是SQL</h3><p>SQL是一种结构化查询语言（Structured Query Language）的缩写。</p>
+<p>SQL是一种专门用来与数据库通信的语言。</p>
+<h3 id="什么是MySQL"><a href="#什么是MySQL" class="headerlink" title="什么是MySQL"></a>什么是MySQL</h3><p>数据的所有存储、检索、管理和处理实际上是由数据库软件–DBMS（数据库管理系统）完成的。</p>
+<p>MySQL是一种DBMS</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/12/UML笔记二/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="luowen">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Coding in life...">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/12/12/UML笔记二/" itemprop="url">UML笔记二</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-12T16:28:44+08:00">
+                2018-12-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/uml/" itemprop="url" rel="index">
+                    <span itemprop="name">uml</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="2-建模基础"><a href="#2-建模基础" class="headerlink" title="2 建模基础"></a><center>2 建模基础</center></h2><p>建模（Modeling），是指通过对客观事物建立一种抽象的方法用以表征事物并对获得对事物本身的理解，同时把这种理解概念化，将这些逻辑概念组织起来，构成一种对所观察的对象的内部结构和工作原理的便于理解的表达。</p>
+<blockquote>
+<p>无论在需求分析、系统分析还是系统设计上，一定要学会采用面向对象的方法，在面对问题领域的时候首先不要决定去通盘考虑，而是要找出问题领域里包含的抽象角度。</p>
+<p>如果把抽象角度都找全了，并且这些角度都分析清楚了，问题领域也就解决了。虽然这些抽象角度在思考的时候可能是互不相连的</p>
+</blockquote>
+<p>具体来说，做需求的时候，首要目标不是要弄清楚业务是如何一步一步完成的，而是要：</p>
+<ul>
+<li>弄清楚有多少业务的参与者？</li>
+<li>每个参与者的目标是什么？</li>
+</ul>
+<p><font style="color:red">参与者的目标就是你的抽象角度</font>。与分析一个复杂的业务流程相比，单独分析参与者的一个个目的要简单的多。实际上，这就是用例！这就是为什么永猎会成为业务建模的方法的原因之一。</p>
+<h4 id="什么是模？"><a href="#什么是模？" class="headerlink" title="什么是模？"></a>什么是模？</h4><p>一个由抽象角度确定的目标需要由静态的事物加上特定条件下产生的一个特定的场景来完成，即：</p>
+<ul>
+<li>静态的事物（物）+特定的条件（规则）+ 特定的动作（参与者的驱动）<ul>
+<li>= 特定的场景（事件）</li>
+</ul>
+</li>
+</ul>
+<p>模就是“人”、“事”、“物”、“规则”    </p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/09/第七章-链接/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -857,6 +2020,28 @@
           </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/uml/" itemprop="url" rel="index">
+                    <span itemprop="name">uml</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -886,8 +2071,7 @@
       
         
           
-            <p>基础篇：</p>
-<ul>
+            <h2 id="基础篇："><a href="#基础篇：" class="headerlink" title="基础篇："></a><center>基础篇：</center></h2><ul>
 <li><p>核心元素</p>
 <ul>
 <li>描述基本事物</li>
@@ -904,1180 +2088,84 @@
 </ul>
 </li>
 </ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/06/复杂度分析（下）/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="luowen">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Coding in life...">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/12/06/复杂度分析（下）/" itemprop="url">复杂度分析（下）</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-06T00:02:06+08:00">
-                2018-12-06
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/算法/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="浅析："><a href="#浅析：" class="headerlink" title="浅析："></a>浅析：</h2>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/04/复杂度分析（上）/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="luowen">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Coding in life...">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/12/04/复杂度分析（上）/" itemprop="url">复杂度分析（上）</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-04T23:24:18+08:00">
-                2018-12-04
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/算法/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="复杂度分析：如何分析，统计算法的执行效率和资源消耗"><a href="#复杂度分析：如何分析，统计算法的执行效率和资源消耗" class="headerlink" title="复杂度分析：如何分析，统计算法的执行效率和资源消耗"></a>复杂度分析：如何分析，统计算法的执行效率和资源消耗</h3><ul>
-<li>算法和数据结构解决的是“快”和“省”的问题，即如何让代码运行的更快，如何让代码更节省资源。</li>
-<li>复杂度分析是整个算法学习的精髓，只要掌握了它，算法和数据结构就掌握了一半了</li>
-</ul>
-<h4 id="为什么需要复杂度分析"><a href="#为什么需要复杂度分析" class="headerlink" title="为什么需要复杂度分析"></a>为什么需要复杂度分析</h4><p>事后统计法</p>
-<ul>
-<li>测试结果非常依赖于测试环境</li>
-<li>测试结果规模受数据规模影响很大</li>
-</ul>
-<p>我们需要一个不需要依赖于测试环境，就可以粗略的估算整个算法的执行效率的方法</p>
-<h5 id="大O复杂度表示法"><a href="#大O复杂度表示法" class="headerlink" title="大O复杂度表示法"></a>大O复杂度表示法</h5><ul>
-<li><p>所有代码的执行时间T(n)与每行代码的执行次数n成正比。</p>
-<ul>
-<li><p>公式： T(n) = O(f(n))</p>
-<ul>
-<li>T(n) 它表示代码执行的时间</li>
-<li>n  代表示数据规模的大小</li>
-<li>f(n) 表示每行代码执行次数的总数。</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<p>大O时间复杂度表示法</p>
-<pre><code>大O时间复杂度实际上并不具体表示代码真正运行的时间，而是表示代码执行时间随着数据规模增长的变化趋势。所以，也叫做渐进复杂度分析（asymptotic time complexity）,简称时间复杂度
-</code></pre><hr>
-<h4 id="时间复杂度分析"><a href="#时间复杂度分析" class="headerlink" title="时间复杂度分析"></a>时间复杂度分析</h4><p>这有三种比较实用的方法，进行时间复杂度分析</p>
+<blockquote>
+<p>建立模型是人们解决现实世界问题的一种常用手段。我们通常接触建模是为了解决某个问题而建立的一个数学模型，通过对数学计算来分析和预测，找出解决问题的办法</p>
+<blockquote>
+<p>从理论上来说，建立模型是指通过对客观事物建立一种抽象的方法，用来表征事物，以获得对事物本身的理解，再把这种理解概念化</p>
+</blockquote>
+</blockquote>
+<h3 id="1-2-4-从现实世界到业务模型"><a href="#1-2-4-从现实世界到业务模型" class="headerlink" title="1.2.4 从现实世界到业务模型"></a>1.2.4 从现实世界到业务模型</h3><p>UML提供以下元素来为现实世界建立模型：</p>
 <ol>
-<li>只关注循环次数最多的一段代码</li>
-<li>加法法则，总复杂度等于量级最大的那段代码的复杂度</li>
-<li>乘法法则，嵌套代码的复杂度等于嵌套内外代码复杂度的乘积</li>
-</ol>
-<h4 id="空间复杂度分析"><a href="#空间复杂度分析" class="headerlink" title="空间复杂度分析"></a>空间复杂度分析</h4><p>渐进空间复杂度：算法的执行所需要的空间与数据规模之间的增长关系表示</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/02/ARTS-第三周挑战/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="luowen">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Coding in life...">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/12/02/ARTS-第三周挑战/" itemprop="url">ARTS-第三周挑战</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-02T22:54:45+08:00">
-                2018-12-02
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/ARTS/" itemprop="url" rel="index">
-                    <span itemprop="name">ARTS</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <ol>
-<li>Algorithm：每周至少做一个 leetcode 的算法题<br><br><a href="https://leetcode.com/problems/swap-nodes-in-pairs/" target="_blank" rel="noopener"> swap nodes（链表两两交换结点） </a></li>
-</ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * public class ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     ListNode next;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x) &#123; val = x; &#125;</span></span><br><span class="line"><span class="comment"> * &#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ListNode <span class="title">swapPairs</span><span class="params">(ListNode head)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(head == <span class="keyword">null</span>) <span class="keyword">return</span> head;</span><br><span class="line">        <span class="keyword">return</span> swapPairs(head,head.next);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> ListNode <span class="title">swapPairs</span><span class="params">(ListNode currentNode, ListNode nextNode)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (currentNode == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> currentNode;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (nextNode == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> currentNode;</span><br><span class="line">        &#125;</span><br><span class="line">        ListNode newHead,changedNextNode,newCurrent;</span><br><span class="line"></span><br><span class="line">        changedNextNode = swapNode(currentNode, nextNode);</span><br><span class="line">        newHead = nextNode;</span><br><span class="line">        </span><br><span class="line">        newCurrent = changedNextNode.next;</span><br><span class="line">        <span class="keyword">if</span> (newCurrent == <span class="keyword">null</span> || newCurrent.next == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> newHead;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        swapPairs(changedNextNode, newCurrent, newCurrent.next);</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> nextNode;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">swapPairs</span><span class="params">(ListNode prevNode,ListNode currentNode , ListNode nextNode)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(currentNode ==<span class="keyword">null</span> || nextNode == <span class="keyword">null</span>) <span class="keyword">return</span> ;</span><br><span class="line">        </span><br><span class="line">        ListNode changeLastNode; </span><br><span class="line">        changeLastNode = swapNode(prevNode,currentNode,nextNode);</span><br><span class="line">        </span><br><span class="line">        prevNode = changeLastNode;</span><br><span class="line">        currentNode = changeLastNode.next;</span><br><span class="line">        <span class="keyword">if</span>(currentNode == <span class="keyword">null</span>)</span><br><span class="line">            <span class="keyword">return</span> ;</span><br><span class="line">        nextNode = changeLastNode.next.next;</span><br><span class="line">            </span><br><span class="line">        swapPairs(prevNode,currentNode,nextNode);</span><br><span class="line">    &#125;   </span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> ListNode <span class="title">swapNode</span><span class="params">(ListNode prev,ListNode currentNode ,ListNode next)</span></span>&#123;</span><br><span class="line">        ListNode tempNode;</span><br><span class="line">        </span><br><span class="line">        tempNode = next.next;</span><br><span class="line">        next.next = currentNode;</span><br><span class="line">        currentNode.next = tempNode;</span><br><span class="line">        prev.next =  next;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> currentNode;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> ListNode <span class="title">swapNode</span><span class="params">(ListNode currentNode,ListNode nextNode)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        ListNode temp;</span><br><span class="line">        </span><br><span class="line">        temp = nextNode.next;</span><br><span class="line">        nextNode.next = currentNode;</span><br><span class="line">        currentNode.next = temp;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> currentNode;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ol start="2">
-<li>Review：阅读并点评至少一篇英文技术文章<br><br><a herf=" https://medium.com/@kevalpatel2106/why-should-you-learn-go-f607681fad65">为什么你应该学习go语言</a></li>
-</ol>
-<p>看下来的好处，我认为是，go天生适合于多核心，多线程的操作环境，内存开销相较于java创建一个thread小太多，并且线程之间的通信困难，用goroutine，内存消耗少，更容易编程使用</p>
-<ol start="3">
-<li>Tip：学习至少一个技术技巧<br><br><a href="https://styleoflw.github.io/2018/11/27/Vim%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE/" target="_blank" rel="noopener">vim常用快捷键</a></li>
-</ol>
-<ol start="4">
-<li>Share：分享一篇有观点和思考的技术文章<br><br><a href="https://styleoflw.github.io/2018/12/01/%E6%9E%B6%E6%9E%8402-%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%E7%9A%84%E7%9B%AE%E7%9A%84/" target="_blank" rel="noopener">架构设计的目的</a></li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/02/读书随笔/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="luowen">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Coding in life...">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/12/02/读书随笔/" itemprop="url">读书随笔</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-02T14:21:22+08:00">
-                2018-12-02
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/随笔记录/" itemprop="url" rel="index">
-                    <span itemprop="name">随笔记录</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <ol>
-<li><p>在计算机内存中，统一使用Unicode编码，当需要保存到硬盘或者需要传输的时候，就转换为UTF-8编码。</p>
+<li><p>UML采用被称之为参与者（actor）的元模型作为信息来源提供者</p>
 <ul>
-<li>用记事本编辑的时候，从文件读取的UTF-8字符被转换为Unicode字符到内存里，编辑完成后，保存的时候再把Unicode转换为UTF-8保存到文件：</li>
-<li>浏览网页的时候，服务器会把动态生成的Unicode内容转换为UTF-8再传输到浏览器：</li>
+<li>参与者代表了现实世界的“人”。参与者是模型信息来源的提供者，也是第一驱动者。</li>
+<li>换句话说，要建立的模型的意义完全被参与者决定，所建立的模型也是完全为参与者服务的，参与者是整个建模过程的中心。</li>
 </ul>
 </li>
-<li><p>ASC|| -&gt; 1字节</p>
+<li><p>UML采用被称之为用例（use case）的一种元模型来表示<font style="color:green">驱动者的业务目标，也就是参与者想要做什么并且获得什么。</font></p>
 <ul>
-<li><p>Unicode -&gt; 2字节 （因为全英文会大量浪费）</p>
-<ul>
-<li>UTF-8 -&gt; 1-6字节    （可变长的编码，汉字通常3个字节）</li>
-</ul>
-</li>
+<li>这个业务目标就是现实世界中的“事”。</li>
+<li>而这件事是怎么做的，依据什么规则，则通过被称之为业务场景（business scenario）和用例场景（use case scenario）的UML视图来描绘的，这些场景便是现实世界中的“规则”。</li>
+<li>最后，UML通过被称之为业务对象模型（business object model）的视图来说明在达成这些业务目标的过程中涉及到的事物，用逻辑概念来表示他们，并定义他们之间的关系。</li>
+<li>业务对象模型则代表了现实世界中的“物”</li>
 </ul>
 </li>
 </ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/01/句子的形成-动词的种类及其用法/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="luowen">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Coding in life...">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/12/01/句子的形成-动词的种类及其用法/" itemprop="url">句子的形成-动词的种类及其用法</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-01T14:59:08+08:00">
-                2018-12-01
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/英语语法/" itemprop="url" rel="index">
-                    <span itemprop="name">英语语法</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="第二节-动词的种类及其用法"><a href="#第二节-动词的种类及其用法" class="headerlink" title="第二节 动词的种类及其用法"></a><center>第二节 动词的种类及其用法</center></h2><h3 id="概述："><a href="#概述：" class="headerlink" title="概述："></a>概述：</h3><ol>
-<li><p>动词（verb）基本上可以分为五大类：</p>
+<h3 id="1-2-5-从业务模型到概念模型"><a href="#1-2-5-从业务模型到概念模型" class="headerlink" title="1.2.5 从业务模型到概念模型"></a>1.2.5 从业务模型到概念模型</h3><p>虽然上一节中现实世界被业务模型映射并且记录下来，但这只是原始需求信息，距离可执行的代码还很遥远，必须把这些内容再换成一种可以指导开发的表达方式.</p>
+<p>UML通过被称之为概念化的过程（Conceptual）来建立适合计算机理解和实现的模型，这个模型称为分析模型（Analysis Model）。分析模型介于原始需求和计算机实现之间，是一种过渡模型。</p>
 <ul>
-<li>完全不及物动词：<ul>
-<li>complete intransitive verb 简写：c. vi.</li>
+<li>分析模型向上映射了原始需求，计算机的可执行代码可以通过分析模型追溯到原始需求；</li>
+<li>同时，分析模型向下为计算机实现规定了一种高层次的抽象，这种抽象是一种指导，也是一种约束，计算机实现过程非常容易遵循这种指导和约束来完成可执行代码的设计工作</li>
 </ul>
-</li>
-<li>不完全不及物动词：<ul>
-<li>incomplete intransitive verb 简写 i. vi. </li>
-</ul>
-</li>
-<li><p>完全及物动词：</p>
+<h4 id="绘制分析模型最主要的元模型有："><a href="#绘制分析模型最主要的元模型有：" class="headerlink" title="绘制分析模型最主要的元模型有："></a>绘制分析模型最主要的元模型有：</h4><ul>
+<li><p>边界类（boundary）</p>
 <ul>
-<li>complete transitive verb 简写: c. vt</li>
-</ul>
-</li>
-<li><p>不完全及物动词：</p>
+<li>狭义上说：边界就是大家熟悉的界面，所有对计算机的操作都要通过界面进行。</li>
+<li><p>从广义上说：任何一件事物都分为里面和外面，外面的事物与里面的事物之间的任何交互都需要有一个边界。</p>
 <ul>
-<li>incomplete transitive verb 简写： i. vt.</li>
+<li>比如参与者与系统的交互，系统与系统之间的交互，模块与模块之间的交互等。只要是两个不同职责的簇之间的交互都需要有一个边界</li>
+<li>换句话说，边界决定了外面能对里面做什么“事”。边界能够决定整个分析设计的结果。</li>
 </ul>
 </li>
-<li><p>授予动词：</p>
+</ul>
+</li>
+</ul>
 <ul>
-<li>dative verb 简写：d.v.</li>
+<li><p>实体类（entity）</p>
+<ul>
+<li>原始需求中领域模型中的业务实体映射了现实世界中参与者完成业务目标时所涉及的事物，UML采用实体类来重新表达业务实体。实体类可以采用计算机观点在不丢失业务实体信息的条件下重新归纳和组织信息，建立逻辑关联，添加哪些实际业务中不会使用到，但是执行计算机逻辑时需要的控制信息等。</li>
+<li>这些实体类可以看作是业务实体的实例化结果。</li>
+</ul>
+</li>
+<li><p>控制类（control）</p>
+<ul>
+<li>控制类（control）。边界和实体都是静态的，本身并不会动作。UML采用控制类来表达原始需求中的动态信息，即业务或用例场景中的步骤和活动。从UML的观点看来，边界类和实体类之间，边界类和边界类之间，实体类和实体类之间不能够直接相互访问，它们需要通过控制类来代理访问要求。</li>
 </ul>
 </li>
 </ul>
-</li>
-</ol>
 <blockquote>
-<p>英语中基本句型就是按此五大动词分类</p>
-</blockquote>
-<ol start="2">
-<li>如何判断完全不及物动词</li>
-</ol>
-<blockquote>
-<p>所有都可以套用这个，所有的英语动词都可以放入下面的空格，翻译成中文后，意思若无毛病，就是及物动词，否则就是不及物动词</p>
-</blockquote>
-<pre><code>- 我 ____ 他  （主动）
-- 他被我 _____ （被动）
-</code></pre><ol start="3">
-<li><p>兼作机务与不及物动词之常用动词：</p>
-<ul>
-<li><p>例如： sing </p>
-<ul>
-<li>vt 唱（一首歌）</li>
-<li>vi 唱歌</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>不及物动词可作及物动词，用同系名词作其宾语</p>
-<ul>
-<li>dream<ul>
-<li>vi 做梦</li>
-<li>vt 做（梦）</li>
-<li>dream a terrible dream</li>
-</ul>
-</li>
-<li><p>live</p>
-<ul>
-<li>vi 生活</li>
-<li>vt 过（生活）</li>
-<li>live a happy life</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>完全及物动词与完全不及物动词：</p>
-<ul>
-<li><p>完全及物动词</p>
-<ul>
-<li>加了宾语之后，意思才能完全的动词。</li>
-<li>He killed her</li>
-</ul>
-</li>
-<li><p>不完全及物动词</p>
-<ul>
-<li>及不需要加宾语，意思就很完全的动词</li>
-<li>He laughed</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>完全及物动词出现的形态：</p>
-<ul>
-<li>主语 + 及物动词 +宾语<ul>
-<li>He wrote a book</li>
-</ul>
-</li>
-<li><p>主语 + be动词 + 及物动词的现在分词 + 宾语</p>
-<ul>
-<li>本句型用以表示动作正在进行的主动状态</li>
-<li>He was writing a book</li>
-</ul>
-</li>
-<li>主语 + be动词 + 过去分词（Past participle，简称p.p.）<ul>
-<li>本句型用以表示被动的概念</li>
-<li>The book was written by him</li>
-</ul>
-</li>
-<li><p>主语 + be动词 + being + 过去分词</p>
-<ul>
-<li>本句型用以表示某动作正在进行的被动状态</li>
-<li>A book was being written by him</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>完全不及物动词出现的形态：</p>
-<ul>
-<li><p>主语 + 不及物动词</p>
-<ul>
-<li>Something happened</li>
-</ul>
-</li>
-<li><p>主语 + be动词 + 不及物动词的现在分词</p>
-<ul>
-<li>本句型用以表示某动作正在进行的状态</li>
-<li>Something was happening</li>
-<li><p>Something was happened （X）</p>
-<blockquote>
-<p>注意： happen是不及物动词，故无被动语态 </p>
-</blockquote>
-</li>
-</ul>
-</li>
-</ul>
+<p>只要有人、事、物和规则（定语），就能构成一个有意义的结果，无非是否合理而已，。</p>
+<p>分析类也是应用这个道理来把业务模型概念化的，</p>
 <ol>
-<li>完全不及物动词，就是意思很完整的不及物动词<ul>
-<li>Something happened</li>
-<li>He died</li>
-</ul>
-</li>
-<li>但完全不及物动词之后，可接副词（adverb ， 简写成adv）或副词对等语（如介词短语、状语从句等），以修饰该动词。<ul>
-<li>Something happened yesterday(adv)</li>
-<li>He died in an accident(介词短语)</li>
-<li>He left because he didn’t want to see Mary again</li>
-</ul>
-</li>
+<li>事：由于所有的操作都通过边界类来行进，能做什么不能做什么由边界决定，所以边界类实际上代表了原始需求中的“事”；</li>
+<li>物：实体类则由业务模型中的领域模型转化而来，它代表了现实世界上的“物”；</li>
+<li>规则：控制类则体现了现实世界中的“规则”，也就是定语；</li>
+<li>用户：再加上由参与者转化而来的系统的“用户”，</li>
 </ol>
-</li>
-<li><p>不完全不及物动词：（系动词）</p>
-<p> 这类动词（简写成i.vi即系动词）意思不完全，因而无法单独存在，之后要接名词、形容词或名词对等语（如代词、动名词、不定式、名词性从句、名词短语等）以补充其意思的不足。我们称作表语（subjective complement， 简称s.c.）</p>
-<ul>
-<li>He looks happy</li>
-<li>He became a good student</li>
-<li>My trouble is that i have no money(名词性从句)</li>
-<li>He is in danger now (介词短语)</li>
-</ul>
-</li>
-<li><p>不完全不及物动词的判断方法：</p>
-<ul>
-<li>不完全不及物动词的判断方法</li>
-</ul>
-</li>
-<li>不完全不及物动词的种类及其表语的用法：</li>
-<li>不完全不及物动词的重要相关短语：</li>
-<li>完全及物动词：</li>
-<li>完全及物动词的用法：</li>
-<li>不完全及物动词：</li>
-<li>不完全及物动词的分类及用法：</li>
-<li>授予动词：</li>
-<li>间接宾语与直接宾语倒置原则：</li>
-<li>与of连用的授予动词：</li>
-<li>表提供的授予动词：</li>
-<li>其他补充要点 </li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/01/架构02-架构设计的目的/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="luowen">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Coding in life...">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/12/01/架构02-架构设计的目的/" itemprop="url">架构02-架构设计的目的</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-01T09:48:33+08:00">
-                2018-12-01
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/从零开始学架构/" itemprop="url" rel="index">
-                    <span itemprop="name">从零开始学架构</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="软件架构"><a href="#软件架构" class="headerlink" title="软件架构"></a>软件架构</h3><blockquote>
-<p>随着软件系统规模的增加，计算相关的算法和数据结构不再构成主要的设计问题：当系统由许多部分组成时，整个系统的组织，也就是所说的“软甲架构”，导致了一系列新的设计问题。</p>
-</blockquote>
-<p>只有规模较大的软件系统才会面临软件架构相关的问题，比如：</p>
-<ul>
-<li>系统规模庞大，内部耦合严重，开发效率低;</li>
-<li>系统耦合严重，牵一发动全身，后续修改和扩展困难;</li>
-<li>系统逻辑复杂，容易出问题，出问题后很难排查和修复。</li>
-</ul>
-<h3 id="架构设计的目的"><a href="#架构设计的目的" class="headerlink" title="架构设计的目的"></a><center>架构设计的目的</center></h3><h4 id="架构设计的误区"><a href="#架构设计的误区" class="headerlink" title="架构设计的误区"></a>架构设计的误区</h4><ul>
-<li>因为架构很重要，所以要做架构设计 （正确的废话）<ul>
-<li>例如：不做架构设计系统就跑不起来了吗？</li>
-<li>例如：做了架构设计就能提示开发效率么？</li>
-<li>例如：设计良好的架构能促进业务发展吗？</li>
-</ul>
-</li>
-<li>不是每个系统都要做架构设计吗<ul>
-<li>例如：强行架构</li>
-</ul>
-</li>
-<li>公司流程要求系统开发过程中必须有架构设计</li>
-<li>为了高性能、高可用、可扩展，所以要做架构设计<ul>
-<li>根据业务或者系统，盲目就一定是有大问题的。</li>
-</ul>
-</li>
-</ul>
-<h4 id="架构设计的真正目的"><a href="#架构设计的真正目的" class="headerlink" title="架构设计的真正目的"></a>架构设计的真正目的</h4><p>一条准则,也可以说是一个原则</p>
-<pre><code>架构设计的目的是为了解决软件系统复杂度带来的问题
-</code></pre><p>明确了架构设计的目的是为了解决软件系统复杂度带来的问题，就能回答下述问题：</p>
-<ul>
-<li><p>这么多需求，从哪里开始下手进行架构设计呢？</p>
-<ul>
-<li>通过熟悉和理解需求，识别系统复杂性所在的地方，然后针对这些复杂点进行架构设计</li>
-</ul>
-</li>
-<li><p>架构设计要考虑高性能、高可用、高扩展…这么多高XX，全部设计完成估计要一个月，但老大只给了一周时间。</p>
-<ul>
-<li>架构设计并不是面面俱到，不需要每个架构都具备高性能、高可用、高扩展等特点，而是要识别出复杂点然后又针对性地解决问题</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li><p>业界A公司的架构师X，B公司的方案是Y，两个差别比较大，该参考那一个呢?</p>
-<ul>
-<li>理解每个架构方案背后所需要解决掉复杂点，然后才能对比自己的业务复杂点，参考复杂点相似的方案。</li>
-</ul>
-</li>
-</ul>
 <blockquote>
-<p>遵循这条准则。能够让架构师“有的方矢，而不是贪大求全”</p>
+<p>这样一来，“人”也有了。有了人、事、物、规则，我们就可以组合成各种各样的语句。不过不能随意组合，而是要依赖业务模型中已经描绘出来的用例场景来组合这些元素，让它们表达特定的业务含义。</p>
 </blockquote>
-<ul>
-<li><p>我们的系统一定要做到每秒TPS 10万</p>
-<ul>
-<li>如果系统的复杂度不是在性能这部分，TPS做到10万并没有什么用。</li>
-</ul>
-</li>
-<li><p>淘宝的架构师这么做的，我们也这么做</p>
-<ul>
-<li>淘宝的架构是为了解决淘宝业务的复杂度而设计的，淘宝的业务复杂度而设计的，淘宝的业务复杂度并不就是我们的业务复杂度，绝大多数业务的用户量都不可能有淘宝那么大。</li>
-</ul>
-</li>
-<li><p>Docker现在很流行，我们的架构应该将Docker应用进来</p>
-<ul>
-<li>Docker不是万能的，只是为了解决资源重用和动态分配而设计的，如果我们的系统复杂度根本不是在这方面，引入Docker没有什么意义。</li>
-</ul>
-</li>
-</ul>
-<h4 id="简单的复杂度分析案例"><a href="#简单的复杂度分析案例" class="headerlink" title="简单的复杂度分析案例"></a>简单的复杂度分析案例</h4><pre><code>一起来看看如何将“架构设计的真正目的就是解决软件系统复杂度带来的问题”
-</code></pre><p>简单的案列：设计一个大学的学生管理系统</p>
-<ul>
-<li>基本功能<ul>
-<li>登录</li>
-<li>注册</li>
-<li>成绩管理</li>
-<li>课程管理</li>
-<li>等</li>
-</ul>
-</li>
-</ul>
-<blockquote>
-<p>当我们对这样一个系统进行架构设计的时候，首先应识别其复杂度到底体现在哪里</p>
 </blockquote>
-<p>性能：</p>
-<pre><code>学生1-2万人，访问系统频率不高，平均每天单个学生访问量不到一次，存储使用MySQL完全足够，缓存都可以不用，Web服务器用Nginx完全足够
-</code></pre><p>可扩展性：</p>
-<pre><code>学生管理系统的功能比较稳定，可扩展的空间并不大，因此可扩展性也不复杂
-</code></pre><p>高可用：</p>
-<pre><code>学生管理系统即使宕机2小时，对学生管理系统工作影响并不大，因此可用不做负载均衡，更不用考虑异地多活这类复杂的方案了。但是，如果学生的数据全部丢失，修复是非常麻烦的，只能靠人工逐条修复，这个很难接受。
-因此需要考虑存储高可靠，这里就有点复杂了。我们需要考虑多种异常情况：机器故障，机房故障，针对机器故障，我们需要设计MySQL同机房主备方案；针对机房故障，我们需要设计MySQL跨机房同步方案。
-</code></pre><p>安全性</p>
-<pre><code>学生管理系统存储的信息有一定的隐私性，例如学生的家庭情况，但并不是和金融相关的，也不包含强隐私（例如玉照。。）的信息，因此安全信只要做三个事情就满足了，
-Nginx提供的ACL控制、用户账号密码管理，数据库访问权限控制。    
-</code></pre><p>成本：</p>
-<pre><code>系统很简单，基本上几台服务器就能够搞定，无需过多关注。
-</code></pre><p>还有其他方面，这个分析下来，这个方案的主要复杂性体现在存储可靠性上，需要保证异常的时候，不要丢失所有数据即可（丢失几个或几十个学生信息问题不大）    </p>
+<h3 id="1-2-6-从概念模型到设计模型"><a href="#1-2-6-从概念模型到设计模型" class="headerlink" title="1.2.6 从概念模型到设计模型"></a>1.2.6 从概念模型到设计模型</h3><p>概念模型使我们获得了软件的蓝图，获得了建设软件所需要的所有组成内容以及建设软件所需要的所有必要细节。</p>
+<p>设计模型的工作就是建筑零部件，组装汽车的过程。<br>在大多数情况下，实现类可以简单地从分析类映射而来。<br>在设计模型中，</p>
+<font style="color:green"><br><br>- 概念模型中的边界类可以被转化为操作界面或者系统接口；<br>- 控制类可以被转化为计算程序或控制程序，列如工作流、算法体等；<br>- 实体类可以转化为数据库表、XML文档或者其他带有持久化特征的类。这个转化过程也是有章可循的，一般来说，可以遵循的规则有：<br><br></font>
+
+<pre><code>- 软件架构和框架。软件架构和框架规定了实现类必须实现的接口、必须继承的超类、必须遵守的编程规则等。
+- 编程语言。各类编程语言有不同的特点，例如在实现一个界面或者一个可持久化类时，采用C++还是Java作为开发语言会有不同的设计要求。
+- 规范或中间件。如果决定采用某个规范或采用某个中间件时，实现类还要遵循规范或中间件规定的那些必须特性。
+</code></pre><blockquote>
+<p>实际上，由于软件项目可以选择不同的软件架构和框架，可以选择不同的编程语言，也可以选择不同的软件规范，还可以购买不同的中间件，因此同样的概念模型会因为选择不同而得到不同的设计模型。</p>
+</blockquote>
 
           
         
@@ -2117,7 +2205,7 @@ Nginx提供的ACL控制、用户账号密码管理，数据库访问权限控制
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2161,7 +2249,7 @@ Nginx提供的ACL控制、用户账号密码管理，数据库访问权限控制
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">25</span>
+                <span class="site-state-item-count">31</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -2172,7 +2260,7 @@ Nginx提供的ACL控制、用户账号密码管理，数据库访问权限控制
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-count">15</span>
                 <span class="site-state-item-name">categories</span>
               </a>
             </div>
@@ -2183,7 +2271,7 @@ Nginx提供的ACL控制、用户账号密码管理，数据库访问权限控制
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-count">15</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
@@ -2225,7 +2313,7 @@ Nginx提供的ACL控制、用户账号密码管理，数据库访问权限控制
         <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2018</span>
+  <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

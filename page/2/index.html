@@ -306,6 +306,1180 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/06/复杂度分析（下）/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="luowen">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Coding in life...">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/12/06/复杂度分析（下）/" itemprop="url">复杂度分析（下）</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-06T00:02:06+08:00">
+                2018-12-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="浅析："><a href="#浅析：" class="headerlink" title="浅析："></a>浅析：</h2>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/04/复杂度分析（上）/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="luowen">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Coding in life...">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/12/04/复杂度分析（上）/" itemprop="url">复杂度分析（上）</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-04T23:24:18+08:00">
+                2018-12-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="复杂度分析：如何分析，统计算法的执行效率和资源消耗"><a href="#复杂度分析：如何分析，统计算法的执行效率和资源消耗" class="headerlink" title="复杂度分析：如何分析，统计算法的执行效率和资源消耗"></a>复杂度分析：如何分析，统计算法的执行效率和资源消耗</h3><ul>
+<li>算法和数据结构解决的是“快”和“省”的问题，即如何让代码运行的更快，如何让代码更节省资源。</li>
+<li>复杂度分析是整个算法学习的精髓，只要掌握了它，算法和数据结构就掌握了一半了</li>
+</ul>
+<h4 id="为什么需要复杂度分析"><a href="#为什么需要复杂度分析" class="headerlink" title="为什么需要复杂度分析"></a>为什么需要复杂度分析</h4><p>事后统计法</p>
+<ul>
+<li>测试结果非常依赖于测试环境</li>
+<li>测试结果规模受数据规模影响很大</li>
+</ul>
+<p>我们需要一个不需要依赖于测试环境，就可以粗略的估算整个算法的执行效率的方法</p>
+<h5 id="大O复杂度表示法"><a href="#大O复杂度表示法" class="headerlink" title="大O复杂度表示法"></a>大O复杂度表示法</h5><ul>
+<li><p>所有代码的执行时间T(n)与每行代码的执行次数n成正比。</p>
+<ul>
+<li><p>公式： T(n) = O(f(n))</p>
+<ul>
+<li>T(n) 它表示代码执行的时间</li>
+<li>n  代表示数据规模的大小</li>
+<li>f(n) 表示每行代码执行次数的总数。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>大O时间复杂度表示法</p>
+<pre><code>大O时间复杂度实际上并不具体表示代码真正运行的时间，而是表示代码执行时间随着数据规模增长的变化趋势。所以，也叫做渐进复杂度分析（asymptotic time complexity）,简称时间复杂度
+</code></pre><hr>
+<h4 id="时间复杂度分析"><a href="#时间复杂度分析" class="headerlink" title="时间复杂度分析"></a>时间复杂度分析</h4><p>这有三种比较实用的方法，进行时间复杂度分析</p>
+<ol>
+<li>只关注循环次数最多的一段代码</li>
+<li>加法法则，总复杂度等于量级最大的那段代码的复杂度</li>
+<li>乘法法则，嵌套代码的复杂度等于嵌套内外代码复杂度的乘积</li>
+</ol>
+<h4 id="空间复杂度分析"><a href="#空间复杂度分析" class="headerlink" title="空间复杂度分析"></a>空间复杂度分析</h4><p>渐进空间复杂度：算法的执行所需要的空间与数据规模之间的增长关系表示</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/02/ARTS-第三周挑战/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="luowen">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Coding in life...">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/12/02/ARTS-第三周挑战/" itemprop="url">ARTS-第三周挑战</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-02T22:54:45+08:00">
+                2018-12-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/ARTS/" itemprop="url" rel="index">
+                    <span itemprop="name">ARTS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <ol>
+<li>Algorithm：每周至少做一个 leetcode 的算法题<br><br><a href="https://leetcode.com/problems/swap-nodes-in-pairs/" target="_blank" rel="noopener"> swap nodes（链表两两交换结点） </a></li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * public class ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     ListNode next;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x) &#123; val = x; &#125;</span></span><br><span class="line"><span class="comment"> * &#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ListNode <span class="title">swapPairs</span><span class="params">(ListNode head)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(head == <span class="keyword">null</span>) <span class="keyword">return</span> head;</span><br><span class="line">        <span class="keyword">return</span> swapPairs(head,head.next);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> ListNode <span class="title">swapPairs</span><span class="params">(ListNode currentNode, ListNode nextNode)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (currentNode == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> currentNode;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (nextNode == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> currentNode;</span><br><span class="line">        &#125;</span><br><span class="line">        ListNode newHead,changedNextNode,newCurrent;</span><br><span class="line"></span><br><span class="line">        changedNextNode = swapNode(currentNode, nextNode);</span><br><span class="line">        newHead = nextNode;</span><br><span class="line">        </span><br><span class="line">        newCurrent = changedNextNode.next;</span><br><span class="line">        <span class="keyword">if</span> (newCurrent == <span class="keyword">null</span> || newCurrent.next == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> newHead;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        swapPairs(changedNextNode, newCurrent, newCurrent.next);</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> nextNode;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">swapPairs</span><span class="params">(ListNode prevNode,ListNode currentNode , ListNode nextNode)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(currentNode ==<span class="keyword">null</span> || nextNode == <span class="keyword">null</span>) <span class="keyword">return</span> ;</span><br><span class="line">        </span><br><span class="line">        ListNode changeLastNode; </span><br><span class="line">        changeLastNode = swapNode(prevNode,currentNode,nextNode);</span><br><span class="line">        </span><br><span class="line">        prevNode = changeLastNode;</span><br><span class="line">        currentNode = changeLastNode.next;</span><br><span class="line">        <span class="keyword">if</span>(currentNode == <span class="keyword">null</span>)</span><br><span class="line">            <span class="keyword">return</span> ;</span><br><span class="line">        nextNode = changeLastNode.next.next;</span><br><span class="line">            </span><br><span class="line">        swapPairs(prevNode,currentNode,nextNode);</span><br><span class="line">    &#125;   </span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> ListNode <span class="title">swapNode</span><span class="params">(ListNode prev,ListNode currentNode ,ListNode next)</span></span>&#123;</span><br><span class="line">        ListNode tempNode;</span><br><span class="line">        </span><br><span class="line">        tempNode = next.next;</span><br><span class="line">        next.next = currentNode;</span><br><span class="line">        currentNode.next = tempNode;</span><br><span class="line">        prev.next =  next;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> currentNode;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> ListNode <span class="title">swapNode</span><span class="params">(ListNode currentNode,ListNode nextNode)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        ListNode temp;</span><br><span class="line">        </span><br><span class="line">        temp = nextNode.next;</span><br><span class="line">        nextNode.next = currentNode;</span><br><span class="line">        currentNode.next = temp;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> currentNode;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>Review：阅读并点评至少一篇英文技术文章<br><br><a herf=" https://medium.com/@kevalpatel2106/why-should-you-learn-go-f607681fad65">为什么你应该学习go语言</a></li>
+</ol>
+<p>看下来的好处，我认为是，go天生适合于多核心，多线程的操作环境，内存开销相较于java创建一个thread小太多，并且线程之间的通信困难，用goroutine，内存消耗少，更容易编程使用</p>
+<ol start="3">
+<li>Tip：学习至少一个技术技巧<br><br><a href="https://styleoflw.github.io/2018/11/27/Vim%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE/" target="_blank" rel="noopener">vim常用快捷键</a></li>
+</ol>
+<ol start="4">
+<li>Share：分享一篇有观点和思考的技术文章<br><br><a href="https://styleoflw.github.io/2018/12/01/%E6%9E%B6%E6%9E%8402-%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%E7%9A%84%E7%9B%AE%E7%9A%84/" target="_blank" rel="noopener">架构设计的目的</a></li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/02/读书随笔/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="luowen">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Coding in life...">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/12/02/读书随笔/" itemprop="url">读书随笔</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-02T14:21:22+08:00">
+                2018-12-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/随笔记录/" itemprop="url" rel="index">
+                    <span itemprop="name">随笔记录</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <ol>
+<li><p>在计算机内存中，统一使用Unicode编码，当需要保存到硬盘或者需要传输的时候，就转换为UTF-8编码。</p>
+<ul>
+<li>用记事本编辑的时候，从文件读取的UTF-8字符被转换为Unicode字符到内存里，编辑完成后，保存的时候再把Unicode转换为UTF-8保存到文件：</li>
+<li>浏览网页的时候，服务器会把动态生成的Unicode内容转换为UTF-8再传输到浏览器：</li>
+</ul>
+</li>
+<li><p>ASC|| -&gt; 1字节</p>
+<ul>
+<li><p>Unicode -&gt; 2字节 （因为全英文会大量浪费）</p>
+<ul>
+<li>UTF-8 -&gt; 1-6字节    （可变长的编码，汉字通常3个字节）</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/01/句子的形成-动词的种类及其用法/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="luowen">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Coding in life...">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/12/01/句子的形成-动词的种类及其用法/" itemprop="url">句子的形成-动词的种类及其用法</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-01T14:59:08+08:00">
+                2018-12-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/英语语法/" itemprop="url" rel="index">
+                    <span itemprop="name">英语语法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="第二节-动词的种类及其用法"><a href="#第二节-动词的种类及其用法" class="headerlink" title="第二节 动词的种类及其用法"></a><center>第二节 动词的种类及其用法</center></h2><h3 id="概述："><a href="#概述：" class="headerlink" title="概述："></a>概述：</h3><ol>
+<li><p>动词（verb）基本上可以分为五大类：</p>
+<ul>
+<li>完全不及物动词：<ul>
+<li>complete intransitive verb 简写：c. vi.</li>
+</ul>
+</li>
+<li>不完全不及物动词：<ul>
+<li>incomplete intransitive verb 简写 i. vi. </li>
+</ul>
+</li>
+<li><p>完全及物动词：</p>
+<ul>
+<li>complete transitive verb 简写: c. vt</li>
+</ul>
+</li>
+<li><p>不完全及物动词：</p>
+<ul>
+<li>incomplete transitive verb 简写： i. vt.</li>
+</ul>
+</li>
+<li><p>授予动词：</p>
+<ul>
+<li>dative verb 简写：d.v.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p>英语中基本句型就是按此五大动词分类</p>
+</blockquote>
+<ol start="2">
+<li>如何判断完全不及物动词</li>
+</ol>
+<blockquote>
+<p>所有都可以套用这个，所有的英语动词都可以放入下面的空格，翻译成中文后，意思若无毛病，就是及物动词，否则就是不及物动词</p>
+</blockquote>
+<pre><code>- 我 ____ 他  （主动）
+- 他被我 _____ （被动）
+</code></pre><ol start="3">
+<li><p>兼作机务与不及物动词之常用动词：</p>
+<ul>
+<li><p>例如： sing </p>
+<ul>
+<li>vt 唱（一首歌）</li>
+<li>vi 唱歌</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>不及物动词可作及物动词，用同系名词作其宾语</p>
+<ul>
+<li>dream<ul>
+<li>vi 做梦</li>
+<li>vt 做（梦）</li>
+<li>dream a terrible dream</li>
+</ul>
+</li>
+<li><p>live</p>
+<ul>
+<li>vi 生活</li>
+<li>vt 过（生活）</li>
+<li>live a happy life</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>完全及物动词与完全不及物动词：</p>
+<ul>
+<li><p>完全及物动词</p>
+<ul>
+<li>加了宾语之后，意思才能完全的动词。</li>
+<li>He killed her</li>
+</ul>
+</li>
+<li><p>不完全及物动词</p>
+<ul>
+<li>及不需要加宾语，意思就很完全的动词</li>
+<li>He laughed</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>完全及物动词出现的形态：</p>
+<ul>
+<li>主语 + 及物动词 +宾语<ul>
+<li>He wrote a book</li>
+</ul>
+</li>
+<li><p>主语 + be动词 + 及物动词的现在分词 + 宾语</p>
+<ul>
+<li>本句型用以表示动作正在进行的主动状态</li>
+<li>He was writing a book</li>
+</ul>
+</li>
+<li>主语 + be动词 + 过去分词（Past participle，简称p.p.）<ul>
+<li>本句型用以表示被动的概念</li>
+<li>The book was written by him</li>
+</ul>
+</li>
+<li><p>主语 + be动词 + being + 过去分词</p>
+<ul>
+<li>本句型用以表示某动作正在进行的被动状态</li>
+<li>A book was being written by him</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>完全不及物动词出现的形态：</p>
+<ul>
+<li><p>主语 + 不及物动词</p>
+<ul>
+<li>Something happened</li>
+</ul>
+</li>
+<li><p>主语 + be动词 + 不及物动词的现在分词</p>
+<ul>
+<li>本句型用以表示某动作正在进行的状态</li>
+<li>Something was happening</li>
+<li><p>Something was happened （X）</p>
+<blockquote>
+<p>注意： happen是不及物动词，故无被动语态 </p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<ol>
+<li>完全不及物动词，就是意思很完整的不及物动词<ul>
+<li>Something happened</li>
+<li>He died</li>
+</ul>
+</li>
+<li>但完全不及物动词之后，可接副词（adverb ， 简写成adv）或副词对等语（如介词短语、状语从句等），以修饰该动词。<ul>
+<li>Something happened yesterday(adv)</li>
+<li>He died in an accident(介词短语)</li>
+<li>He left because he didn’t want to see Mary again</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><p>不完全不及物动词：（系动词）</p>
+<p> 这类动词（简写成i.vi即系动词）意思不完全，因而无法单独存在，之后要接名词、形容词或名词对等语（如代词、动名词、不定式、名词性从句、名词短语等）以补充其意思的不足。我们称作表语（subjective complement， 简称s.c.）</p>
+<ul>
+<li>He looks happy</li>
+<li>He became a good student</li>
+<li>My trouble is that i have no money(名词性从句)</li>
+<li>He is in danger now (介词短语)</li>
+</ul>
+</li>
+<li><p>不完全不及物动词的判断方法：</p>
+<ul>
+<li>不完全不及物动词的判断方法</li>
+</ul>
+</li>
+<li>不完全不及物动词的种类及其表语的用法：</li>
+<li>不完全不及物动词的重要相关短语：</li>
+<li>完全及物动词：</li>
+<li>完全及物动词的用法：</li>
+<li>不完全及物动词：</li>
+<li>不完全及物动词的分类及用法：</li>
+<li>授予动词：</li>
+<li>间接宾语与直接宾语倒置原则：</li>
+<li>与of连用的授予动词：</li>
+<li>表提供的授予动词：</li>
+<li>其他补充要点 </li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/01/架构02-架构设计的目的/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="luowen">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Coding in life...">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/12/01/架构02-架构设计的目的/" itemprop="url">架构02-架构设计的目的</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-01T09:48:33+08:00">
+                2018-12-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/从零开始学架构/" itemprop="url" rel="index">
+                    <span itemprop="name">从零开始学架构</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="软件架构"><a href="#软件架构" class="headerlink" title="软件架构"></a>软件架构</h3><blockquote>
+<p>随着软件系统规模的增加，计算相关的算法和数据结构不再构成主要的设计问题：当系统由许多部分组成时，整个系统的组织，也就是所说的“软甲架构”，导致了一系列新的设计问题。</p>
+</blockquote>
+<p>只有规模较大的软件系统才会面临软件架构相关的问题，比如：</p>
+<ul>
+<li>系统规模庞大，内部耦合严重，开发效率低;</li>
+<li>系统耦合严重，牵一发动全身，后续修改和扩展困难;</li>
+<li>系统逻辑复杂，容易出问题，出问题后很难排查和修复。</li>
+</ul>
+<h3 id="架构设计的目的"><a href="#架构设计的目的" class="headerlink" title="架构设计的目的"></a><center>架构设计的目的</center></h3><h4 id="架构设计的误区"><a href="#架构设计的误区" class="headerlink" title="架构设计的误区"></a>架构设计的误区</h4><ul>
+<li>因为架构很重要，所以要做架构设计 （正确的废话）<ul>
+<li>例如：不做架构设计系统就跑不起来了吗？</li>
+<li>例如：做了架构设计就能提示开发效率么？</li>
+<li>例如：设计良好的架构能促进业务发展吗？</li>
+</ul>
+</li>
+<li>不是每个系统都要做架构设计吗<ul>
+<li>例如：强行架构</li>
+</ul>
+</li>
+<li>公司流程要求系统开发过程中必须有架构设计</li>
+<li>为了高性能、高可用、可扩展，所以要做架构设计<ul>
+<li>根据业务或者系统，盲目就一定是有大问题的。</li>
+</ul>
+</li>
+</ul>
+<h4 id="架构设计的真正目的"><a href="#架构设计的真正目的" class="headerlink" title="架构设计的真正目的"></a>架构设计的真正目的</h4><p>一条准则,也可以说是一个原则</p>
+<pre><code>架构设计的目的是为了解决软件系统复杂度带来的问题
+</code></pre><p>明确了架构设计的目的是为了解决软件系统复杂度带来的问题，就能回答下述问题：</p>
+<ul>
+<li><p>这么多需求，从哪里开始下手进行架构设计呢？</p>
+<ul>
+<li>通过熟悉和理解需求，识别系统复杂性所在的地方，然后针对这些复杂点进行架构设计</li>
+</ul>
+</li>
+<li><p>架构设计要考虑高性能、高可用、高扩展…这么多高XX，全部设计完成估计要一个月，但老大只给了一周时间。</p>
+<ul>
+<li>架构设计并不是面面俱到，不需要每个架构都具备高性能、高可用、高扩展等特点，而是要识别出复杂点然后又针对性地解决问题</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>业界A公司的架构师X，B公司的方案是Y，两个差别比较大，该参考那一个呢?</p>
+<ul>
+<li>理解每个架构方案背后所需要解决掉复杂点，然后才能对比自己的业务复杂点，参考复杂点相似的方案。</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>遵循这条准则。能够让架构师“有的方矢，而不是贪大求全”</p>
+</blockquote>
+<ul>
+<li><p>我们的系统一定要做到每秒TPS 10万</p>
+<ul>
+<li>如果系统的复杂度不是在性能这部分，TPS做到10万并没有什么用。</li>
+</ul>
+</li>
+<li><p>淘宝的架构师这么做的，我们也这么做</p>
+<ul>
+<li>淘宝的架构是为了解决淘宝业务的复杂度而设计的，淘宝的业务复杂度而设计的，淘宝的业务复杂度并不就是我们的业务复杂度，绝大多数业务的用户量都不可能有淘宝那么大。</li>
+</ul>
+</li>
+<li><p>Docker现在很流行，我们的架构应该将Docker应用进来</p>
+<ul>
+<li>Docker不是万能的，只是为了解决资源重用和动态分配而设计的，如果我们的系统复杂度根本不是在这方面，引入Docker没有什么意义。</li>
+</ul>
+</li>
+</ul>
+<h4 id="简单的复杂度分析案例"><a href="#简单的复杂度分析案例" class="headerlink" title="简单的复杂度分析案例"></a>简单的复杂度分析案例</h4><pre><code>一起来看看如何将“架构设计的真正目的就是解决软件系统复杂度带来的问题”
+</code></pre><p>简单的案列：设计一个大学的学生管理系统</p>
+<ul>
+<li>基本功能<ul>
+<li>登录</li>
+<li>注册</li>
+<li>成绩管理</li>
+<li>课程管理</li>
+<li>等</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>当我们对这样一个系统进行架构设计的时候，首先应识别其复杂度到底体现在哪里</p>
+</blockquote>
+<p>性能：</p>
+<pre><code>学生1-2万人，访问系统频率不高，平均每天单个学生访问量不到一次，存储使用MySQL完全足够，缓存都可以不用，Web服务器用Nginx完全足够
+</code></pre><p>可扩展性：</p>
+<pre><code>学生管理系统的功能比较稳定，可扩展的空间并不大，因此可扩展性也不复杂
+</code></pre><p>高可用：</p>
+<pre><code>学生管理系统即使宕机2小时，对学生管理系统工作影响并不大，因此可用不做负载均衡，更不用考虑异地多活这类复杂的方案了。但是，如果学生的数据全部丢失，修复是非常麻烦的，只能靠人工逐条修复，这个很难接受。
+因此需要考虑存储高可靠，这里就有点复杂了。我们需要考虑多种异常情况：机器故障，机房故障，针对机器故障，我们需要设计MySQL同机房主备方案；针对机房故障，我们需要设计MySQL跨机房同步方案。
+</code></pre><p>安全性</p>
+<pre><code>学生管理系统存储的信息有一定的隐私性，例如学生的家庭情况，但并不是和金融相关的，也不包含强隐私（例如玉照。。）的信息，因此安全信只要做三个事情就满足了，
+Nginx提供的ACL控制、用户账号密码管理，数据库访问权限控制。    
+</code></pre><p>成本：</p>
+<pre><code>系统很简单，基本上几台服务器就能够搞定，无需过多关注。
+</code></pre><p>还有其他方面，这个分析下来，这个方案的主要复杂性体现在存储可靠性上，需要保证异常的时候，不要丢失所有数据即可（丢失几个或几十个学生信息问题不大）    </p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/30/Python-study-record/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1295,1428 +2469,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/25/算法系列/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="luowen">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Coding in life...">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/11/25/算法系列/" itemprop="url">算法系列</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-25T08:41:37+08:00">
-                2018-11-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="以后不管干什么，都必须从宏观入手"><a href="#以后不管干什么，都必须从宏观入手" class="headerlink" title="以后不管干什么，都必须从宏观入手"></a><center>以后不管干什么，都必须从宏观入手</center></h2><p>这次算法&amp;数据结构的学习，和我以前学习的方式不太一样了，不在是抱着一本书，从前往后看，而是立下自己要学习的目标。反过去从书中学，网上学，不在是书指导我的思维</p>
-<h3 id="我对于该知识学习的等级，越深入，所需时间是几何倍的增长。（所以需要自己掌握这个度）"><a href="#我对于该知识学习的等级，越深入，所需时间是几何倍的增长。（所以需要自己掌握这个度）" class="headerlink" title="我对于该知识学习的等级，越深入，所需时间是几何倍的增长。（所以需要自己掌握这个度）"></a><center>我对于该知识学习的等级，越深入，所需时间是几何倍的增长。（所以需要自己掌握这个度）</center></h3><ol>
-<li>宏观篇（有一个大体的了解，最少仅限于概念懂，最多看懂代码实现）</li>
-<li>微观篇（不深入怎么能叫微观呢？最少有一个自己的实现，和一个完美的实现）</li>
-<li>极致篇（多半我不会来这里，来了，就是死磕，不允许自己心中还有疑问）</li>
-</ol>
-<hr>
-<p>眉毛胡子一把抓，是不行的，但下面这些是我必须掌握的</p>
-<h2 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a><center>数据结构</center></h2><h4 id="线性表"><a href="#线性表" class="headerlink" title="线性表"></a><center>线性表</center></h4><ul>
-<li>数组</li>
-<li>链表<ul>
-<li>单链表</li>
-<li>双向链表</li>
-<li>循环链表</li>
-<li>双向循环链表</li>
-<li>静态链表</li>
-</ul>
-</li>
-<li>栈<ul>
-<li>顺序栈</li>
-<li>链式栈</li>
-</ul>
-</li>
-<li>队列<ul>
-<li>普通队列</li>
-<li>双端队列</li>
-<li>阻塞队列</li>
-<li>并发队列</li>
-<li>阻塞并发队列</li>
-</ul>
-</li>
-</ul>
-<h4 id="散列表"><a href="#散列表" class="headerlink" title="散列表"></a><center>散列表</center></h4><ul>
-<li>顺序散列</li>
-<li>冲突散列<ul>
-<li>链表法</li>
-<li>开发寻址</li>
-<li>其它</li>
-</ul>
-</li>
-<li>动态扩容</li>
-<li>位图 <h4 id="树"><a href="#树" class="headerlink" title="树"></a><center>树</center></h4></li>
-<li>二叉树<ul>
-<li>平衡二叉树</li>
-<li>二叉查找树</li>
-<li>平衡二叉查找树</li>
-<li>完全二叉树</li>
-<li>满二叉树</li>
-</ul>
-</li>
-<li>多路查找树<ul>
-<li>B树</li>
-<li>B+树</li>
-<li>2-3树</li>
-<li>2-3-4树</li>
-</ul>
-</li>
-<li>堆<ul>
-<li>小顶堆</li>
-<li>大顶堆</li>
-<li>优先级队列</li>
-<li>斐波那契堆</li>
-<li>二顶堆</li>
-</ul>
-</li>
-<li>其它     <ul>
-<li>树状数组</li>
-<li>线段树<h4 id="图"><a href="#图" class="headerlink" title="图"></a><center>图</center></h4></li>
-</ul>
-</li>
-<li>图的存储<ul>
-<li>邻接矩阵</li>
-<li>邻接表</li>
-</ul>
-</li>
-<li>拓扑排序</li>
-<li>最短路径</li>
-<li>关键路径</li>
-<li>最小生成树</li>
-<li>二分图</li>
-<li>最大流</li>
-</ul>
-<h2 id="算法"><a href="#算法" class="headerlink" title="算法"></a><center>算法</center></h2><h4 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a><center>复杂度分析</center></h4><ul>
-<li>空间复杂度</li>
-<li>时间复杂度<ul>
-<li>最好</li>
-<li>最坏</li>
-<li>平均</li>
-<li>均摊</li>
-</ul>
-</li>
-</ul>
-<h4 id="基本算法思想"><a href="#基本算法思想" class="headerlink" title="基本算法思想"></a><center>基本算法思想</center></h4><ul>
-<li>贪心算法</li>
-<li>分治算法</li>
-<li>动态规划</li>
-<li>回溯算法</li>
-<li>枚举算法</li>
-</ul>
-<h4 id="排序"><a href="#排序" class="headerlink" title="排序"></a><center>排序</center></h4><ul>
-<li>时间复杂度：O（n^2）</li>
-<li>时间复杂度：O（nlogn）</li>
-<li>时间复杂度：O（n）</li>
-</ul>
-<h4 id="搜索"><a href="#搜索" class="headerlink" title="搜索"></a><center>搜索</center></h4><ul>
-<li>深度优先搜索</li>
-<li>广度优先搜索</li>
-<li>A*启发式搜索</li>
-</ul>
-<h4 id="查找"><a href="#查找" class="headerlink" title="查找"></a><center>查找</center></h4><ul>
-<li>线性表查找</li>
-<li>树结构查找</li>
-<li>散列表查找</li>
-</ul>
-<h4 id="字符串匹配"><a href="#字符串匹配" class="headerlink" title="字符串匹配"></a><center>字符串匹配</center></h4><ul>
-<li>朴素</li>
-<li>KMP</li>
-<li>Robin-Karp</li>
-<li>Boyer-Moore</li>
-<li>AC自动机</li>
-<li>Trie</li>
-<li>后缀数组<h4 id="其它"><a href="#其它" class="headerlink" title="其它"></a><center>其它</center></h4></li>
-<li>数论</li>
-<li>计算几何</li>
-<li>概率分析</li>
-<li>并查集</li>
-<li>拓扑网络</li>
-<li>矩阵运算</li>
-<li>线性规划</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/24/三年计划/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="luowen">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Coding in life...">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/11/24/三年计划/" itemprop="url">三年计划</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-24T19:09:54+08:00">
-                2018-11-24
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/三年之约/" itemprop="url" rel="index">
-                    <span itemprop="name">三年之约</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="就是约一下三年之后的自己"><a href="#就是约一下三年之后的自己" class="headerlink" title="就是约一下三年之后的自己"></a><center>就是约一下三年之后的自己</center></h3><p>写这个的目的就是想看看三年之后，我都打基础的话，是不是一个美好的决定，基础永远是最有挑战性的。学习还是很简单的，一遍不会就…</p>
-<blockquote>
-<p>我想要提升自己，以后计算机也会是我的爱好，所以我愿意三年来打基础，不追求最潮流的技术。当然如果能从英文官网上，学习一手资源，这个锻炼自己学习能的，我是大力支持的。</p>
-</blockquote>
-<h4 id="未来的三架马车"><a href="#未来的三架马车" class="headerlink" title="未来的三架马车"></a><center>未来的三架马车</center></h4><ul>
-<li>核心永远是这三个地方，其它学习的时候，都没有这些重要，用到再去学习，想要学的时候学。其它时候一律搞我的三架马车</li>
-</ul>
-<ol>
-<li>英语：三年后的自己，我想要的是自由游览英文网站，基本上和中文网站一样的感觉 （现在感觉达到一半了）</li>
-<li>算法：<ul>
-<li>这个玩意我需要写一个博客记录一下</li>
-<li>我要的算法就是常见的算法数据结构，不仅懂了，还要有手动实现。</li>
-<li>剑指offer搞定。</li>
-<li>每周一次的leetCode刷题。</li>
-<li>数据结构与算法之美。</li>
-<li>视频课，facebook带刷题。</li>
-</ul>
-</li>
-<li>计算机基础知识<ul>
-<li>计算机操作系统<ul>
-<li>深入理解操作系统（2遍肯定是需要的）</li>
-<li>现代操作系统 </li>
-</ul>
-</li>
-<li>网络<ul>
-<li>计算机网络</li>
-<li>图解Http</li>
-<li>图解tcp/ip（可选）</li>
-<li>图解网络硬件（可选）</li>
-</ul>
-</li>
-<li>数据库<ul>
-<li>mysql 必知必会</li>
-<li>网课mysql</li>
-<li>估计还有一门高性能xxx（可选）</li>
-</ul>
-</li>
-<li>linux系统<ul>
-<li>鸟哥的私房菜</li>
-<li>关于一些性能调优的东西（可选）</li>
-</ul>
-</li>
-</ul>
-</li>
-</ol>
-<hr>
-<pre><code>- 语言（只是一门工具,但也可以划为一个系列了）
-    - Java
-    - Python
-    - Go
-    - C
-    - JavaScript
-</code></pre><h4 id="读书"><a href="#读书" class="headerlink" title="读书"></a>读书</h4><ol>
-<li>深入理解计算机操作系统 (现在正在啃）。完成日期：跟着刘大走</li>
-<li>英语语法（每天至少一页，500页）。完成日期：2019/12/31</li>
-<li>Effective Java（每两周一项，90项）。完成日期：2020/12/31</li>
-<li>python 官网文档，（主要在于爬虫）我试试就在官网上弄这个，基础语法什么的就在官网上学了。<ul>
-<li>运行一个最简单的爬虫。完成日期：2018/12/31</li>
-</ul>
-</li>
-<li>Head Fist Servlet &amp; JSP （这本书技术比较老了，但可以重看一遍）。完成日期：2018/12/31</li>
-<li>算法 </li>
-<li>剑值Offer （算法面试系列）</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/24/数据类型的设计/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="luowen">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Coding in life...">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/11/24/数据类型的设计/" itemprop="url">数据类型的设计</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-24T15:01:41+08:00">
-                2018-11-24
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/设计篇/" itemprop="url" rel="index">
-                    <span itemprop="name">设计篇</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>####<center>概述（算法这本书就是很牛，记录看见的这个）<br>抽象数据类型是一种向用例隐藏内部表示的数据类型。这种思想真的很牛</center></p>
-<hr>
-<h5 id="封装"><a href="#封装" class="headerlink" title="封装"></a><center>封装</center></h5><blockquote>
-<p>面向对象编程的特征之一就是使用数据类型的实现封装数据，以简化实现和隔离用例开发。封装实现了模块化编程。<br>它允许我们：</p>
-</blockquote>
-<ul>
-<li>独立开发用例和实现的代码；</li>
-<li>切换至改进的实现而不会影响用例的代码；</li>
-<li>支持尚未编写的程序（API能够起到指南的作用）</li>
-</ul>
-<blockquote>
-<p>封装的同时也隔离了一致性检查等调试功能</p>
-</blockquote>
-<ul>
-<li>限制潜在的错误</li>
-<li>在实现中添加一致性检查等调试工具</li>
-<li>确保用例代码更明晰</li>
-</ul>
-<blockquote>
-<ul>
-<li>一个封装的数据类型可以被任意用例使用，因此它扩展了Java语言。</li>
-<li>提倡的编程风格是将大型程序分解为能够独立开发和调试的小型模块。这种方式将修改代码的影响限制在局部区域。改进软件的质量。它也促进了代码复用，因为我们可以用某种数据类型的新实现代替老的实现来改进它的性能、准确度或是内存消耗。</li>
-<li>同样的思想也使用与许多其它领域。</li>
-<li>我们在使用系统库时常常从封装收益。Java系统的新实现往往更新了多种数据类型或静态方法库的实现，但它们的API没有变化</li>
-<li>在算法和数据结构的学习中，我们总是希望开发出更好的算法，因为只需用抽象数据类型的改进实现替换老的实现即可在不改变任何用例代码的情况下改进所有用例的性能</li>
-<li>模块化编程成功的关键在于保持模块之间的独立性。</li>
-<li>坚持将API作为用例和实现之间唯一的依赖点（这个地方就非常牛了，我估计为什么会有敏捷开发模式，跟这种思想肯定是有很大的一致性）</li>
-</ul>
-</blockquote>
-<p>并不需要知道一个数据类型是如何实现的才能使用它，实现数据类型时也应该假设使用者除了API什么也不知道。（封装的这种思想真的是非常非常牛）</p>
-<hr>
-<h4 id="设计API"><a href="#设计API" class="headerlink" title="设计API"></a><center>设计API</center></h4><ul>
-<li>构建现代软件最重要也最有挑战的一项任务就是设计API。它需要经验、思考和反复的修改，但设计一份优秀的API所付出的所有时间都能从调试和代码复用所节省的时间中获得回报。</li>
-<li>一个小程序就不用了，但也应该按照能够复用的方式编写每个程序。</li>
-<li>理想情况下，一份API应该能够清楚地说明所有可能的输入和副作用</li>
-<li>因此，我们的API将是与抽象数据类型相关联的值以及一系列构造函数和实例方法的目的和副作用的自然语言描述。</li>
-</ul>
-<p>（这里的设计API，需要有大量的编程经验）</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/24/架构01-架构到底指什么/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="luowen">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Coding in life...">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/11/24/架构01-架构到底指什么/" itemprop="url">架构01_架构到底指什么</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-24T07:28:35+08:00">
-                2018-11-24
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/从零开始学架构/" itemprop="url" rel="index">
-                    <span itemprop="name">从零开始学架构</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="架构到底指什么？能弄清这些概念吗？"><a href="#架构到底指什么？能弄清这些概念吗？" class="headerlink" title="架构到底指什么？能弄清这些概念吗？"></a>架构到底指什么？能弄清这些概念吗？</h3><ol>
-<li>架构和框架是什么关系？有什么区别？</li>
-<li>Linux有架构，MySQL有架构，JVM也有架构，使用JAVA开发、MySQL存储，跑在Linux上的业务也有架构，应该关注哪个架构呢？</li>
-<li>微信有架构，微信的登录系统也有架构，微信的支付系统也有架构，当我们谈微信架构时，到底是在谈什么架构呢？</li>
-</ol>
-<blockquote>
-<p>要想准确的回答这几个问题，关键在于梳理几个有关系而又相似的概念，包括系统与子系统，模块与组件，框架与架构。</p>
-</blockquote>
-<hr>
-<h4 id="系统与子系统"><a href="#系统与子系统" class="headerlink" title="系统与子系统"></a><center>系统与子系统</center></h4><p>维基百科定义：</p>
-<blockquote>
-<p>系统泛指由一群有关联的个体组成，根据某种规则运作，能完成个别元件不能单独完成的工作的群体。它的意思是“总体”“整体”或“联盟”</p>
-</blockquote>
-<p>关键内容整理</p>
-<blockquote>
-<ol>
-<li>关联：系统是由一群有关联的个体组成的，没有关联的个体堆在一起不能称为一个系统</li>
-<li>规则：系统内的个体需要按照指定的规则运作，而不是单个个体各自为政。规则规定了系统内个体分工和协作的方式。</li>
-<li>能力：系统能力与个体能力有本质的差别，系统能力不是个体能力之和，而是产生了新的能力。</li>
-</ol>
-</blockquote>
-<blockquote>
-<p>子系统定义：子系统也是由一群有关联的个体所组成的系统，多半会是更大系统中的一部分。</p>
-</blockquote>
-<p>总结：其实子系统的定义和系统定义是一样的，只是观察的角度有差异，一个系统可能是另外一个更大系统的子系统。</p>
-<p>根据以上的基本概念，以微信为例来做一个分析。</p>
-<blockquote>
-<ol>
-<li>微信本身是一个系统，包含聊天，登录，支付，朋友圈等子系统。</li>
-<li>朋友圈这个系统又包含动态、评论、点赞等子系统。</li>
-<li>评论这个系统可能又包含防刷子系统，审核子系统，发布子系统，存储子系统。</li>
-<li>评论审核系统不再包含业务意义上的子系统，而是包括各个模块或者组件，这些模块或者组件本身也是另外一个维度上的系统。列如，MySQL，Redis是存储系统，但不是业务子系统。</li>
-</ol>
-</blockquote>
-<hr>
-<h4 id="模块与组件"><a href="#模块与组件" class="headerlink" title="模块与组件"></a><center>模块与组件</center></h4><p>模块和组件两个概念在实际工作中很容易混淆，我们经常能够听到类似这样的说法：</p>
-<pre><code>- MySQL 模块主要负责存储数据，而ElasticSearch模块主要负责数据搜索。
-- 我们有安全加密组件，有审核组件
-- App的下载模块使用了第三方的组件。
-</code></pre><p>造成这种现象的主要原因是，模块与组件的定义不好理解，也不能很好地进行区分。来看看两者在维基百科上的定义。</p>
-<blockquote>
-<p>软件模块（Module）是一套一致而互相有紧密关连的软件组织。它分别包含了程序和数据结构两部分。现代软件开发往往利用模块作为合成的单位。模块的接口表达了由该模块体统的功能和调用它时所需的元素。模块是可能分开被编写的单位。这使它们可再用和允许人员同时协作，编写及研究不同的模块。</p>
-<p>软件组件定义为自包含的，可编程的，可重用的，与语言无关的软件单位，软件组件可以很容易被用于组装应用程序中。</p>
-</blockquote>
-<p>可能看完这两个定义后一头雾水，还是不知道这两者有什么区别。造成这种现象的根本原因是，模块和组件都是系统的组成部分，只是从不同的角度拆分系统而已。</p>
-<ul>
-<li><p>从逻辑的角度拆分系统后：得到的单元就是“模块”；从物理的角度来拆分系统后，得到的单元就是“组件”.划分模块的主要目的是职责分离；划分模块的主要目的是单元复用。其实，“组件”的英文component也可翻译成零件一词，“零件”是一个物理的概念，并且具备“独立且可替换”的特点。</p>
-</li>
-<li><p>例子:一个最简单的网站系统来为例。假设我们要做一个学生信息管理系统。这个系统从逻辑角度来拆分，可以分为“登录注册模块”“个人信息模块”“个人成绩模块”；从物理的角度来拆分，可以拆分为Nginx，Web服务器，MySQL</p>
-</li>
-</ul>
-<h4 id="框架与架构"><a href="#框架与架构" class="headerlink" title="框架与架构"></a><center>框架与架构</center></h4><p>框架是和架构比较相似的概念，且两者有较强的关联关系，所以在实际工作中，这两个概念有时我们容易分不清楚。参考维基百科上框架与架构的定义，我来解释两者的区别。</p>
-<blockquote>
-<p>软件框架（Software framework）通常指的是为了实现某个业界标准或完成特定基本任务的软件组件规范，也指为了实现某个软件组件规范时，提供规范所要求之基础功能的软件产品</p>
-</blockquote>
-<p>其中关键部分：</p>
-<ol>
-<li>框架是组件规范：列如，MVC就是一种最常见的开发规范，类似的还有MVP，MVVM，J2EE等框架。</li>
-<li>框架提供基础功能的产品：例如，Spring MVC是MVC的开发框架，除了满足MVC的规范，Spring提供了很多基础功能来帮助我们实现功能，包括注解（@Controller等），还有许多基础功能。</li>
-</ol>
-<blockquote>
-<p>软件架构指软件系统的“基础结构”，创造这些基础结构的准则，以及对这些结构的描述</p>
-</blockquote>
-<pre><code>单纯从定义的角度来看，框架和架构的区别还是比较明显的，框架关注的是“规范”，架构关注的是“结构”。框架的英文是Framework，架构的英文是Architecture。Spring MVC的英文文档标题是“Web MVC framework”。
-
-虽然是这样，但工作中经常能遇到似是而非的说法。例如“我们的系统是MVC架构”“我们需要将android app重构为MVP架构”，“我们的系统基于SSH框架开发”，“我们是SSH的架构”，“XX系统是基于springMVC框架开发，标准的MVC架构”。。。
-
-究竟什么说法是对的，什么说法是错的呢?
-
-其实这些说法都是对的，造成这种现象的根本原因隐藏于架构的定义中，关键就是“基础架构”这个概念没有明确说是从什么角度来分解的。采用不同的角度或者唯独，可以将系统划分为不同的结构，其实我在“模块与组件”中的“学生管理系统”实例已经包含了这一点。
-</code></pre><ol>
-<li>从业务逻辑的角度分解，“学生管理系统”的架构是：<ul>
-<li>登录注册模块</li>
-<li>个人信息模块</li>
-<li>个人成绩模块</li>
-</ul>
-</li>
-<li>从物理部署的角度分解，“学生管理系统”的架构是：<ul>
-<li>nignx</li>
-<li>web服务器</li>
-<li>mysql</li>
-</ul>
-</li>
-<li>从开发规范的角度分解，“学生管理系统”可以采用标准的MVC框架来开发，因此架构又变成MVC架构：<ul>
-<li>Controller</li>
-<li>View</li>
-<li>Model</li>
-</ul>
-</li>
-</ol>
-<blockquote>
-<p>这个地方重新定义了架构.</p>
-</blockquote>
-<p>参考：软件架构指软件系统的顶层结构。</p>
-<ol>
-<li>“系统是一群关联的个体组成”，这些“个体”可以是“子系统”“模块”“组件”等；架构需要明确系统包含哪些“个体”</li>
-<li>系统中的个体需要“根据某种规则”运作，架构需要明确个运作和协作的规则。</li>
-<li>维基百科定义的架构用到了“基础结构”这个说法，这里改为“顶层结构”，可以更好地区分系统和子系统，避免将系统架构和子系统架构混淆在一起导致架构层次混乱。    </li>
-</ol>
-<h4 id="一些感觉很不错的评论"><a href="#一些感觉很不错的评论" class="headerlink" title="一些感觉很不错的评论"></a><center>一些感觉很不错的评论</center></h4><ol>
-<li>架构是顶层设计，框架是面向编程或配置的半成品；组件是从技术维度上的复用；模块是从业务维度上职责的划分；系统是相互协同可运行的实体。 </li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/21/句子的形成-可做主语的词类/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="luowen">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Coding in life...">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/11/21/句子的形成-可做主语的词类/" itemprop="url">句子的形成_名词作主语</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-21T23:09:51+08:00">
-                2018-11-21
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/英语语法/" itemprop="url" rel="index">
-                    <span itemprop="name">英语语法</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="句子的形成"><a href="#句子的形成" class="headerlink" title="句子的形成"></a><center>句子的形成</center></h2><p>概说：</p>
-<p>任何一个句子一定由主语（subject，简写成S）及动词（verb，简写成V）形成。</p>
-<pre><code>John works hard。
-</code></pre><p>有时主语可以省略，而形成祈使句。这种祈使句句首位原形动词，之前省略了You should（你应当）</p>
-<pre><code>Work hard = (You should) work hard.  
-idea: 是不是句子以动词开头，找不到主语，就可以理解为是祈使句？
-</code></pre><blockquote>
-<p>注意：祈使句变成否定形式时，要在原形动词前加Don’t<br>//这种祈使句是不是默认就是对方，你 ，类似希望你怎么怎么样的？</p>
-</blockquote>
-<pre><code>- Don&apos;t fool around 别游手好闲
-</code></pre><h2 id="new-word"><a href="#new-word" class="headerlink" title="new word"></a><center>new word<center></center></center></h2><ol>
-<li>opt vi 选择</li>
-<li>apt adj 恰当的</li>
-</ol>
-<h2 id="第一节-可作主语的词类"><a href="#第一节-可作主语的词类" class="headerlink" title="第一节 可作主语的词类"></a><center>第一节 可作主语的词类</center></h2><p>一般所见到的结构中，通常是以名词作主语，但除了名词之外，还可用代词，不定式或不定式短语、名词性从句、名词短语、表距离的地点副词短语等作主语</p>
-<pre><code>除了名词本身外就是下面这几种作主语了。（idea: 更细的就千万不要研究了）
-- 代词
-- 不定式
-- 名词性从句
-- 名词短语
-- 表距离的地点副词短语
-</code></pre><h3 id="1-名词作主语"><a href="#1-名词作主语" class="headerlink" title="1.名词作主语"></a><center>1.名词作主语</center></h3><pre><code>The child is apt to tell lies
-</code></pre><h3 id="2-代词作主语"><a href="#2-代词作主语" class="headerlink" title="2.代词作主语"></a><center>2.代词作主语</center></h3><pre><code>He always keep his promise
-</code></pre><h3 id="3-动名词或不定式作主语"><a href="#3-动名词或不定式作主语" class="headerlink" title="3.动名词或不定式作主语"></a><center>3.动名词或不定式作主语</center></h3><p>动词绝对不可以直接当主语。一定要变成动名词或不定式短语，如此才可以视为名词的对等语，作主语用。</p>
-<blockquote>
-<p>idea: 动词如果放在第一个，那是不是就可以认为是祈使句了？</p>
-</blockquote>
-<pre><code>Seeing him makes me angry.  //动名词表示的是一种事实
-To see him is my purpose of here
-    - 动名词作主语，通常用以表示已知的事实或曾经做过的事情
-    - 不定式作主语，通常表示一种意愿、目的或未完成的事。
-</code></pre><blockquote>
-<p>注意：不定式或动名词短语作主语时，往往会形成主语太长的现象，古通常用代词it作形式主语，置于句首前，而将真正主语（也就是动名词或不定式短语）移至句尾。动名词移至句尾时，通常改为不定式短语。 </p>
-<blockquote>
-<p>idea:看见it在句首，先找找句尾的主语。it作形式主语的时候，主语置于最后。</p>
-</blockquote>
-</blockquote>
-<h3 id="4-名词性从句作主语："><a href="#4-名词性从句作主语：" class="headerlink" title="4.名词性从句作主语："></a><center>4.名词性从句作主语：</center></h3><h4 id="A-从事翻译时，我们会碰到这样的句子"><a href="#A-从事翻译时，我们会碰到这样的句子" class="headerlink" title="A. 从事翻译时，我们会碰到这样的句子"></a>A. 从事翻译时，我们会碰到这样的句子</h4><ul>
-<li>He doesn’t study makes me angry (x)</li>
-</ul>
-<blockquote>
-<p>注意：所谓句子，就是一开头就是主语的结构。句子绝对不能当主语，一定要变成名词性从句方可作主语 </p>
-<pre><code>idea: 看见如果一开始就是主语，那这个就是句子的结构了，也就没有其他的来代替或做主语了，也挺好认。 //还有一点就是如果一开始是动词，祈使句吧，就这里理解好了
-</code></pre></blockquote>
-<h4 id="B-名词性从句的种类"><a href="#B-名词性从句的种类" class="headerlink" title="B. 名词性从句的种类"></a>B. 名词性从句的种类</h4><ul>
-<li><p>名词性从句包括宾语从句、主语从句、表语从句、同位语从句。</p>
-<ul>
-<li>idea: 原来名词性从句是相当于更高一层的，下面有四个子类</li>
-</ul>
-<ol>
-<li>宾语从句</li>
-<li>主语从句</li>
-<li>表语从句</li>
-<li>同位语从句</li>
-</ol>
-</li>
-<li>名词性从句一共有三种： <ul>
-<li>that 从句</li>
-<li>whether 从句</li>
-<li>疑问词所引导的从句</li>
-</ul>
-</li>
-</ul>
-<p>// idea： 这个地方我认为的就是名词性从句的格式，也就是具体的形式了。1. 由that开始的 。 2. 由whether 格式引出的 3. 由疑问词。。</p>
-<ol>
-<li><p>that从句<br>任何一个主语起首的句子面前冠以that，即成that从句。<br>// idea：一开始就是That肯定是了，Whether or 疑问词的就不一定了</p>
-</li>
-<li><p>whether从句<br>本从句系由可用yes/no回答的问句变化而成，这种可用yes/no回答的问句称为一般疑问句。</p>
-<ul>
-<li>问句由be动词时：<ul>
-<li>主语与be动词还原，前面冠以whether</li>
-<li>Is he happy？</li>
-<li>whether he is happy //这里没有？ 因为这个已经变为从句了，这里并没有主句。</li>
-</ul>
-</li>
-<li>问句由一般助动词（can、will、may、should、ought to must、have）时：<ul>
-<li>主语与助动词还原、前面冠以whether</li>
-<li>Can he do it?</li>
-<li>whether he can do it</li>
-</ul>
-</li>
-<li>问句有do、does、did等助动词时：<ul>
-<li>主语与助动词还原，再将do、does、did去掉，后面的动词一人称和时态进行变化。</li>
-<li>Did he come？</li>
-<li>whether he came</li>
-</ul>
-</li>
-</ul>
-</li>
-</ol>
-<p>// idea: 这个whether 引起的从句，看后面的主语就知道了，如果是sv结构的（主语+动词的）就是从句了。这个叫名词性从句之whether结构。</p>
-<ol start="3">
-<li><p>疑问句从句:<br>本从句系由疑问句（what,when,how,where,why）等引导的问句变化而成，这种由疑问词引导的问句称为特殊疑问句。</p>
-<ul>
-<li>问句有be动词时<ul>
-<li>主语与be动词还原，前面保持疑问词</li>
-<li>What is he doing?（问句）</li>
-<li>what he is doing（名词性从句）</li>
-</ul>
-</li>
-<li>问句有一般助动词时<ul>
-<li>主语与助动词还原，前面保持疑问词</li>
-<li>Where can he find it?</li>
-<li>where he can find it //从句，为什么前面是小写明白了吧</li>
-</ul>
-</li>
-<li>问句有do、does、did等助动词时<ul>
-<li>主语与助动词还原，前面保持疑问词，再将do、does、did去掉，动词依人称和时态进行变化。</li>
-<li>What did he write？</li>
-<li>what he wrote  //did 表示的是过去，所以这里去掉之后，改为过去时wrote</li>
-<li>When did he come？</li>
-<li>when he came //这个再也不是单独的一个句子了，现在是另一个句子的一部分了。</li>
-<li>How does he do it？</li>
-<li>how he does it //does 第三人称单数，根据：现在&amp;he</li>
-</ul>
-</li>
-</ul>
-</li>
-</ol>
-<blockquote>
-<p>注意：who、what、which（哪一个）为疑问代词，若在问句中作主语，变成名词性从句时，结构不变。</p>
-</blockquote>
-<p>例如：</p>
-<pre><code>who came here？//who 是主语
--&gt; who came here //名词性从句
-
-what happened last night ？//what 主语
--&gt; what happened last night？ //名从
-
-which was bought?
--&gt;which was bought
-</code></pre><h4 id="C-名词性从句的功能"><a href="#C-名词性从句的功能" class="headerlink" title="C.名词性从句的功能"></a>C.名词性从句的功能</h4><p>我们已知，名词性从句由句子或问句变化而成，和动名词或不定式短语一样，名词性从句也要被视为名词。由于具有名词的特性，股可作主语、宾语或在be动词之后做宾语。</p>
-<pre><code>//idea：现在的想法是作主语的，1.名词 2. 代词 3.it形式主语（真正的主语在句尾） 4. 动名词（表示一个事实，曾经发生过的） 5. 不定式（表示意愿，或将来发生的） 6. 名词性从句，7. 如果开头是一个动词，就是祈使句了。
-</code></pre><ol>
-<li>名词性从句作主语<ul>
-<li>That honesty is the best policy is a proverb (which) we should always keep in mind //主语：诚实为最好的政策</li>
-<li>where he lives is still in doubt</li>
-<li>Whether he can do it remains to be seen</li>
-</ul>
-</li>
-</ol>
-<blockquote>
-<p>注意：如名词或不定式短语，名词性从句作主语时，容易造成主语太长的现象，因此亦可用形式主语it代替，置于句首，而被代替的名词性从句则置于句尾</p>
-</blockquote>
-<p>故上述句子可修改为：</p>
-<pre><code>- It is a proverb we should always keep in mind that honesty is the best policy
-- It is still in doubt where he lives
-- It remains to be seen whether he can do it //这个就是由疑问句转为的名词性从句，所以翻译的时候需要翻译成疑问句。
-</code></pre><ol start="2">
-<li>名词性从句作及物动词的宾语</li>
-</ol>
-<p>*及物动词在英语中称作transitive verb，简写为vt ；宾语则称作object，简写为 o</p>
-<ul>
-<li>I know that he will go abroad in the near future<ul>
-<li>vt know</li>
-<li>o that he … feature //整个从句</li>
-</ul>
-</li>
-<li>I wonder whether he has finished the work</li>
-<li>I don’t know how he’ll handle it.</li>
-</ul>
-<ol start="3">
-<li>名词性从句作介词的宾语 </li>
-</ol>
-<p>*介词在英语中称作preposition, 简写成prep。</p>
-<ol>
-<li><p>此时仅能用whether从句或疑问词引导的名词性从句作宾语。that从句不可作介词的宾语</p>
-<ul>
-<li>I am worried about whether he can do it<ul>
-<li>prep : about  //这种介词的，不能用that做宾语</li>
-</ul>
-</li>
-<li>I’m curious about how he’ll cope with the problem</li>
-</ul>
-</li>
-<li><p>遇到介词，非要用that的话，宾语用一个名词代替，that作同位语从句 </p>
-<ul>
-<li>介词 + the fact + that 从句  //that 作同位语从句</li>
-<li>be + adj + that从句 //去掉介词</li>
-</ul>
-</li>
-</ol>
-<h3 id="5-名词短语作主语"><a href="#5-名词短语作主语" class="headerlink" title="5.名词短语作主语"></a><center>5.名词短语作主语</center></h3><p>名词短语系由“疑问词+不定式短语”形成</p>
-<pre><code>//idea：名词短语就是由“疑问词 + 不定式短语”组成的
-</code></pre><ol>
-<li>疑问副词<ul>
-<li>where to live  //住哪里</li>
-<li>whether to try again  // 是否再试一次</li>
-<li>when to talk to him  //什么时候和他谈</li>
-<li>how to do it //如何做哪些事</li>
-</ul>
-</li>
-</ol>
-<p>//idea：疑问副词 其实就只需要记一下 1. whether 2. how </p>
-<ol start="2">
-<li>疑问代词<ul>
-<li>what to do  //做什么</li>
-<li>whom to see  // 看什么</li>
-<li>which to buy   // 买哪一个</li>
-<li>whom to talk to //与谁谈 ， whom 做to的宾语</li>
-</ul>
-</li>
-</ol>
-<blockquote>
-<p>注意：</p>
-<ol>
-<li><p>疑问副词形成的名词短语中，疑问副词因为是副词的性质，故不做不定式短语中及物动词的宾语。但疑问代词形成的名词短语中，疑问代词因具有名词的性质，故一定要作不定式短语中动词或介词的宾语。故what、whom、which在上列名词短语中，作宾语  </p>
-</li>
-<li><p>名词短语因具有名词性质，故亦可作主语，系由名词性从句化简而成</p>
-</li>
-</ol>
-</blockquote>
-<pre><code>Where to meet him is not decided yet
-== Where we should meet him is not decided yet
-
-How to  handle the problem depends on how much money we can collect
-== How we can handle the problem depends on how much money we can collect
-
-// 读这种疑问词+不定式短语这种，感觉都是省略了我们这个。
-</code></pre><h3 id="表距离的地点副词短语作主语"><a href="#表距离的地点副词短语作主语" class="headerlink" title="表距离的地点副词短语作主语"></a><center>表距离的地点副词短语作主语</center></h3><p>from + 地方名词 + to + 地方名词<br>此为表距离的地点副词短语，亦可做主语，与单数的be动词连用。</p>
-<pre><code>From Shanghai to Beijing is about 1000 kilometers
-== 主语也可以用it代替，形成下列结构
-It is about 1000 kilometers from Shanghai to Beijing
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/20/Effective-Java-Item01/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="luowen">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Coding in life...">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/11/20/Effective-Java-Item01/" itemprop="url">Effective_Java_Item01_考虑静态工厂方法替代构造器</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-20T23:15:10+08:00">
-                2018-11-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/Effective-Java/" itemprop="url" rel="index">
-                    <span itemprop="name">Effective Java</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="Creating-and-Destorying-Objects-–第二章"><a href="#Creating-and-Destorying-Objects-–第二章" class="headerlink" title="Creating and Destorying Objects –第二章"></a>Creating and Destorying Objects –第二章</h3><blockquote>
-<p>这个章节关系着创建和销毁对象：什么时候和怎样创建它们，何时并且如何避免创建它们，怎样保证它们被销毁用一种合适的方式，并且怎么管理任意的清除行为，这些行为必须在它们的销毁之前。</p>
-</blockquote>
-<h4 id="new-knowledge"><a href="#new-knowledge" class="headerlink" title="new knowledge"></a><center>new knowledge<center></center></center></h4><ol>
-<li>manner n.方式，习惯，规矩</li>
-<li>timely adj 即使的，合适的 adv 及时地</li>
-<li>cleanup n 清除</li>
-<li>precede v 领先 ，在…之前</li>
-<li>probably adv 大概，或许</li>
-<li>prime 主要的，可能的 v 作准备</li>
-<li>get around 避开，到处走走，有办法应付</li>
-<li>end up 结束，死亡</li>
-<li>close 紧密的，关的</li>
-<li>dispense 分配 分发 免除</li>
-<li>be said to be 据说</li>
-<li>also 也，而且，同样</li>
-<li>compact n.合同，契约 v 使简洁，使紧凑 adj 简洁的</li>
-<li>lend vt 贷款 提供</li>
-</ol>
-<h3 id="Item-1-考虑静态工厂方法替代构造器"><a href="#Item-1-考虑静态工厂方法替代构造器" class="headerlink" title="Item 1:考虑静态工厂方法替代构造器"></a>Item 1:考虑静态工厂方法替代构造器</h3><blockquote>
-<p>对于一个类传统的方式允许一个客户获取一个实例是提供一个公开的构造。有一种别的技术，这种技术应该成为每个开发者工具包的一部分。一个类可以提供一个公开的静态工厂方法，这个方法是简单的一个静态的方法，该方法返回一个类的实例。这是一个简单的列子来自Boolean（包装原始数据的类对于boolean基本数据类型）。这个方法翻译一个boolean原始数据类型的值进入一个Boolean包装类对象的引用。</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Boolean <span class="title">valueOf</span><span class="params">( <span class="keyword">boolean</span> b )</span></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> b? Boolean.TRUE : Boolean.FALSE;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>注意这个静态工厂方法是不相同的对于工厂方法模式来自《设计模式》。这个静态工厂方法在这个项中描述并没有直接等价与《设计模式》。</p>
-<p>一个类可以提供它的使用者用静态工厂方法替代，或者另外，公开的构造器有优势并且也有劣势。</p>
-<p>静态工厂方法的一个优点在于，不像构造方法，他们有属于自己的名字。如果参数对于一个构造函数做不了什么，描述的对象将被返回，一个静态工厂有一个精心准备的名字会更容易使用，并且致使使用者的代码更容易被阅读。例如：构造函数BigInteger（int，int，Random），这将返回一个<br>BigInteger，这个是可能主要的，这有更好的表达作为一个静态工厂方法的名字 BigInteger。probablyPrime（这个方法被添加进Java4平台）</p>
-</blockquote>
-<blockquote>
-<p>一个类可以仅有一个单独的给定签名的构造函数，程序员已经知道避开这种通过提供两种构造函数，这种函数的参数集合不同仅在于它们的参数类型的顺序不同的限制。这是一种很坏的想法。这样一个api的使用者将从来不会记得构造函数是这样，并且结束调用这样一个错误通过这个失误。人们阅读代码，用这些构造函数将不会知道这个代码，要是没有参考类的文档。</p>
-<p>因为他们有同样的名字，静态工厂方法将不会共享在前一个段落限制讨论，在这种情况下一个类视乎必须多个相同签名的构造函数，用静态工厂方法替代这些构造方法并且小心地紧密的名字来强调它们的不同。</p>
-<p>静态工厂方法的第二个优势是，不像构造函数，它们没有必要创建一个对象在每次它们被调用的时候。这个允许不变的类来提前构造使用一个预先构造好的实例，或者为了缓存一个实例作为它们构建的，并且可以分配它们来避免重复的创建不必要的重复的对象。这个Boolean。valueOf（boolean）方法阐述了这个技术：它从来不创建对象。这个技巧很相似于Flyweight pattern（轻量级模式）【Gramma95】。它可以极大的提高性能如果同等的对象被频繁的请求，尤其是它们是那种创建很昂贵的对象。</p>
-<p>静态工厂方法能够返回同样的对象来自重复的调用的这个能力，允许类能够维持严格的控制实例在任何时刻都存在。这样实现的类据说是instance-controlled（实例控制）。有几个原因来写实例控制类。实例控制允许一个类保证它是一个单列或者一个不能实例化。而且，它允许一个不可变的值类来保证没有两个相同的实例存在：a.equals(b)仅仅可能是a==b，也就是同一个对象。这个是轻量级模式的基础【Gramma95】。枚举类型提供了这种保证。</p>
-<p>静态工厂方法的第三个优点是，不像构造函数，它们可以返回一个任意它们的返回类型的子类型的一个对象。这个给你极大的灵活在选择返回对象的类。</p>
-<p>灵活的应用是一个api可以返回对象，而没有让它们的类公开。隐藏实现类用这种流行导致一个非常简洁的API。这个技术提供它自身对于interface-based framework（Item 20）（接口基础框架），在这里接口提供自然的返回类型对于用静态工厂方法。</p>
-</blockquote>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2760,7 +2517,7 @@ It is about 1000 kilometers from Shanghai to Beijing
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">25</span>
+                <span class="site-state-item-count">31</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -2771,7 +2528,7 @@ It is about 1000 kilometers from Shanghai to Beijing
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-count">15</span>
                 <span class="site-state-item-name">categories</span>
               </a>
             </div>
@@ -2782,7 +2539,7 @@ It is about 1000 kilometers from Shanghai to Beijing
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-count">15</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
@@ -2824,7 +2581,7 @@ It is about 1000 kilometers from Shanghai to Beijing
         <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2018</span>
+  <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

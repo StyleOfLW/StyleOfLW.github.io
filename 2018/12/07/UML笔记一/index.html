@@ -78,7 +78,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="uml,">
 
 
 
@@ -94,18 +94,18 @@
 
 
 
-<meta name="description" content="基础篇：  核心元素  描述基本事物   核心视图  表达这些事物构成的有意义的观点   核心模型  使用视图来描述某种需求、">
-<meta name="keywords" content="Java JavaScript Network Algorithms compute 踩坑专业户">
+<meta name="description" content="基础篇： 核心元素  描述基本事物   核心视图  表达这些事物构成的有意义的观点   核心模型  使用视图来描述某种需求、     建立模型是人们解决现实世界问题的一种常用手段。我们通常接触建模是为了解决某个问题而建立的一个数学模型，通过对数学计算来分析和预测，找出解决问题的办法  从理论上来说，建立模型是指通过对客观事物建立一种抽象的方法，用来表征事物，以获得对事物本身的理解，再把这种理解概念">
+<meta name="keywords" content="uml">
 <meta property="og:type" content="article">
 <meta property="og:title" content="UML笔记一">
 <meta property="og:url" content="http://yoursite.com/2018/12/07/UML笔记一/index.html">
 <meta property="og:site_name" content="Coding in life...">
-<meta property="og:description" content="基础篇：  核心元素  描述基本事物   核心视图  表达这些事物构成的有意义的观点   核心模型  使用视图来描述某种需求、">
+<meta property="og:description" content="基础篇： 核心元素  描述基本事物   核心视图  表达这些事物构成的有意义的观点   核心模型  使用视图来描述某种需求、     建立模型是人们解决现实世界问题的一种常用手段。我们通常接触建模是为了解决某个问题而建立的一个数学模型，通过对数学计算来分析和预测，找出解决问题的办法  从理论上来说，建立模型是指通过对客观事物建立一种抽象的方法，用来表征事物，以获得对事物本身的理解，再把这种理解概念">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-12-08T13:59:10.534Z">
+<meta property="og:updated_time" content="2018-12-12T08:30:00.322Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="UML笔记一">
-<meta name="twitter:description" content="基础篇：  核心元素  描述基本事物   核心视图  表达这些事物构成的有意义的观点   核心模型  使用视图来描述某种需求、">
+<meta name="twitter:description" content="基础篇： 核心元素  描述基本事物   核心视图  表达这些事物构成的有意义的观点   核心模型  使用视图来描述某种需求、     建立模型是人们解决现实世界问题的一种常用手段。我们通常接触建模是为了解决某个问题而建立的一个数学模型，通过对数学计算来分析和预测，找出解决问题的办法  从理论上来说，建立模型是指通过对客观事物建立一种抽象的方法，用来表征事物，以获得对事物本身的理解，再把这种理解概念">
 
 
 
@@ -345,6 +345,28 @@
           </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/uml/" itemprop="url" rel="index">
+                    <span itemprop="name">uml</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -377,8 +399,7 @@
       
 
       
-        <p>基础篇：</p>
-<ul>
+        <h2 id="基础篇："><a href="#基础篇：" class="headerlink" title="基础篇："></a><center>基础篇：</center></h2><ul>
 <li><p>核心元素</p>
 <ul>
 <li>描述基本事物</li>
@@ -395,6 +416,84 @@
 </ul>
 </li>
 </ul>
+<blockquote>
+<p>建立模型是人们解决现实世界问题的一种常用手段。我们通常接触建模是为了解决某个问题而建立的一个数学模型，通过对数学计算来分析和预测，找出解决问题的办法</p>
+<blockquote>
+<p>从理论上来说，建立模型是指通过对客观事物建立一种抽象的方法，用来表征事物，以获得对事物本身的理解，再把这种理解概念化</p>
+</blockquote>
+</blockquote>
+<h3 id="1-2-4-从现实世界到业务模型"><a href="#1-2-4-从现实世界到业务模型" class="headerlink" title="1.2.4 从现实世界到业务模型"></a>1.2.4 从现实世界到业务模型</h3><p>UML提供以下元素来为现实世界建立模型：</p>
+<ol>
+<li><p>UML采用被称之为参与者（actor）的元模型作为信息来源提供者</p>
+<ul>
+<li>参与者代表了现实世界的“人”。参与者是模型信息来源的提供者，也是第一驱动者。</li>
+<li>换句话说，要建立的模型的意义完全被参与者决定，所建立的模型也是完全为参与者服务的，参与者是整个建模过程的中心。</li>
+</ul>
+</li>
+<li><p>UML采用被称之为用例（use case）的一种元模型来表示<font style="color:green">驱动者的业务目标，也就是参与者想要做什么并且获得什么。</font></p>
+<ul>
+<li>这个业务目标就是现实世界中的“事”。</li>
+<li>而这件事是怎么做的，依据什么规则，则通过被称之为业务场景（business scenario）和用例场景（use case scenario）的UML视图来描绘的，这些场景便是现实世界中的“规则”。</li>
+<li>最后，UML通过被称之为业务对象模型（business object model）的视图来说明在达成这些业务目标的过程中涉及到的事物，用逻辑概念来表示他们，并定义他们之间的关系。</li>
+<li>业务对象模型则代表了现实世界中的“物”</li>
+</ul>
+</li>
+</ol>
+<h3 id="1-2-5-从业务模型到概念模型"><a href="#1-2-5-从业务模型到概念模型" class="headerlink" title="1.2.5 从业务模型到概念模型"></a>1.2.5 从业务模型到概念模型</h3><p>虽然上一节中现实世界被业务模型映射并且记录下来，但这只是原始需求信息，距离可执行的代码还很遥远，必须把这些内容再换成一种可以指导开发的表达方式.</p>
+<p>UML通过被称之为概念化的过程（Conceptual）来建立适合计算机理解和实现的模型，这个模型称为分析模型（Analysis Model）。分析模型介于原始需求和计算机实现之间，是一种过渡模型。</p>
+<ul>
+<li>分析模型向上映射了原始需求，计算机的可执行代码可以通过分析模型追溯到原始需求；</li>
+<li>同时，分析模型向下为计算机实现规定了一种高层次的抽象，这种抽象是一种指导，也是一种约束，计算机实现过程非常容易遵循这种指导和约束来完成可执行代码的设计工作</li>
+</ul>
+<h4 id="绘制分析模型最主要的元模型有："><a href="#绘制分析模型最主要的元模型有：" class="headerlink" title="绘制分析模型最主要的元模型有："></a>绘制分析模型最主要的元模型有：</h4><ul>
+<li><p>边界类（boundary）</p>
+<ul>
+<li>狭义上说：边界就是大家熟悉的界面，所有对计算机的操作都要通过界面进行。</li>
+<li><p>从广义上说：任何一件事物都分为里面和外面，外面的事物与里面的事物之间的任何交互都需要有一个边界。</p>
+<ul>
+<li>比如参与者与系统的交互，系统与系统之间的交互，模块与模块之间的交互等。只要是两个不同职责的簇之间的交互都需要有一个边界</li>
+<li>换句话说，边界决定了外面能对里面做什么“事”。边界能够决定整个分析设计的结果。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>实体类（entity）</p>
+<ul>
+<li>原始需求中领域模型中的业务实体映射了现实世界中参与者完成业务目标时所涉及的事物，UML采用实体类来重新表达业务实体。实体类可以采用计算机观点在不丢失业务实体信息的条件下重新归纳和组织信息，建立逻辑关联，添加哪些实际业务中不会使用到，但是执行计算机逻辑时需要的控制信息等。</li>
+<li>这些实体类可以看作是业务实体的实例化结果。</li>
+</ul>
+</li>
+<li><p>控制类（control）</p>
+<ul>
+<li>控制类（control）。边界和实体都是静态的，本身并不会动作。UML采用控制类来表达原始需求中的动态信息，即业务或用例场景中的步骤和活动。从UML的观点看来，边界类和实体类之间，边界类和边界类之间，实体类和实体类之间不能够直接相互访问，它们需要通过控制类来代理访问要求。</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>只要有人、事、物和规则（定语），就能构成一个有意义的结果，无非是否合理而已，。</p>
+<p>分析类也是应用这个道理来把业务模型概念化的，</p>
+<ol>
+<li>事：由于所有的操作都通过边界类来行进，能做什么不能做什么由边界决定，所以边界类实际上代表了原始需求中的“事”；</li>
+<li>物：实体类则由业务模型中的领域模型转化而来，它代表了现实世界上的“物”；</li>
+<li>规则：控制类则体现了现实世界中的“规则”，也就是定语；</li>
+<li>用户：再加上由参与者转化而来的系统的“用户”，</li>
+</ol>
+<blockquote>
+<p>这样一来，“人”也有了。有了人、事、物、规则，我们就可以组合成各种各样的语句。不过不能随意组合，而是要依赖业务模型中已经描绘出来的用例场景来组合这些元素，让它们表达特定的业务含义。</p>
+</blockquote>
+</blockquote>
+<h3 id="1-2-6-从概念模型到设计模型"><a href="#1-2-6-从概念模型到设计模型" class="headerlink" title="1.2.6 从概念模型到设计模型"></a>1.2.6 从概念模型到设计模型</h3><p>概念模型使我们获得了软件的蓝图，获得了建设软件所需要的所有组成内容以及建设软件所需要的所有必要细节。</p>
+<p>设计模型的工作就是建筑零部件，组装汽车的过程。<br>在大多数情况下，实现类可以简单地从分析类映射而来。<br>在设计模型中，</p>
+<font style="color:green"><br><br>- 概念模型中的边界类可以被转化为操作界面或者系统接口；<br>- 控制类可以被转化为计算程序或控制程序，列如工作流、算法体等；<br>- 实体类可以转化为数据库表、XML文档或者其他带有持久化特征的类。这个转化过程也是有章可循的，一般来说，可以遵循的规则有：<br><br></font>
+
+<pre><code>- 软件架构和框架。软件架构和框架规定了实现类必须实现的接口、必须继承的超类、必须遵守的编程规则等。
+- 编程语言。各类编程语言有不同的特点，例如在实现一个界面或者一个可持久化类时，采用C++还是Java作为开发语言会有不同的设计要求。
+- 规范或中间件。如果决定采用某个规范或采用某个中间件时，实现类还要遵循规范或中间件规定的那些必须特性。
+</code></pre><blockquote>
+<p>实际上，由于软件项目可以选择不同的软件架构和框架，可以选择不同的编程语言，也可以选择不同的软件规范，还可以购买不同的中间件，因此同样的概念模型会因为选择不同而得到不同的设计模型。</p>
+</blockquote>
 
       
     </div>
@@ -409,6 +508,12 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/uml/" rel="tag"># uml</a>
+          
+        </div>
       
 
       
@@ -483,8 +588,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="luowen">
           <p class="site-author-name" itemprop="name">luowen</p>
@@ -497,7 +611,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">25</span>
+                <span class="site-state-item-count">31</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -508,7 +622,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-count">15</span>
                 <span class="site-state-item-name">categories</span>
               </a>
             </div>
@@ -519,7 +633,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-count">15</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
@@ -545,6 +659,22 @@
       </section>
 
       
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基础篇："><span class="nav-number">1.</span> <span class="nav-text">基础篇：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-4-从现实世界到业务模型"><span class="nav-number">1.1.</span> <span class="nav-text">1.2.4 从现实世界到业务模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-5-从业务模型到概念模型"><span class="nav-number">1.2.</span> <span class="nav-text">1.2.5 从业务模型到概念模型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#绘制分析模型最主要的元模型有："><span class="nav-number">1.2.1.</span> <span class="nav-text">绘制分析模型最主要的元模型有：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-6-从概念模型到设计模型"><span class="nav-number">1.3.</span> <span class="nav-text">1.2.6 从概念模型到设计模型</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
 
       
 
@@ -561,7 +691,7 @@
         <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2018</span>
+  <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
