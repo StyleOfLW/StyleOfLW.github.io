@@ -78,7 +78,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="CSAPP,">
 
 
 
@@ -94,17 +94,18 @@
 
 
 
-<meta name="description" content="Blogging is a little fun">
-<meta name="keywords" content="Java JavaScript Network Algorithms compute 踩坑专业户">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Coding in life...">
-<meta property="og:url" content="http://yoursite.com/categories/日计划/index.html">
+<meta name="description" content="前言输入/输出（I/O）是主存和外部设备（列如磁盘驱动器、终端和网络）之间复制数据的过程。输入操作是从I/O设备复制数据到主存，而输出操作是从主存复制数据到I/O设备 10.1 Unix I/O一个Linux文件就是一个m个字节的序列。 所有的I/O设备（例如网络、磁盘和终端）都被模型化为文件，而所有的输入和输出都被当作对相应文件的读和写来执行。这种将设备优雅地映射为文件的方式，允许Linux内核">
+<meta name="keywords" content="CSAPP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第十章-系统级I&#x2F;O">
+<meta property="og:url" content="http://yoursite.com/2019/01/08/第十章-系统级I-O/index.html">
 <meta property="og:site_name" content="Coding in life...">
-<meta property="og:description" content="Blogging is a little fun">
+<meta property="og:description" content="前言输入/输出（I/O）是主存和外部设备（列如磁盘驱动器、终端和网络）之间复制数据的过程。输入操作是从I/O设备复制数据到主存，而输出操作是从主存复制数据到I/O设备 10.1 Unix I/O一个Linux文件就是一个m个字节的序列。 所有的I/O设备（例如网络、磁盘和终端）都被模型化为文件，而所有的输入和输出都被当作对相应文件的读和写来执行。这种将设备优雅地映射为文件的方式，允许Linux内核">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-01-09T13:32:59.714Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Coding in life...">
-<meta name="twitter:description" content="Blogging is a little fun">
+<meta name="twitter:title" content="第十章-系统级I&#x2F;O">
+<meta name="twitter:description" content="前言输入/输出（I/O）是主存和外部设备（列如磁盘驱动器、终端和网络）之间复制数据的过程。输入操作是从I/O设备复制数据到主存，而输出操作是从主存复制数据到I/O设备 10.1 Unix I/O一个Linux文件就是一个m个字节的序列。 所有的I/O设备（例如网络、磁盘和终端）都被模型化为文件，而所有的输入和输出都被当作对相应文件的读和写来执行。这种将设备优雅地映射为文件的方式，允许Linux内核">
 
 
 
@@ -133,13 +134,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/categories/日计划/">
+  <link rel="canonical" href="http://yoursite.com/2019/01/08/第十章-系统级I-O/">
 
 
 
 
 
-  <title>Category: 日计划 | Coding in life...</title>
+  <title>第十章-系统级I/O | Coding in life...</title>
   
 
 
@@ -164,7 +165,7 @@
     
   
 
-  <div class="container sidebar-position-left  ">
+  <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -290,53 +291,245 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block category">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>日计划<small>Category</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
 
   <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/08/第十章-系统级I-O/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="luowen">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Coding in life...">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2018/11/17/第一步总是伟大的（日计划）/" itemprop="url">
-              
-                <span itemprop="name">第一步总是伟大的（日计划）</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">第十章-系统级I/O</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2018-11-17T08:20:02+08:00" content="2018-11-17">
-          11-17
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-08T22:07:32+08:00">
+                2019-01-08
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/《深入理解计算机系统》/" itemprop="url" rel="index">
+                    <span itemprop="name">《深入理解计算机系统》</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i> 阅读数
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    </div>
+      
 
+      
+        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a><center>前言</center></h3><p>输入/输出（I/O）是主存和外部设备（列如磁盘驱动器、终端和网络）之间复制数据的过程。输入操作是从I/O设备复制数据到主存，而输出操作是从主存复制数据到I/O设备</p>
+<h3 id="10-1-Unix-I-O"><a href="#10-1-Unix-I-O" class="headerlink" title="10.1 Unix I/O"></a><center>10.1 Unix I/O</center></h3><p>一个Linux文件就是一个m个字节的序列。</p>
+<p>所有的I/O设备（例如网络、磁盘和终端）都被模型化为文件，而所有的输入和输出都被当作对相应文件的读和写来执行。这种将设备优雅地映射为文件的方式，允许Linux内核引出一个简单、低级的应用程序接口，称为Unix I/O,这使得所有的输入和输出都能以一种统一且一致的方式来执行：</p>
+<ul>
+<li><p>打开文件</p>
+<ul>
+<li>一个应用程序通过要求内核打开相应的文件，来宣告它想要访问一个I/O设备。</li>
+<li>内核返回一个小的非负整数，叫做描述符，它在后续对此文件的所有操作中标识这个文件。内核记录有关这个打开文件的所有信息。应用程序只需记录这个描述符</li>
+</ul>
+</li>
+<li><p>Linux Shell 创建的每个进程开始时都有三个打开的文件：</p>
+<ul>
+<li>标准的输入（描述符为0）、</li>
+<li>标准输出（描述为1）</li>
+<li>标准错误（描述符为2）    </li>
+</ul>
+</li>
+<li><p>改变当前的文件位置</p>
+<ul>
+<li>对于每个打开的文件，内核保持着一个文件位置k，初始为0。</li>
+<li>这个文件位置是从文件开头起始的字节偏移量</li>
+</ul>
+</li>
+<li><p>读写文件</p>
+<ul>
+<li>一个读操作就是从文件复制n&gt;0个字节到内存，从当前位置k开始，然后将k增加到k+n。</li>
+<li>给定一个大小为m字节的文件，当k&gt;=m时执行</li>
+</ul>
+</li>
+</ul>
+<h3 id="10-2-文件"><a href="#10-2-文件" class="headerlink" title="10.2 文件"></a><center>10.2 文件</center></h3><p>每个Linux文件都有一个类型（type）来表明他在系统中的角色：</p>
+<ul>
+<li><p>普通文件（regular file）</p>
+<ul>
+<li>包含任意数据</li>
+<li>应用程序常常要区分文本文件（text file）和二进制文件（binary file）</li>
+<li>对内核而言，没有区别</li>
+</ul>
+</li>
+<li><p>目录（directory）</p>
+<ul>
+<li>是包含一组链接（link）的文件，其中每个链接都讲一个文件名（filename）映射到一个文件。</li>
+<li>这个文件可能是另一个目录</li>
+<li>每个目录至少包含有2个条目 1。 ‘.’ 2. ‘..’</li>
+</ul>
+</li>
+<li><p>套接字（socket）</p>
+<ul>
+<li>是用来与另一个进程进行跨网络通宵的文件。</li>
+</ul>
+</li>
+</ul>
+<h3 id="10-3-打开和关闭文件"><a href="#10-3-打开和关闭文件" class="headerlink" title="10.3 打开和关闭文件"></a><center>10.3 打开和关闭文件</center></h3><h3 id="10-4-读和写文件"><a href="#10-4-读和写文件" class="headerlink" title="10.4 读和写文件"></a><center>10.4 读和写文件</center></h3><h3 id="10-5-用RIO包健壮地读写"><a href="#10-5-用RIO包健壮地读写" class="headerlink" title="10.5 用RIO包健壮地读写"></a><center>10.5 用RIO包健壮地读写</center></h3><h3 id="10-6-读取文件元数据"><a href="#10-6-读取文件元数据" class="headerlink" title="10.6 读取文件元数据"></a><center>10.6 读取文件元数据</center></h3><h3 id="10-7-读取目录内容"><a href="#10-7-读取目录内容" class="headerlink" title="10.7 读取目录内容"></a><center>10.7 读取目录内容</center></h3><h3 id="10-8-共享文件"><a href="#10-8-共享文件" class="headerlink" title="10.8 共享文件"></a><center>10.8 共享文件</center></h3><p>文件共享概念。<br>内核用三个相关的数据结构来表示打开的文件</p>
+<ul>
+<li><p>描述符表（descriptor table）</p>
+<ul>
+<li>每个进程都有它独立的描述符表，它的表项是由进程打开的文件描述符来索引的。每个打开的描述符表项指向文件表中的一个表项</li>
+</ul>
+</li>
+<li><p>文件表（file table）</p>
+<ul>
+<li>打开文件的集合是由一张文件表来表示的，所有的进程共享这张表。每个文件表的表项组成（针对我们的目的）包括当前的文件位置、引用计数（reference count）（即当前指向该表项的描述符表项数），以及一个指向v-node表中对应表项的指针。</li>
+<li>关闭一个描述符会减少相应的文件表项中的引用计数。内核不会删除这个文件表表项，直到它的引用计数为0</li>
+</ul>
+</li>
+<li><p>v-node表（v-node table）</p>
+<ul>
+<li>同文件表一样，所有的进程共享这张v-node表。</li>
+</ul>
+</li>
+</ul>
+<h3 id="10-9-I-O重定向"><a href="#10-9-I-O重定向" class="headerlink" title="10.9 I/O重定向"></a><center>10.9 I/O重定向</center></h3><h3 id="10-10-标准I-O"><a href="#10-10-标准I-O" class="headerlink" title="10.10 标准I/O"></a><center>10.10 标准I/O</center></h3><p>标准I/O库将一个打开的文件模型化为一个流。</p>
+<h3 id="10-11-综合：我该使用那些I-O函数"><a href="#10-11-综合：我该使用那些I-O函数" class="headerlink" title="10.11 综合：我该使用那些I/O函数"></a><center>10.11 综合：我该使用那些I/O函数</center></h3><h3 id="10-12-小结"><a href="#10-12-小结" class="headerlink" title="10.12 小结"></a><center>10.12 小结</center></h3>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/CSAPP/" rel="tag"># CSAPP</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/04/第九章-虚拟内存/" rel="next" title="第九章-虚拟内存">
+                <i class="fa fa-chevron-left"></i> 第九章-虚拟内存
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -344,6 +537,10 @@
 
 
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>
         
@@ -364,8 +561,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="luowen">
           <p class="site-author-name" itemprop="name">luowen</p>
@@ -425,6 +631,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-1-Unix-I-O"><span class="nav-number">2.</span> <span class="nav-text">10.1 Unix I/O</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-2-文件"><span class="nav-number">3.</span> <span class="nav-text">10.2 文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-3-打开和关闭文件"><span class="nav-number">4.</span> <span class="nav-text">10.3 打开和关闭文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-4-读和写文件"><span class="nav-number">5.</span> <span class="nav-text">10.4 读和写文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-5-用RIO包健壮地读写"><span class="nav-number">6.</span> <span class="nav-text">10.5 用RIO包健壮地读写</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-6-读取文件元数据"><span class="nav-number">7.</span> <span class="nav-text">10.6 读取文件元数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-7-读取目录内容"><span class="nav-number">8.</span> <span class="nav-text">10.7 读取目录内容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-8-共享文件"><span class="nav-number">9.</span> <span class="nav-text">10.8 共享文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-9-I-O重定向"><span class="nav-number">10.</span> <span class="nav-text">10.9 I/O重定向</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-10-标准I-O"><span class="nav-number">11.</span> <span class="nav-text">10.10 标准I/O</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-11-综合：我该使用那些I-O函数"><span class="nav-number">12.</span> <span class="nav-text">10.11 综合：我该使用那些I/O函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-12-小结"><span class="nav-number">13.</span> <span class="nav-text">10.12 小结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -558,10 +780,10 @@
   
 
   
-    <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
 <script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
 
-  
+
 
   
 

@@ -306,6 +306,384 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/26/第六章-存储器层次结构/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="luowen">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Coding in life...">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/26/第六章-存储器层次结构/" itemprop="url">第六章-存储器层次结构</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-26T21:28:30+08:00">
+                2018-11-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/《深入理解计算机系统》/" itemprop="url" rel="index">
+                    <span itemprop="name">《深入理解计算机系统》</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>概述：</p>
+<pre><code>前面学习的都是依赖于一个简单的计算机系统模型，CPU执行指令，而存储器系统为CPU存放指令和数据。在简单模型中，存储器系统是一个线性的字节数组，而CPU能够在一个常数时间内访问每个存储器位置。虽然迄今为止这都是一个有效的模型，但是它没有反映现代系统实际工作的方式。
+</code></pre><p>实际上，存储器系统（memory system）是一个具有不同容量、成本和访问时间的存储设备的层次结构。</p>
+<ul>
+<li>L0 CPU寄存器保存着最常用的数据。</li>
+<li>L1 靠近CPU的小的、快速的高速缓存存储器（cache memory）作为一部分存储在相对慢速的主存储器（main memory）中数据和指令的缓冲区域。主存缓存存储在容量较大的、慢速磁盘上大数据，而这些磁盘常常又作为存储在通过网络连接的其他机器的磁盘或磁带上的数据的缓冲区域。</li>
+</ul>
+<p>计算机系统中一个基本持久的思想：使数据项存储在层次结构中较高的地方，在哪里CPU能更快地访问到它们。</p>
+<pre><code>这种思想围绕着计算机程序的一个称为局部性（locality）的基本属性。具有良好局部性的程序倾向于一次又一次地访问相同的数据项集合
+</code></pre><h3 id="6-1存储技术"><a href="#6-1存储技术" class="headerlink" title="6.1存储技术"></a><center>6.1存储技术</center></h3><h4 id="6-1-1-随机访问存储器"><a href="#6-1-1-随机访问存储器" class="headerlink" title="6.1.1 随机访问存储器"></a>6.1.1 随机访问存储器</h4><p>  随机访问存储器（Random-Access Memory，RAM）分为两类：静态的和动态的。静态RAM(SARM)比动态的（DRAM）更快，但也贵很多。SRAM用来作为高速存储器，既可以在CPU芯片上，也可以在片下。DRAM用来作为主存以及图形系统的帧缓冲区。典型地，一个笔记本，SRAM不会操过几兆字节。</p>
+<ol>
+<li>静态RAM</li>
+</ol>
+<blockquote>
+<p>SRAM将每个位存储在一个双稳态的（bistable）存储器单元里。每个单元是用一个六晶体管电路来实现的。</p>
+<p>SRAM存储器单元有双稳态特性，只要有电，它就会永远地保持它的值。</p>
+</blockquote>
+<ol start="2">
+<li>动态RAM</li>
+</ol>
+<ol start="3">
+<li><p>传统的DRAM</p>
+</li>
+<li><p>内存模块</p>
+</li>
+</ol>
+<ul>
+<li>DRAM芯片封装在内存模块，通过将多个内存模块链接到内存控制器，能够聚合成主存</li>
+</ul>
+<ol start="5">
+<li><p>增强的DRAM</p>
+</li>
+<li><p>非易失性存储器</p>
+</li>
+</ol>
+<blockquote>
+<p>如果断电，DRAM和SRAM会丢失它们的信息，从这个意义上来书，它们是（volatile, 挥发性的）。<br>非易失性存储器（novolatile memory）即使是在关电后，仍然保存着它们的信息</p>
+</blockquote>
+<blockquote>
+<p>ROM,其中有的类型可以读也可以写，但是它们整体上都被称为（Read-Only Memory, ROM）。ROM是以它们能够被重编程（写）的次数和它们对进行重编所用的机制来区分的</p>
+</blockquote>
+<p>闪存（flash memory）是一类非易失性存储器。</p>
+<ul>
+<li>SSD,一种新型的基于闪存的磁盘驱动技术，称为固态硬盘（Solid State Disk， SSD）</li>
+</ul>
+<p>存储在ROM设备中的程序通常被称为（firmware）固件。当一个计算机系统通电以后，它会运行存储在ROM中的固件。</p>
+<pre><code>- 一些系统在固件中提供了少量的基本的输入和输出函数--例如PC的BIOS（基本输入/输出系统）例程。
+</code></pre><ol start="7">
+<li>访问主存</li>
+</ol>
+<p>数据流通过称为总线（bus）的共享电子电路在处理器和DRAM主存之间来来回回。</p>
+<pre><code>每次CPU和主存之间的数据传送都是通过一系列步骤来完成的，这些步骤称为总线事物（bus transaction）。读事物（read transaction）从主存传送数据到CPU。写事物（write transaction）从CPU传送数据到主存
+</code></pre><p>一个计算机系统的配置（主要部分）</p>
+<ul>
+<li>CPU芯片</li>
+<li>I/O桥接器（I/O bridge）的芯片组（其中包括内存控制器）</li>
+<li>以及组成主存的DRAM内存模块 </li>
+</ul>
+<blockquote>
+<p>这些部件由一对总线连接起来，其中一条总线是系统总线（system bus），它连接CPU和I/O桥接器，另一条总线是内存总线（memory bus），它连接I/O桥接器和主存。I/O桥接器将系统总线的电子信号翻译成内存总线的电子信号。</p>
+</blockquote>
+<h4 id="6-1-2-磁盘存储"><a href="#6-1-2-磁盘存储" class="headerlink" title="6.1.2 磁盘存储"></a>6.1.2 磁盘存储</h4><ol>
+<li><p>磁盘构造<br>磁盘是由盘片（platter）构成的。每个盘片有两面或者称为表面（surface），表面覆盖着磁性记录材料。盘片中央有一个可以旋转的主轴（spindle），它使得盘片以固定的旋转速率（rotational rate）旋转，通常是5400-15000转每分钟（Revolution Per Minute， RPM）。磁盘通常包含一个或多个这样的盘片，并封装在一个密封的容器类</p>
+</li>
+<li><p>磁盘容量</p>
+</li>
+<li><p>磁盘操作</p>
+</li>
+<li>逻辑磁盘块</li>
+<li>连接I/O设备</li>
+</ol>
+<p>例如图形卡、监视器、鼠标、键盘和磁盘这样的输入/输出（I/O）设备，都是通过I/O总线，连接到CPU和主存的。</p>
+<p>虽然I/O总线比系统总线和内存总线慢，但是它可以容纳种类繁多的第三方I/O设备。</p>
+<ul>
+<li>通用串行总线（Universal Serial Bus，USB）控制器是一个连接到USB总显得设备的中转机构，USB总显示一个广泛使用的标准，连接各种外围I/O设备。</li>
+<li>图形卡（或适配器）包含硬件和软件逻辑，它们负载代表CPU在显示器上画像素。</li>
+<li>主机总线适配器将一个或多个磁盘连接到I/O总线，使用的是一个特别的主机总线接口定义的通信协议。</li>
+</ul>
+<ol start="6">
+<li>访问磁盘<br>设备可以自己执行读或者写总线事物而不需要CPU干涉的过程，称为直接内存访问（Direct Memory Access，DMA）。这种数据传送称为DMA传送🤩（DMA transfer）<h4 id="6-1-3-固态硬盘"><a href="#6-1-3-固态硬盘" class="headerlink" title="6.1.3 固态硬盘"></a>6.1.3 固态硬盘</h4></li>
+</ol>
+<h4 id="6-1-4-存储技术趋势"><a href="#6-1-4-存储技术趋势" class="headerlink" title="6.1.4 存储技术趋势"></a>6.1.4 存储技术趋势</h4><h3 id="6-2-局部性"><a href="#6-2-局部性" class="headerlink" title="6.2 局部性"></a><center>6.2 局部性</center></h3><h4 id="6-2-1-对程序数据引用的局部性"><a href="#6-2-1-对程序数据引用的局部性" class="headerlink" title="6.2.1 对程序数据引用的局部性"></a>6.2.1 对程序数据引用的局部性</h4><h4 id="6-2-2-取指令的局部性"><a href="#6-2-2-取指令的局部性" class="headerlink" title="6.2.2 取指令的局部性"></a>6.2.2 取指令的局部性</h4><h4 id="6-2-3-局部性小结"><a href="#6-2-3-局部性小结" class="headerlink" title="6.2.3 局部性小结"></a>6.2.3 局部性小结</h4><h3 id="6-3-存储器层次结构"><a href="#6-3-存储器层次结构" class="headerlink" title="6.3 存储器层次结构"></a><center>6.3 存储器层次结构</center></h3><h4 id="6-3-1-存储器层次结构中的缓存"><a href="#6-3-1-存储器层次结构中的缓存" class="headerlink" title="6.3.1 存储器层次结构中的缓存"></a>6.3.1 存储器层次结构中的缓存</h4><p>一般而言，高速缓存（cache，读作‘cash’）是一个小而快速的存储设备，它作为存储在更大、也更慢的设备中的数据对象的缓冲区域。使用高速缓存的过程称为缓存（caching，读作‘cashing’）</p>
+<h4 id="6-3-2-存储器层次结构概念小结"><a href="#6-3-2-存储器层次结构概念小结" class="headerlink" title="6.3.2 存储器层次结构概念小结"></a>6.3.2 存储器层次结构概念小结</h4><h3 id="6-4-高速缓存存储器"><a href="#6-4-高速缓存存储器" class="headerlink" title="6.4 高速缓存存储器"></a><center>6.4 高速缓存存储器</center></h3><h4 id="6-4-1-通用的高速缓存存储器组织结构"><a href="#6-4-1-通用的高速缓存存储器组织结构" class="headerlink" title="6.4.1 通用的高速缓存存储器组织结构"></a>6.4.1 通用的高速缓存存储器组织结构</h4><h4 id="6-4-2-直接映射高速缓存"><a href="#6-4-2-直接映射高速缓存" class="headerlink" title="6.4.2 直接映射高速缓存"></a>6.4.2 直接映射高速缓存</h4><h4 id="6-4-3-组相联高速缓存"><a href="#6-4-3-组相联高速缓存" class="headerlink" title="6.4.3 组相联高速缓存"></a>6.4.3 组相联高速缓存</h4><h4 id="6-4-4-全相联高速缓存"><a href="#6-4-4-全相联高速缓存" class="headerlink" title="6.4.4 全相联高速缓存"></a>6.4.4 全相联高速缓存</h4><h4 id="6-4-5-有关写的问题"><a href="#6-4-5-有关写的问题" class="headerlink" title="6.4.5 有关写的问题"></a>6.4.5 有关写的问题</h4><h4 id="6-4-6-一个真实的高速缓存层次结构的解剖"><a href="#6-4-6-一个真实的高速缓存层次结构的解剖" class="headerlink" title="6.4.6 一个真实的高速缓存层次结构的解剖"></a>6.4.6 一个真实的高速缓存层次结构的解剖</h4><h4 id="6-4-7-高速缓存参数的性能影响"><a href="#6-4-7-高速缓存参数的性能影响" class="headerlink" title="6.4.7 高速缓存参数的性能影响"></a>6.4.7 高速缓存参数的性能影响</h4><h3 id="6-5-编写高速缓存友好的代码"><a href="#6-5-编写高速缓存友好的代码" class="headerlink" title="6.5 编写高速缓存友好的代码"></a><center>6.5 编写高速缓存友好的代码</center></h3><h3 id="6-6-综合：高速缓存对程序性能的影响"><a href="#6-6-综合：高速缓存对程序性能的影响" class="headerlink" title="6.6 综合：高速缓存对程序性能的影响"></a><center>6.6 综合：高速缓存对程序性能的影响</center></h3><h4 id="6-6-1-存储器山"><a href="#6-6-1-存储器山" class="headerlink" title="6.6.1 存储器山"></a>6.6.1 存储器山</h4><p>一个程序从存储系统中读数据的速率称为读吞吐量（read throughput），或者有时称为（read bandwidth）。</p>
+<h4 id="6-6-2-重新排列循环以提高空间局部性"><a href="#6-6-2-重新排列循环以提高空间局部性" class="headerlink" title="6.6.2 重新排列循环以提高空间局部性"></a>6.6.2 重新排列循环以提高空间局部性</h4><h4 id="6-6-3-在程序中利用局部性"><a href="#6-6-3-在程序中利用局部性" class="headerlink" title="6.6.3 在程序中利用局部性"></a>6.6.3 在程序中利用局部性</h4>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/25/ARTS-第二周挑战/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="luowen">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Coding in life...">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/25/ARTS-第二周挑战/" itemprop="url">ARTS-第二周挑战</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-25T23:44:38+08:00">
+                2018-11-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/ARTS/" itemprop="url" rel="index">
+                    <span itemprop="name">ARTS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <ol>
+<li>Algorithm：每周至少做一个 leetcode 的算法题<br><br><a href="https://leetcode.com/problems/reverse-linked-list/" target="_blank" rel="noopener"> reverse linked list（翻转链表） </a></li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * public class ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     ListNode next;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x) &#123; val = x; &#125;</span></span><br><span class="line"><span class="comment"> * &#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ListNode <span class="title">reverseList</span><span class="params">(ListNode head)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(head == <span class="keyword">null</span> || head.next == <span class="keyword">null</span>)</span><br><span class="line">            <span class="keyword">return</span> head;</span><br><span class="line">        List&lt;ListNode&gt; tempList = <span class="keyword">new</span> ArrayList&lt;ListNode&gt;();</span><br><span class="line">        reverseList(head,head.next,tempList);</span><br><span class="line">        <span class="keyword">return</span> tempList.get(<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ListNode <span class="title">reverseList</span><span class="params">(ListNode currentNode, ListNode nextNode,List objList)</span> </span>&#123;</span><br><span class="line">        ListNode changedNextNode;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> (nextNode.next == <span class="keyword">null</span>) &#123;</span><br><span class="line">            objList.add(nextNode);</span><br><span class="line">            changeNodeOrder(currentNode,nextNode);</span><br><span class="line">            <span class="keyword">return</span> currentNode;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            changedNextNode = reverseList(nextNode, nextNode.next,objList);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        changeNodeOrder(currentNode, changedNextNode);</span><br><span class="line">        <span class="keyword">return</span> currentNode;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">changeNodeOrder</span><span class="params">(ListNode prevNode, ListNode nextNode)</span> </span>&#123;</span><br><span class="line">        nextNode.next = prevNode;</span><br><span class="line">        prevNode.next = <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li><p>Review：阅读并点评至少一篇英文技术文章<br><br>自己翻译练习的Effective Java （注：翻译水平很有限，欢迎大家指正），第二篇未完待续。。。</p>
+<p> <a href="https://styleoflw.github.io/2018/11/20/Effective-Java-Item01/" target="_blank" rel="noopener">Effective Java Item01_静态工厂方法</a></p>
+</li>
+<li><p>Tip：学习至少一个技术技巧<br><br><a href="https://styleoflw.github.io/2018/11/21/%E5%8F%A5%E5%AD%90%E7%9A%84%E5%BD%A2%E6%88%90-%E5%8F%AF%E5%81%9A%E4%B8%BB%E8%AF%AD%E7%9A%84%E8%AF%8D%E7%B1%BB/" target="_blank" rel="noopener"> 英语语法<em>句子的形成</em>名词作主语</a></p>
+</li>
+<li><p>Share：分享一篇有观点和思考的技术文章<br><br><a href="https://styleoflw.github.io/2018/11/24/%E6%9E%B6%E6%9E%8401-%E6%9E%B6%E6%9E%84%E5%88%B0%E5%BA%95%E6%8C%87%E4%BB%80%E4%B9%88/" target="_blank" rel="noopener"> 架构01_架构到底指什么</a></p>
+</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/25/算法系列/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -2013,491 +2391,6 @@ It is about 1000 kilometers from Shanghai to Beijing
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/17/Effective-Java-Introduction/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="luowen">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Coding in life...">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/11/17/Effective-Java-Introduction/" itemprop="url">Effective_Java_Introduction</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-17T22:25:55+08:00">
-                2018-11-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/Effective-Java/" itemprop="url" rel="index">
-                    <span itemprop="name">Effective Java</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="new-konwledge"><a href="#new-konwledge" class="headerlink" title="new konwledge"></a><center>new konwledge</center></h2><ul>
-<li>from time to time 有时</li>
-<li>convey 传达，运输</li>
-<li>generally 通常</li>
-<li>capture 捕获，俘获</li>
-<li>hold 握住 (held的过去分词) </li>
-<li>held to be 被认为是</li>
-<li>beneficial 有益的</li>
-<li>group into 集合成</li>
-<li>from cover to cover 从头至尾</li>
-<li>stand on 坚持 ，依靠</li>
-<li>heavy 沉重的，大量的</li>
-<li>cross 交叉</li>
-<li>plot n.情节，v.划分，密谋</li>
-<li>through prep 通过 凭借，adj 直达的，完结的 adv 彻底，从头至尾</li>
-<li>in some way 在某种程度上，在某些方面</li>
-<li>where to go 去哪里</li>
-<li>coverage 关键功能</li>
-<li>idioms 习惯语，惯用语，方言</li>
-<li>appropriate adj适当的 v 占用</li>
-<li>where appropriate 在适当的地方</li>
-<li>know as 称为</li>
-<li>accessible 可进入的，可理解的</li>
-<li>even for 即使对于</li>
-<li>even adj 偶数的，平坦的，相等的，adv 甚至，即使，实际上 v 使平坦，使相等</li>
-<li>most of 大部分，大多数的</li>
-<li>derive 源于，起源</li>
-<li>paramount 至高无上的，最重要的</li>
-<li>ideally 理想地</li>
-<li>characterize v 描绘…的特性，具有…的特征</li>
-<li>majority 多数，成年</li>
-<li>major 主要的 n 成年人</li>
-<li>slavishly 奴隶般地</li>
-<li>discipline n 学科 v 训练</li>
-<li>for the most part 在极大程度上，多半</li>
-<li>robust 健壮的，强健的</li>
-<li>usually 通常，经常</li>
-<li>performance 性能，执行，表现</li>
-<li>approximate 近似，接近于</li>
-<li>nicknames 昵称，绰号</li>
-<li>readability 可读性，易读</li>
-<li>boilerplate 引用，样板文件</li>
-<li>deserve 应得，应受</li>
-<li>mention 提到，说起</li>
-<li>export 输出</li>
-<li>by which 由</li>
-<li>be short for 是…的简称</li>
-<li>preferable 更好的</li>
-<li>prefer 更喜欢，喜欢</li>
-<li>coincidence 巧合，同时发生</li>
-<li>union 联合，联盟</li>
-</ul>
-<hr>
-<h2 id="翻译-Introduction（简介）"><a href="#翻译-Introduction（简介）" class="headerlink" title="翻译_Introduction（简介）"></a><center>翻译_Introduction（简介）</center></h2><blockquote>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;这本书的设计是帮助你，让你高效的使用java编程语言和它的基础库，如：java.lang , java.util 和 java.io ,包括它的子包比如 java.util.concurrent 和 java.util.function 。有时别的库也会被讨论。</p>
-</blockquote>
-<blockquote>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;这本书由90项组成，每一项都传达一种规则。这种规则包含的实践通常被最棒的和最有经验的工程师认为是有益的。这些零散地项被集合成11个章节，每一个章节都涵盖了一种广泛的软件设计方向。这本书没有从头至尾阅读的意图，每一项都仅仅只依赖于它自己，或多或少，这些项大量地交叉，因此你可以很容易地划分出你自己的课程通过本书。</p>
-</blockquote>
-<blockquote>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;许多新的功能被添加到这个自从这本书上个版本被发布以来。在这本书大多数的项用这些新功能在某些方面。下面这个表格向你展示了去哪里关于主要的关键功能的覆盖：</p>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">功能</th>
-<th style="text-align:center">项目</th>
-<th style="text-align:right">java版本</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">Lamdbas</td>
-<td style="text-align:center">Items 42-44</td>
-<td style="text-align:right">java 8</td>
-</tr>
-<tr>
-<td style="text-align:left">Streams</td>
-<td style="text-align:center">Items 45-48</td>
-<td style="text-align:right">java 8</td>
-</tr>
-<tr>
-<td style="text-align:left">Optionals</td>
-<td style="text-align:center">Item 55</td>
-<td style="text-align:right">java 8</td>
-</tr>
-<tr>
-<td style="text-align:left">Default methods in interfaces</td>
-<td style="text-align:center">Items 21</td>
-<td style="text-align:right">java 8 </td>
-</tr>
-<tr>
-<td style="text-align:left">try-with-resources</td>
-<td style="text-align:center">Items 9</td>
-<td style="text-align:right">java 7</td>
-</tr>
-<tr>
-<td style="text-align:left">@SafeVarargs</td>
-<td style="text-align:center">Items 32</td>
-<td style="text-align:right">java 7</td>
-</tr>
-<tr>
-<td style="text-align:left">Modules</td>
-<td style="text-align:center">Item 15</td>
-<td style="text-align:right">java 9</td>
-</tr>
-</tbody>
-</table>
-<blockquote>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;大多数的项用用编程列子来解释。这本书的一个关键功能是，它包含代码例子来解释许多设计模式和习惯语法。在适当地地方，它们相互引用给标准引用工作在这片区域【Gramma95】</p>
-</blockquote>
-<blockquote>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;许多项包含一个或者多个编程例子解释了一些实践应该避免。列如这些例子，称为 “antipatterns” ，被清晰地用一句注释 ”//Never do this” 来标注。在每一个列子中，这个项解释了为什么这个列子是坏的并且建议一个可供选择的方法。</p>
-</blockquote>
-<blockquote>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;这本书不适合初学者：它假定你已经很适应java了。如果你还不是，考虑许多好的介绍的入门书之一，列如Peter Sestoft‘s Java Precisely。当Effecive Java被设计成可以理解的对于任何有这门语言的工作知识的人，它提供了丰富的思考即使对于高级工程师</p>
-</blockquote>
-<blockquote>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;在这本书大部分规则源于一些基础原则。清晰和简洁是最重要的。一个组件的使用者应该从未被它的行为感到惊讶。组件应该尽可能的小直到没有更小的。（作为本书的使用者，术语组件参考许多可重用软件部分，从一个独立的方法到一个由多个包组成的复杂框架）。代码应该被重用而不是复制。依赖在组件之间应该保持到最小。错误应该尽可能的在它们被制造出来时被检测到，理想在编译期。</p>
-</blockquote>
-<blockquote>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;当规则在本书中不能被100%的应用，它们将塑造最好的编程实践在大多数情况下。你不应该奴隶般地跟随这些原则，但违反这些原则仅仅偶然的情况并且有好的原因。学习编程的艺术，像大多数别的训练，由第一次学习规则然后学习什么时候打破它们。</p>
-</blockquote>
-<blockquote>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;在极大程度上，这本书没有关于怎么执行。它是关于写程序，清晰的、正确的、可用的、健壮的，灵活的，并且是可维护的。如果你这样做了，它通常是一个相对简单关系为了得到你需要的性能（Item 67）。一些项讨论了性能的关系，并缺这些项的一部分提供了性能的数据。这些数据，被介绍用词汇“on my machine”应该被认为是接近于最好的。</p>
-</blockquote>
-<blockquote>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;关于作者机器配置这大致为，i7-4770k 3.5Ghz ，16g内存，windows7，OpenJDK。</p>
-</blockquote>
-<blockquote>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;当讨论Java编程语言和它的库的功能时，参考指定的版本有时是必要的。为了方便，这本书偏好用绰号给官方的发行版名字，这张表展示了映射关系在官方名字和绰号之间。（表已省略）</p>
-</blockquote>
-<blockquote>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;这个列子被合理的完成，但是偏好易读性超过了完整。他们自由地用来自包java.util 和 java.io的类。为了编译例子，你应该添加一个或多个导入声明，或者别的引用。<a href="http://joshbloch.com/effectivejava" target="_blank" rel="noopener">本书的网站<br></a>，包含了每个列子的扩展版本，你可以编译和运行它们。</p>
-</blockquote>
-<blockquote>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;对于大部分，这本书使用技术术语作为他们定义在javaSE8【JLS】，一些术语应特别的提到。这门语言支持4种类型：interface接口（包含注解annotation），class（包含枚举enum），数组和原始数据类型。一至三被称为引用数据类型。类实例和数组是对象，原始类型的值并不是。一个类的成员由它的字段，方法，成员类，和成员接口组成。一个方法的签名由它的名字和它的形式参数类型组成；这个签名不包括方法的返回类型。</p>
-</blockquote>
-<blockquote>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;这本书使用的一些术语不同于“The Java Language Specification”。不同于【JLS】，这本书使用inheritance作为subclassing子类的同义词。用术语inheritance替代interface接口，这本书简单的陈述了一个类实现一个接口或者一个接口继承了别的。为了描述这种访问等级，当没有什么指定的时候引用这种访问等级，这本书用传统的package-private包私有代替技术正确的包访问。</p>
-</blockquote>
-<blockquote>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;这本书用一些技术术语，这些技术术语没有定义在【JSL】。这术语输出API，或者简单API，参考类和接口，构造，成员，和序列化形式由一个程序员访问一个类，接口，或者一个包。（术语API，这个是应用程序接口的简称，是偏好的使用为了更合适的使用术语接口以避免这门语言名字的构造）。一名程序员用api是参考api的用法。一个实现的类用一个api是一个客户端的API。</p>
-</blockquote>
-<blockquote>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;类，接口，构造，成员，和序列化形式是集合称为api成员。一个输出的API由API成员，这些包外部可访问的成员定义了api。API成员有许多客户端可以使用并且api的作者提供了支持。并非巧合，他们仅是Javadoc工具生成的文档元素在它的默认操作模式下。宽泛的说，一个包的api有public公开的和protected受保护的成员还有每个公开的类和接口的构造方法在这个包中。</p>
-</blockquote>
-<blockquote>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;在java9中，一个模块系统被添加进了平台。如果一个库使用模块化系统，它输出的api是所有包的输出的api的一个联合输出通过一个包模块的声明。</p>
-</blockquote>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/17/markdown-record/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="luowen">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Coding in life...">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/11/17/markdown-record/" itemprop="url">markdown_record</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-17T09:08:10+08:00">
-                2018-11-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/markdown/" itemprop="url" rel="index">
-                    <span itemprop="name">markdown</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><image src="/love/01.jpeg" style="border:none;" alt="此处应有图片"></image></p>
-<h3 id="基础规则学习"><a href="#基础规则学习" class="headerlink" title="基础规则学习"></a>基础规则学习</h3><pre><code># (锚点) 写标题用
-</code></pre><ul>
-<li>注意：# 需要空格再接标题，不生效问题</li>
-</ul>
-<hr>
-<pre><code>&gt; (引用) 只需要在整个段落第一行前面加上就行。
-    1. 可以嵌套
-    2. 结束的时候换行就行了（注：空一行）
-</code></pre><blockquote>
-<p>一级引用</p>
-<blockquote>
-<p>二级引用</p>
-</blockquote>
-</blockquote>
-<hr>
-<pre><code>-/number. (列表) 标记后面要接一个字符的空格。
-</code></pre><ul>
-<li>一个点</li>
-<li>在列表内放进引用，用&gt;(需要缩紧)<blockquote>
-<p>unit test</p>
-</blockquote>
-</li>
-</ul>
-<ol>
-<li>这个是有序列表</li>
-<li>数字</li>
-</ol>
-<hr>
-<pre><code><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">	</span><br><span class="line">code body</span><br></pre></td></tr></table></figure>
-</code></pre><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> className&#123;</span><br><span class="line">	<span class="meta">@Test</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sayHello</span><span class="params">()</span></span>&#123;</span><br><span class="line">		printf(<span class="string">"Hello"</span>)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<hr>
-<pre><code>*斜体*
-_斜体_
-（注：没生效，需要删除前面的一个占位符，就生效了）
-**加粗**
-__斜体__
-</code></pre><p><strong>加粗就是这样</strong></p>
-<p><strong>斜体没看出来啊？</strong> </p>
-<hr>
-<pre><code>[]() 方括号显示说明，圆括号内显示网址    
-</code></pre><p><a href="https://github.com/StyleOfLW" target="_blank" rel="noopener">github连接</a></p>
-<hr>
-<pre><code>![Alt text](/path/to/img.jpg) 路径我是放在source/images中
-</code></pre><hr>
-<p>##markdown支持html语法</p>
-<p>我个人还是使用html标签比较习惯，可以直接修改样式</p>
-<ul>
-<li><p>图片标签 image</p>
-</li>
-<li><p>居中标签 center （也可以使用样式居中）</p>
-</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2546,7 +2439,7 @@ __斜体__
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">31</span>
+                <span class="site-state-item-count">33</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
