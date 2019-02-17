@@ -306,6 +306,156 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/20/递归之一/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="luowen">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Coding in life...">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/20/递归之一/" itemprop="url">递归之一</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-20T21:33:06+08:00">
+                2018-11-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/《算法》/" itemprop="url" rel="index">
+                    <span itemprop="name">《算法》</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="编写递归最重要的三点之一"><a href="#编写递归最重要的三点之一" class="headerlink" title="编写递归最重要的三点之一"></a>编写递归最重要的三点之一</h2><ol>
+<li>递归总有一个最简单的情况。<ul>
+<li>方法的第一条语句总是包含return的条件语句</li>
+</ul>
+</li>
+<li>递归调用总是尝试解决一个规模更小的子问题，这样递归才能收敛到最简单的情况。<br><br><br></li>
+<li>递归调用的父问题和尝试解决的子问题之间不应该有交集</li>
+</ol>
+<h4 id="二分查找。（用好重载是真的牛）"><a href="#二分查找。（用好重载是真的牛）" class="headerlink" title="二分查找。（用好重载是真的牛）"></a>二分查找。（用好重载是真的牛）</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">//这个肯定是对外提供的api，下面重载的方法才是具体实现，真牛</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">binarySearch</span><span class="params">(<span class="keyword">int</span>[] orderArray, <span class="keyword">int</span> targetValue)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">return</span> binarySearch(orderArray, targetValue, <span class="number">0</span>, orderArray.length - <span class="number">1</span>);</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">binarySearch</span><span class="params">(<span class="keyword">int</span>[] orderArray, <span class="keyword">int</span> targetValue, <span class="keyword">int</span> minIndex, <span class="keyword">int</span> maxIndex)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">if</span>(orderArray==<span class="keyword">null</span> || orderArray.length == <span class="number">0</span>) <span class="keyword">return</span> Integer.MIN_VALUE;</span><br><span class="line"></span><br><span class="line">       <span class="keyword">int</span> index = (minIndex + maxIndex)/<span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">       <span class="keyword">if</span>( targetValue &gt; orderArray[index] ) <span class="keyword">return</span> binarySearch(orderArray, targetValue, index, maxIndex);</span><br><span class="line">       <span class="keyword">if</span>( targetValue &lt; orderArray[index] ) <span class="keyword">return</span> binarySearch(orderArray, targetValue, minIndex, index);</span><br><span class="line">       </span><br><span class="line">       <span class="keyword">return</span> index;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/18/ARTS-第一周挑战/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1135,7 +1285,7 @@ __斜体__
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">34</span>
+                <span class="site-state-item-count">35</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>

@@ -306,6 +306,228 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/09/第七章-链接/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="luowen">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Coding in life...">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/12/09/第七章-链接/" itemprop="url">第七章-链接</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-09T19:51:42+08:00">
+                2018-12-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/《深入理解计算机系统》/" itemprop="url" rel="index">
+                    <span itemprop="name">《深入理解计算机系统》</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a><center>概述</center></h2><p>链接（linking）是将各种代码和数据片段搜集并组合成为一个单一文件的过程，这个文件可被加载（复制）到内存并执行。</p>
+<ul>
+<li>链接可以执行于编译时（compile time），也就是在源代码被翻译成机器代码时；</li>
+<li>也可以执行于加载时（load time），也就是在程序被加载（loader）加载到内存并执行时；</li>
+<li>甚至于执行于运行时（run time），也就是由应用程序来执行。</li>
+</ul>
+<blockquote>
+<p>在早期的计算机系统中，链接是手动执行的。在现代系统中，链接是由连接器（linker）的程序自动执行的。</p>
+</blockquote>
+<p>连接器在软件开发中扮演一个重要的角色，因为它们使得分离编译（separate compilation）成为可能。</p>
+<pre><code>我们不用将一个大型的应用程序组织为一个巨大的源文件，而是可以吧它分解成为更小、更好管理的模块，可以独立地修改和编译这些模块。当我们改变这些模块中的一个时，只需简单地重新编译它，并重新连接应用，而不必重新编译其它文件。
+</code></pre><p>为什么需要连接的知识？</p>
+<ul>
+<li>理解连接器将帮助构造大型程序<ul>
+<li>构建大型程序经常会遇到缺少模块、缺少库或者不兼容的库版本引起的连接器错误。</li>
+<li>除非你理解连接器是如何解析引用、什么是库以及连接器是如何使用库来解析引用的，菲欧这类错误将令你感到迷惑和挫败</li>
+</ul>
+</li>
+<li><p>帮助避免一些危险的编译错误</p>
+<ul>
+<li>Linux连接器解析符号引用时所做的决定可以不动声色地影响你程序的正确性。</li>
+</ul>
+</li>
+<li><p>帮助理解语言的作用域规则是如何实现的</p>
+<ul>
+<li>全局和局部变量之间的区别是什么？当你定义一个具有static属性的变量或者函数时，实际到底意味着什么？</li>
+</ul>
+</li>
+<li><p>理解其它重要的系统概念</p>
+<ul>
+<li>连接器产生的可执行目标文件在重要的系统功能中扮演着关键角色，比如加载和运行程序、虚拟内存、分页、内存映射。</li>
+</ul>
+</li>
+<li><p>将使你能够利用共享库</p>
+<ul>
+<li>随着共享库和动态链接在现代操作系统中重要性的日益增强，链接成为一个复杂的过程。比如，许多软件产品在运行时使用共享库来升级压缩包装的（shrink-wrapped）二级制程序。还有，大多数Web服务器都依赖于共享库的动态链接来提供内容。</li>
+</ul>
+</li>
+</ul>
+<p>这一章提供了关于链接各方面的全面讨论，从传统静态链接到加载时的共享库的动态链接，以及到运行时的共享库的动态链接。</p>
+<blockquote>
+<p>无论什么样的操作系统，ISA或者目标文件格式、基本的链接概念是通用的。</p>
+</blockquote>
+<h3 id="编译器驱动程序"><a href="#编译器驱动程序" class="headerlink" title="编译器驱动程序"></a><center>编译器驱动程序</center></h3><h3 id="静态链接"><a href="#静态链接" class="headerlink" title="静态链接"></a><center>静态链接</center></h3><p>静态连接器（static linker）以<font style="color:red">一组可重定位目标文件和命令行参数作为输入，生成一个完全链接的、可以加载和运行的可执行目标文件作为输出</font>。</p>
+<pre><code>输入的可重定位目标文件由各种不同的代码和数据结节（section）组成，每一节都是一个连续的字节序列。指令在一节中，初始化了的全局变量在另一节中，而未初始化的变量又在另外一节中。
+</code></pre><p>为了构造可执行文件，链接器必须完成两个主要任务。</p>
+<ul>
+<li><p>符号解析（symbol resolution）。目标文件定义和引用符号，每个符号对应于一个函数、一个全局变量或一个静态变量（即C语言中任何以static属性声明的变量）。</p>
+<ul>
+<li>符号解析的目的是将每个符号引用正好和一个符号定义关联起来。</li>
+</ul>
+</li>
+<li>重定位（relocation）。编译器和汇编器生成从地址0开始的代码和数据节。链接器通过把每个符号定义与一个内存位置关联起来，从而重定位这些节，然后修改所有对这些符号的引用，使得它们指向这个内存位置。链接器使用汇编器产生的重定位条目（relocation entry）的详细指令，不加甄别地执行这样的重定位。</li>
+</ul>
+<blockquote>
+<p>要记住关于链接器的一些基本事实：</p>
+<ol>
+<li>目标文件纯粹是字节块的集合</li>
+<li>这些块中，有些包含程序代码，有些包含程序数据，而其他的则包含引导链接器和加载器的数据结构。</li>
+<li>链接器将这些块连接起来，确定被链接块的运行时位置，并且修改代码和数据块中的各种位置。</li>
+</ol>
+</blockquote>
+<h3 id="目标文件"><a href="#目标文件" class="headerlink" title="目标文件"></a><center>目标文件</center></h3><p>目标文件有三种形似：</p>
+<ul>
+<li><p>可重定向目标文件</p>
+<ul>
+<li>包含二进制代码和数据，其形式可以在编译时与其他可重定位目标文件合并起来，创建一个可执行目标文件。</li>
+</ul>
+</li>
+<li><p>可执行目标文件</p>
+<ul>
+<li>包含二进制代码和数据，其形式可以被直接复制到内存并执行。</li>
+</ul>
+</li>
+<li><p>共享目标文件</p>
+<ul>
+<li>一种特殊类型的可重定位目标文件，可以在加载或者运行时被动态地加载进内存并连接。</li>
+</ul>
+</li>
+</ul>
+<p><font style="color:green">编译器和汇编器生成可重定位目标文件（包括共享目标文件）。<br>连接器生成可执行目标文件</font>。<br><br>从技术上来说，一个目标模块（object module）就是一个字节序列，而一个目标文件（object file）就是一个以文件形式存放在磁盘中的目标模块。    </p>
+<h3 id="可重定向目标文件"><a href="#可重定向目标文件" class="headerlink" title="可重定向目标文件"></a><center>可重定向目标文件</center></h3><h3 id="符号和符号表"><a href="#符号和符号表" class="headerlink" title="符号和符号表"></a><center>符号和符号表</center></h3><h3 id="符号解析"><a href="#符号解析" class="headerlink" title="符号解析"></a><center>符号解析</center></h3><h3 id="重定位"><a href="#重定位" class="headerlink" title="重定位"></a><center>重定位</center></h3><h3 id="可执行目标文件"><a href="#可执行目标文件" class="headerlink" title="可执行目标文件"></a><center>可执行目标文件</center></h3><h3 id="加载可执行文件"><a href="#加载可执行文件" class="headerlink" title="加载可执行文件"></a><center>加载可执行文件</center></h3><h3 id="动态链接共享库"><a href="#动态链接共享库" class="headerlink" title="动态链接共享库"></a><center>动态链接共享库</center></h3><h3 id="位置无关代码"><a href="#位置无关代码" class="headerlink" title="位置无关代码"></a><center>位置无关代码</center></h3><h3 id="库打桩机制"><a href="#库打桩机制" class="headerlink" title="库打桩机制"></a><center>库打桩机制</center></h3><h3 id="处理目标文件的工具"><a href="#处理目标文件的工具" class="headerlink" title="处理目标文件的工具"></a><center>处理目标文件的工具</center></h3><h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a><center>小结</center></h3>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/09/aaaaaaaaaaaa/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1990,157 +2212,6 @@ Nginx提供的ACL控制、用户账号密码管理，数据库访问权限控制
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/30/Python-study-record/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="luowen">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Coding in life...">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/11/30/Python-study-record/" itemprop="url">Python_study_record</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-30T19:43:27+08:00">
-                2018-11-30
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="Python如何运行程序"><a href="#Python如何运行程序" class="headerlink" title="Python如何运行程序"></a><center>Python如何运行程序</center></h2><h4 id="Python解释器简介"><a href="#Python解释器简介" class="headerlink" title="Python解释器简介"></a>Python解释器简介</h4><ul>
-<li>从目前的实现上来讲，Python也是一个名为解释器的软件包</li>
-<li>解释器是一种让其他程序运行起来的程序</li>
-<li>解释器就是代码与机器的计算机硬件之间的软件逻辑层</li>
-<li>当Python包安装在机器上后，它包含了一些最小化的组件：一个解释器和支持的库</li>
-</ul>
-<h4 id="Python虚拟机（PVM）"><a href="#Python虚拟机（PVM）" class="headerlink" title="Python虚拟机（PVM）"></a>Python虚拟机（PVM）</h4><ul>
-<li>python编译成的字节码，在PVM上执行</li>
-<li>PVM不是一个独立的程序，bu’xu’yao</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2189,7 +2260,7 @@ Nginx提供的ACL控制、用户账号密码管理，数据库访问权限控制
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">34</span>
+                <span class="site-state-item-count">35</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>

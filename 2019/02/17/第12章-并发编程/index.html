@@ -78,7 +78,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="CSAPP,">
 
 
 
@@ -94,17 +94,18 @@
 
 
 
-<meta name="description" content="Blogging is a little fun">
-<meta name="keywords" content="Java JavaScript Network Algorithms compute 踩坑专业户">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Coding in life...">
-<meta property="og:url" content="http://yoursite.com/tags/算法/index.html">
+<meta name="description" content="前言如果逻辑控制流在时间上重叠，那么它们就是并发的（concurrent）。这种常见的现象称为并发（concurrency    ） 使用应用级并发的应用程序称为并发程序（concurrent program）。现代操作系统提供了三种基本的构造并发程序的方法：  进程  用这种方法，每个逻辑控制流都是一个进程，由内核来调度和维护。因为进程有独立的虚拟地址空间，想要和其他流通信，控制流必须使用某种">
+<meta name="keywords" content="CSAPP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第12章-并发编程">
+<meta property="og:url" content="http://yoursite.com/2019/02/17/第12章-并发编程/index.html">
 <meta property="og:site_name" content="Coding in life...">
-<meta property="og:description" content="Blogging is a little fun">
+<meta property="og:description" content="前言如果逻辑控制流在时间上重叠，那么它们就是并发的（concurrent）。这种常见的现象称为并发（concurrency    ） 使用应用级并发的应用程序称为并发程序（concurrent program）。现代操作系统提供了三种基本的构造并发程序的方法：  进程  用这种方法，每个逻辑控制流都是一个进程，由内核来调度和维护。因为进程有独立的虚拟地址空间，想要和其他流通信，控制流必须使用某种">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-02-17T15:07:40.938Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Coding in life...">
-<meta name="twitter:description" content="Blogging is a little fun">
+<meta name="twitter:title" content="第12章-并发编程">
+<meta name="twitter:description" content="前言如果逻辑控制流在时间上重叠，那么它们就是并发的（concurrent）。这种常见的现象称为并发（concurrency    ） 使用应用级并发的应用程序称为并发程序（concurrent program）。现代操作系统提供了三种基本的构造并发程序的方法：  进程  用这种方法，每个逻辑控制流都是一个进程，由内核来调度和维护。因为进程有独立的虚拟地址空间，想要和其他流通信，控制流必须使用某种">
 
 
 
@@ -133,13 +134,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/tags/算法/">
+  <link rel="canonical" href="http://yoursite.com/2019/02/17/第12章-并发编程/">
 
 
 
 
 
-  <title>Tag: 算法 | Coding in life...</title>
+  <title>第12章-并发编程 | Coding in life...</title>
   
 
 
@@ -164,7 +165,7 @@
     
   
 
-  <div class="container sidebar-position-left  ">
+  <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -290,78 +291,192 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block tag">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>算法<small>Tag</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
 
   <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/17/第12章-并发编程/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="luowen">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Coding in life...">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2018/12/06/复杂度分析（下）/" itemprop="url">
-              
-                <span itemprop="name">复杂度分析（下）</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">第12章-并发编程</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2018-12-06T00:02:06+08:00" content="2018-12-06">
-          12-06
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-17T22:22:27+08:00">
+                2019-02-17
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/《深入理解计算机系统》/" itemprop="url" rel="index">
+                    <span itemprop="name">《深入理解计算机系统》</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i> 阅读数
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-        
+      
 
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/12/04/复杂度分析（上）/" itemprop="url">
-              
-                <span itemprop="name">复杂度分析（上）</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2018-12-04T23:24:18+08:00" content="2018-12-04">
-          12-04
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
+      
+        <h3 id="前言"><a href="#前言" class="headerlink" title=" 前言"></a><center> 前言</center></h3><p>如果逻辑控制流在时间上重叠，那么它们就是并发的（concurrent）。这种常见的现象称为并发（concurrency    ）</p>
+<p>使用应用级并发的应用程序称为并发程序（concurrent program）。现代操作系统提供了三种基本的构造并发程序的方法：</p>
+<ul>
+<li><p>进程</p>
+<ul>
+<li>用这种方法，每个逻辑控制流都是一个进程，由内核来调度和维护。因为进程有独立的虚拟地址空间，想要和其他流通信，控制流必须使用某种显示的进程间通信（interprocess communication， IPC）机制。</li>
+</ul>
+</li>
+<li><p>I/O多路复用</p>
+<ul>
+<li>在这种形式的并发编程中，应用程序在一个进程的上下文中显示地调度它们自己的逻辑流。逻辑流被模型化为状态机，数据到达文件描述符后，主程序显示地从一个状态转换到另一个状态。因为程序是一个单独的进程，所以所有的流都共享同一个地址空间</li>
+</ul>
+</li>
+<li><p>线程</p>
+<ul>
+<li>线程是运行在一个单一进程上下文中的逻辑流，由内核进行调度。你可以把线程看成是其他两种方式的混合体，像进程流一样由内核进行调度，而像I/O多路复用流一样共享同一个虚拟地址空间。</li>
+</ul>
+</li>
+</ul>
+<h3 id="12-1-基于进程的并发编程"><a href="#12-1-基于进程的并发编程" class="headerlink" title="12.1 基于进程的并发编程"></a><center>12.1 基于进程的并发编程</center></h3><h3 id="12-2-基于I-O多路复用的并发编程"><a href="#12-2-基于I-O多路复用的并发编程" class="headerlink" title="12.2 基于I/O多路复用的并发编程"></a><center>12.2 基于I/O多路复用的并发编程</center></h3><h3 id="12-3-基于线程的并发编程"><a href="#12-3-基于线程的并发编程" class="headerlink" title="12.3 基于线程的并发编程"></a><center>12.3 基于线程的并发编程</center></h3><h3 id="12-4-多线程程序中的共享变量"><a href="#12-4-多线程程序中的共享变量" class="headerlink" title="12.4 多线程程序中的共享变量"></a><center>12.4 多线程程序中的共享变量</center></h3><h3 id="12-5-用信号量同步线程"><a href="#12-5-用信号量同步线程" class="headerlink" title="12.5 用信号量同步线程"></a><center>12.5 用信号量同步线程</center></h3><h3 id="12-6-使用线程提供并行性"><a href="#12-6-使用线程提供并行性" class="headerlink" title="12.6 使用线程提供并行性"></a><center>12.6 使用线程提供并行性</center></h3><h3 id="12-7-其他并发问题"><a href="#12-7-其他并发问题" class="headerlink" title="12.7 其他并发问题"></a><center>12.7 其他并发问题</center></h3><h3 id="12-8-小结"><a href="#12-8-小结" class="headerlink" title="12.8 小结"></a><center>12.8 小结</center></h3>
       
     </div>
+    
+    
+    
 
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/CSAPP/" rel="tag"># CSAPP</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/15/第11章-网络编程/" rel="next" title="第11章-网络编程">
+                <i class="fa fa-chevron-left"></i> 第11章-网络编程
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -369,6 +484,10 @@
 
 
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>
         
@@ -389,8 +508,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="luowen">
           <p class="site-author-name" itemprop="name">luowen</p>
@@ -450,6 +578,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text"> 前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12-1-基于进程的并发编程"><span class="nav-number">2.</span> <span class="nav-text">12.1 基于进程的并发编程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12-2-基于I-O多路复用的并发编程"><span class="nav-number">3.</span> <span class="nav-text">12.2 基于I/O多路复用的并发编程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12-3-基于线程的并发编程"><span class="nav-number">4.</span> <span class="nav-text">12.3 基于线程的并发编程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12-4-多线程程序中的共享变量"><span class="nav-number">5.</span> <span class="nav-text">12.4 多线程程序中的共享变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12-5-用信号量同步线程"><span class="nav-number">6.</span> <span class="nav-text">12.5 用信号量同步线程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12-6-使用线程提供并行性"><span class="nav-number">7.</span> <span class="nav-text">12.6 使用线程提供并行性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12-7-其他并发问题"><span class="nav-number">8.</span> <span class="nav-text">12.7 其他并发问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12-8-小结"><span class="nav-number">9.</span> <span class="nav-text">12.8 小结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -583,10 +727,10 @@
   
 
   
-    <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
 <script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
 
-  
+
 
   
 
