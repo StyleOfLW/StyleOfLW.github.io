@@ -306,6 +306,243 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/01/架构02-架构设计的目的/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="luowen">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Coding in life...">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/12/01/架构02-架构设计的目的/" itemprop="url">架构02-架构设计的目的</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-01T09:48:33+08:00">
+                2018-12-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/从零开始学架构/" itemprop="url" rel="index">
+                    <span itemprop="name">从零开始学架构</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="软件架构"><a href="#软件架构" class="headerlink" title="软件架构"></a>软件架构</h3><blockquote>
+<p>随着软件系统规模的增加，计算相关的算法和数据结构不再构成主要的设计问题：当系统由许多部分组成时，整个系统的组织，也就是所说的“软甲架构”，导致了一系列新的设计问题。</p>
+</blockquote>
+<p>只有规模较大的软件系统才会面临软件架构相关的问题，比如：</p>
+<ul>
+<li>系统规模庞大，内部耦合严重，开发效率低;</li>
+<li>系统耦合严重，牵一发动全身，后续修改和扩展困难;</li>
+<li>系统逻辑复杂，容易出问题，出问题后很难排查和修复。</li>
+</ul>
+<h3 id="架构设计的目的"><a href="#架构设计的目的" class="headerlink" title="架构设计的目的"></a><center>架构设计的目的</center></h3><h4 id="架构设计的误区"><a href="#架构设计的误区" class="headerlink" title="架构设计的误区"></a>架构设计的误区</h4><ul>
+<li>因为架构很重要，所以要做架构设计 （正确的废话）<ul>
+<li>例如：不做架构设计系统就跑不起来了吗？</li>
+<li>例如：做了架构设计就能提示开发效率么？</li>
+<li>例如：设计良好的架构能促进业务发展吗？</li>
+</ul>
+</li>
+<li>不是每个系统都要做架构设计吗<ul>
+<li>例如：强行架构</li>
+</ul>
+</li>
+<li>公司流程要求系统开发过程中必须有架构设计</li>
+<li>为了高性能、高可用、可扩展，所以要做架构设计<ul>
+<li>根据业务或者系统，盲目就一定是有大问题的。</li>
+</ul>
+</li>
+</ul>
+<h4 id="架构设计的真正目的"><a href="#架构设计的真正目的" class="headerlink" title="架构设计的真正目的"></a>架构设计的真正目的</h4><p>一条准则,也可以说是一个原则</p>
+<pre><code>架构设计的目的是为了解决软件系统复杂度带来的问题
+</code></pre><p>明确了架构设计的目的是为了解决软件系统复杂度带来的问题，就能回答下述问题：</p>
+<ul>
+<li><p>这么多需求，从哪里开始下手进行架构设计呢？</p>
+<ul>
+<li>通过熟悉和理解需求，识别系统复杂性所在的地方，然后针对这些复杂点进行架构设计</li>
+</ul>
+</li>
+<li><p>架构设计要考虑高性能、高可用、高扩展…这么多高XX，全部设计完成估计要一个月，但老大只给了一周时间。</p>
+<ul>
+<li>架构设计并不是面面俱到，不需要每个架构都具备高性能、高可用、高扩展等特点，而是要识别出复杂点然后又针对性地解决问题</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>业界A公司的架构师X，B公司的方案是Y，两个差别比较大，该参考那一个呢?</p>
+<ul>
+<li>理解每个架构方案背后所需要解决掉复杂点，然后才能对比自己的业务复杂点，参考复杂点相似的方案。</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>遵循这条准则。能够让架构师“有的方矢，而不是贪大求全”</p>
+</blockquote>
+<ul>
+<li><p>我们的系统一定要做到每秒TPS 10万</p>
+<ul>
+<li>如果系统的复杂度不是在性能这部分，TPS做到10万并没有什么用。</li>
+</ul>
+</li>
+<li><p>淘宝的架构师这么做的，我们也这么做</p>
+<ul>
+<li>淘宝的架构是为了解决淘宝业务的复杂度而设计的，淘宝的业务复杂度而设计的，淘宝的业务复杂度并不就是我们的业务复杂度，绝大多数业务的用户量都不可能有淘宝那么大。</li>
+</ul>
+</li>
+<li><p>Docker现在很流行，我们的架构应该将Docker应用进来</p>
+<ul>
+<li>Docker不是万能的，只是为了解决资源重用和动态分配而设计的，如果我们的系统复杂度根本不是在这方面，引入Docker没有什么意义。</li>
+</ul>
+</li>
+</ul>
+<h4 id="简单的复杂度分析案例"><a href="#简单的复杂度分析案例" class="headerlink" title="简单的复杂度分析案例"></a>简单的复杂度分析案例</h4><pre><code>一起来看看如何将“架构设计的真正目的就是解决软件系统复杂度带来的问题”
+</code></pre><p>简单的案列：设计一个大学的学生管理系统</p>
+<ul>
+<li>基本功能<ul>
+<li>登录</li>
+<li>注册</li>
+<li>成绩管理</li>
+<li>课程管理</li>
+<li>等</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>当我们对这样一个系统进行架构设计的时候，首先应识别其复杂度到底体现在哪里</p>
+</blockquote>
+<p>性能：</p>
+<pre><code>学生1-2万人，访问系统频率不高，平均每天单个学生访问量不到一次，存储使用MySQL完全足够，缓存都可以不用，Web服务器用Nginx完全足够
+</code></pre><p>可扩展性：</p>
+<pre><code>学生管理系统的功能比较稳定，可扩展的空间并不大，因此可扩展性也不复杂
+</code></pre><p>高可用：</p>
+<pre><code>学生管理系统即使宕机2小时，对学生管理系统工作影响并不大，因此可用不做负载均衡，更不用考虑异地多活这类复杂的方案了。但是，如果学生的数据全部丢失，修复是非常麻烦的，只能靠人工逐条修复，这个很难接受。
+因此需要考虑存储高可靠，这里就有点复杂了。我们需要考虑多种异常情况：机器故障，机房故障，针对机器故障，我们需要设计MySQL同机房主备方案；针对机房故障，我们需要设计MySQL跨机房同步方案。
+</code></pre><p>安全性</p>
+<pre><code>学生管理系统存储的信息有一定的隐私性，例如学生的家庭情况，但并不是和金融相关的，也不包含强隐私（例如玉照。。）的信息，因此安全信只要做三个事情就满足了，
+Nginx提供的ACL控制、用户账号密码管理，数据库访问权限控制。    
+</code></pre><p>成本：</p>
+<pre><code>系统很简单，基本上几台服务器就能够搞定，无需过多关注。
+</code></pre><p>还有其他方面，这个分析下来，这个方案的主要复杂性体现在存储可靠性上，需要保证异常的时候，不要丢失所有数据即可（丢失几个或几十个学生信息问题不大）    </p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/30/Python-study-record/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -2535,183 +2772,6 @@ It is about 1000 kilometers from Shanghai to Beijing
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/20/Effective-Java-Item01/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="luowen">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Coding in life...">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/11/20/Effective-Java-Item01/" itemprop="url">Effective_Java_Item01_考虑静态工厂方法替代构造器</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-20T23:15:10+08:00">
-                2018-11-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/Effective-Java/" itemprop="url" rel="index">
-                    <span itemprop="name">Effective Java</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="Creating-and-Destorying-Objects-–第二章"><a href="#Creating-and-Destorying-Objects-–第二章" class="headerlink" title="Creating and Destorying Objects –第二章"></a>Creating and Destorying Objects –第二章</h3><blockquote>
-<p>这个章节关系着创建和销毁对象：什么时候和怎样创建它们，何时并且如何避免创建它们，怎样保证它们被销毁用一种合适的方式，并且怎么管理任意的清除行为，这些行为必须在它们的销毁之前。</p>
-</blockquote>
-<h4 id="new-knowledge"><a href="#new-knowledge" class="headerlink" title="new knowledge"></a><center>new knowledge<center></center></center></h4><ol>
-<li>manner n.方式，习惯，规矩</li>
-<li>timely adj 即使的，合适的 adv 及时地</li>
-<li>cleanup n 清除</li>
-<li>precede v 领先 ，在…之前</li>
-<li>probably adv 大概，或许</li>
-<li>prime 主要的，可能的 v 作准备</li>
-<li>get around 避开，到处走走，有办法应付</li>
-<li>end up 结束，死亡</li>
-<li>close 紧密的，关的</li>
-<li>dispense 分配 分发 免除</li>
-<li>be said to be 据说</li>
-<li>also 也，而且，同样</li>
-<li>compact n.合同，契约 v 使简洁，使紧凑 adj 简洁的</li>
-<li>lend vt 贷款 提供</li>
-</ol>
-<h3 id="Item-1-考虑静态工厂方法替代构造器"><a href="#Item-1-考虑静态工厂方法替代构造器" class="headerlink" title="Item 1:考虑静态工厂方法替代构造器"></a>Item 1:考虑静态工厂方法替代构造器</h3><blockquote>
-<p>对于一个类传统的方式允许一个客户获取一个实例是提供一个公开的构造。有一种别的技术，这种技术应该成为每个开发者工具包的一部分。一个类可以提供一个公开的静态工厂方法，这个方法是简单的一个静态的方法，该方法返回一个类的实例。这是一个简单的列子来自Boolean（包装原始数据的类对于boolean基本数据类型）。这个方法翻译一个boolean原始数据类型的值进入一个Boolean包装类对象的引用。</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Boolean <span class="title">valueOf</span><span class="params">( <span class="keyword">boolean</span> b )</span></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> b? Boolean.TRUE : Boolean.FALSE;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>注意这个静态工厂方法是不相同的对于工厂方法模式来自《设计模式》。这个静态工厂方法在这个项中描述并没有直接等价与《设计模式》。</p>
-<p>一个类可以提供它的使用者用静态工厂方法替代，或者另外，公开的构造器有优势并且也有劣势。</p>
-<p>静态工厂方法的一个优点在于，不像构造方法，他们有属于自己的名字。如果参数对于一个构造函数做不了什么，描述的对象将被返回，一个静态工厂有一个精心准备的名字会更容易使用，并且致使使用者的代码更容易被阅读。例如：构造函数BigInteger（int，int，Random），这将返回一个<br>BigInteger，这个是可能主要的，这有更好的表达作为一个静态工厂方法的名字 BigInteger。probablyPrime（这个方法被添加进Java4平台）</p>
-</blockquote>
-<blockquote>
-<p>一个类可以仅有一个单独的给定签名的构造函数，程序员已经知道避开这种通过提供两种构造函数，这种函数的参数集合不同仅在于它们的参数类型的顺序不同的限制。这是一种很坏的想法。这样一个api的使用者将从来不会记得构造函数是这样，并且结束调用这样一个错误通过这个失误。人们阅读代码，用这些构造函数将不会知道这个代码，要是没有参考类的文档。</p>
-<p>因为他们有同样的名字，静态工厂方法将不会共享在前一个段落限制讨论，在这种情况下一个类视乎必须多个相同签名的构造函数，用静态工厂方法替代这些构造方法并且小心地紧密的名字来强调它们的不同。</p>
-<p>静态工厂方法的第二个优势是，不像构造函数，它们没有必要创建一个对象在每次它们被调用的时候。这个允许不变的类来提前构造使用一个预先构造好的实例，或者为了缓存一个实例作为它们构建的，并且可以分配它们来避免重复的创建不必要的重复的对象。这个Boolean。valueOf（boolean）方法阐述了这个技术：它从来不创建对象。这个技巧很相似于Flyweight pattern（轻量级模式）【Gramma95】。它可以极大的提高性能如果同等的对象被频繁的请求，尤其是它们是那种创建很昂贵的对象。</p>
-<p>静态工厂方法能够返回同样的对象来自重复的调用的这个能力，允许类能够维持严格的控制实例在任何时刻都存在。这样实现的类据说是instance-controlled（实例控制）。有几个原因来写实例控制类。实例控制允许一个类保证它是一个单列或者一个不能实例化。而且，它允许一个不可变的值类来保证没有两个相同的实例存在：a.equals(b)仅仅可能是a==b，也就是同一个对象。这个是轻量级模式的基础【Gramma95】。枚举类型提供了这种保证。</p>
-<p>静态工厂方法的第三个优点是，不像构造函数，它们可以返回一个任意它们的返回类型的子类型的一个对象。这个给你极大的灵活在选择返回对象的类。</p>
-<p>灵活的应用是一个api可以返回对象，而没有让它们的类公开。隐藏实现类用这种流行导致一个非常简洁的API。这个技术提供它自身对于interface-based framework（Item 20）（接口基础框架），在这里接口提供自然的返回类型对于用静态工厂方法。</p>
-</blockquote>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2760,7 +2820,7 @@ It is about 1000 kilometers from Shanghai to Beijing
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">35</span>
+                <span class="site-state-item-count">36</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -2771,7 +2831,7 @@ It is about 1000 kilometers from Shanghai to Beijing
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-count">16</span>
                 <span class="site-state-item-name">categories</span>
               </a>
             </div>
@@ -2782,7 +2842,7 @@ It is about 1000 kilometers from Shanghai to Beijing
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-count">16</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
