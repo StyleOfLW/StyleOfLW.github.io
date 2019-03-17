@@ -306,6 +306,178 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/15/敏捷软件开发-第三周/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="luowen">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Coding in life...">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/03/15/敏捷软件开发-第三周/" itemprop="url">敏捷软件开发-第三周</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-15T17:39:41+08:00">
+                2019-03-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/alige-PPP/" itemprop="url" rel="index">
+                    <span itemprop="name">alige PPP</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="第二部分-敏捷设计"><a href="#第二部分-敏捷设计" class="headerlink" title=" 第二部分 敏捷设计"></a><center> 第二部分 敏捷设计</center></h2><h3 id="什么是敏捷设计"><a href="#什么是敏捷设计" class="headerlink" title=" 什么是敏捷设计"></a><center> 什么是敏捷设计</center></h3><h3 id="单一职责原则（SRP）"><a href="#单一职责原则（SRP）" class="headerlink" title=" 单一职责原则（SRP）"></a><center> 单一职责原则（SRP）</center></h3><p>就一个类而言，应该仅有一个引起它变化的原因</p>
+<p>什么是职责：</p>
+<pre><code>- 在SRP中，我们把职责定义为“变化的原因”，如果你能够想到多于一个的动机去改变一个类，那么这个类就具有多于一个的职责。
+</code></pre><h3 id="开放-封闭原则（OCP）"><a href="#开放-封闭原则（OCP）" class="headerlink" title=" 开放-封闭原则（OCP）"></a><center> 开放-封闭原则（OCP）</center></h3><p>软件实体（类，模块，函数）应该是可以扩展的，但是不可修改的</p>
+<p>描述：<br>    遵循开发-封闭原则设计出的模块具有两个主要的特征。</p>
+<ol>
+<li><p>对于扩展是开发的 （open for extension）</p>
+<ul>
+<li>我们可以改变模块的功能</li>
+</ul>
+</li>
+<li><p>对于更改是封闭的（Close for modification）</p>
+<ul>
+<li>对模块的行为进行扩展，不必改动模块的源代码或者二进制代码。模块的二进制可执行版本，都无需改动</li>
+</ul>
+</li>
+</ol>
+<p>关键是抽象：<br>     可以创建出固定能够描述一组任意个可能行为的抽象体。这个抽象体就是抽象基类。而这一组任意个可能的行为则表现为可能的派生类。</p>
+<pre><code>模块可以操作一个抽象体。由于模块依赖于一个固定的抽象体。所以它对于更改可以是改变的。同时从这个抽象体派生，也可以扩展此模块的行为。
+</code></pre><h3 id="Liskov替换原则（LSP）"><a href="#Liskov替换原则（LSP）" class="headerlink" title=" Liskov替换原则（LSP）"></a><center> Liskov替换原则（LSP）</center></h3><p>对于LSP的解释：<br>    子类型（subtype）必须能够替换掉它们的基类型（base type）</p>
+<h3 id="依赖倒置原则（DIP）"><a href="#依赖倒置原则（DIP）" class="headerlink" title=" 依赖倒置原则（DIP）"></a><center> 依赖倒置原则（DIP）</center></h3><ol>
+<li><p>高层模块不应该依赖于低层模块。二者都应该依赖于抽象</p>
+</li>
+<li><p>抽象不应该依赖于细节。细节应该依赖于抽象。</p>
+</li>
+</ol>
+<p>依赖于抽象：</p>
+<pre><code>1. 任何变量都不应该持有一个指向具体类的引用
+2. 任何类都不应该从具体类从派生
+3. 任何方法都不应该覆写它的任何基类中的已经实现了的方法。
+</code></pre><p>如果一个具体类不太会改变。并且也不会创建其他类似的派生类，那么依赖于它并不会造成损害    </p>
+<h3 id="接口隔离原则（ISP）"><a href="#接口隔离原则（ISP）" class="headerlink" title=" 接口隔离原则（ISP）"></a><center> 接口隔离原则（ISP）</center></h3>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/03/敏捷软件开发-第一周/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -501,10 +673,15 @@
 <li>持续集成</li>
 <li>可持续的开发速度</li>
 <li>开发的工作空间</li>
-<li><p>计划游戏</p>
-<p>  -计划游戏的本质是划分业务人员和开发人员之间的职责，业务人员（客户）决定特性（feature）的重要性。开发人员决定实现一个特性所花费的代价</p>
+<li>计划游戏</li>
+<li><p>简单的设计</p>
+<ul>
+<li><p>团队使他们的</p>
+<p>-计划游戏的本质是划分业务人员和开发人员之间的职责，业务人员（客户）决定特性（feature）的重要性。开发人员决定实现一个特性所花费的代价</p>
 </li>
-<li><p>简单的设计    </p>
+</ul>
+</li>
+<li><p>重构</p>
 <h3 id="第三章-计划"><a href="#第三章-计划" class="headerlink" title="第三章 计划"></a><center>第三章 计划</center></h3><h3 id="第四章-测试"><a href="#第四章-测试" class="headerlink" title="第四章 测试"></a><center>第四章 测试</center></h3><h3 id="第五章-重构"><a href="#第五章-重构" class="headerlink" title="第五章 重构"></a><center>第五章 重构</center></h3></li>
 </ul>
 
@@ -2156,172 +2333,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/17/mysql必知必会1-3章/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="luowen">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Coding in life...">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/12/17/mysql必知必会1-3章/" itemprop="url">mysql必知必会1-3章</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-17T15:38:32+08:00">
-                2018-12-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/《MySQL必知必会》/" itemprop="url" rel="index">
-                    <span itemprop="name">《MySQL必知必会》</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="第一章-了解SQL"><a href="#第一章-了解SQL" class="headerlink" title="第一章 了解SQL"></a><center>第一章 了解SQL</center></h2><ul>
-<li><p>数据库（database）</p>
-<ul>
-<li>保存有组织的数据的容器（通常是一个文件或一组文件）</li>
-</ul>
-</li>
-<li><p>表（table）</p>
-<ul>
-<li>某种特定类型数据的结构化清单</li>
-</ul>
-</li>
-<li><p>模式（schema）</p>
-<ul>
-<li>关于数据库和表的布局及特性的信息</li>
-</ul>
-</li>
-</ul>
-<blockquote>
-<p>描述表的这组信息就是所谓的模式，模式可以用来描述数据库中特定的表以及整个数据库（和其中表的关系）</p>
-</blockquote>
-<hr>
-<h3 id="什么是SQL"><a href="#什么是SQL" class="headerlink" title="什么是SQL"></a>什么是SQL</h3><p>SQL是一种结构化查询语言（Structured Query Language）的缩写。</p>
-<p>SQL是一种专门用来与数据库通信的语言。</p>
-<h3 id="什么是MySQL"><a href="#什么是MySQL" class="headerlink" title="什么是MySQL"></a>什么是MySQL</h3><p>数据的所有存储、检索、管理和处理实际上是由数据库软件–DBMS（数据库管理系统）完成的。</p>
-<p>MySQL是一种DBMS</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2370,7 +2381,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">36</span>
+                <span class="site-state-item-count">37</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
